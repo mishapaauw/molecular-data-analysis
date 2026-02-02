@@ -1,0 +1,33 @@
+---
+title: "Data visualization and reproducible science"
+sidebar: part1
+---
+
+Topics or episodes to cover:
+
+## R wrangling:
+
+- Based on carpentries + other tutorials
+- Importing data into R
+- Data frame manipulation using `dplyr`
+- Making graphs using `ggplot2`
+
+## Introduction to unix shell:
+
+- Based on carpentries and other tutorials 
+- Basic set of unix commands (e.g. cd, ls, etc)
+- Continue with basic bioinformatics filetypes (`.fasta`, `.fastq`)
+- Introduce sanity check concept
+
+## Reproducible science using Github:
+
+- Introduce github website
+- Introduce concept of version control
+- Make people create a github account, make a repository, and push some changes to the repository
+
+## Data visualization in R:
+
+- Some data viz theory
+- Continue working with ggplot2, slightly more advanced
+- Assignment: take a dataset and create a very BAD plot and a very GOOD plot with this data. Explain why the bad plot is bad and the good plot is good. Present? Hand in in CANVAS? Push to github is maybe better? How to grade this?
+

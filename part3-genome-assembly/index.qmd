@@ -1,0 +1,12 @@
+---
+title: "Genome assembly"
+sidebar: part3
+---
+
+- Have people download different read datasets of the same organism:
+    - Short reads vs long reads
+    - Different levels of coverage (10x, 20x, 50x, 100x)
+- Assemble genome using appropriate tool (`xyz` for short reads, `flye` for long reads)
+- Register assembly metrics in google sheet
+- Visualize results! Each student pair gets to analyze a different assembly metric. Perhaps present results?
+

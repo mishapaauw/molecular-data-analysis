@@ -1,0 +1,57 @@
+---
+title: "Molecular Data Analysis"
+subtitle: "Module of Quantitative Skills (MSc Biological Sciences)"
+---
+
+## Welcome
+
+This course is designed to equip you with essential computational skills for modern biological research, from data visualization to advanced genomics analyses. The module will guide you through practical, hands-on approaches to analyzing biological data. Throughout this course, you'll work with real-world datasets and industry-standard tools, building a strong foundation in reproducible computational biology.
+
+## Learning Objectives
+
+By the end of this module, you will be able to:
+
+- Set up and configure a complete bioinformatics analysis environment in R
+- Create publication-quality data visualizations using modern R packages
+- Design and implement effective graphics for exploring complex biological datasets
+- Perform end-to-end RNA-seq analysis, from raw reads to differential expression
+- Interpret RNA-seq results and conduct functional enrichment analyses
+- Understand the principles and workflows of genome assembly
+- Apply quality control measures and validation strategies for genomic data
+- Integrate multiple bioinformatics tools into reproducible analysis pipelines
+- Document and communicate your analyses effectively
+
+## Course Structure
+
+This module is organized into three main parts, with a preliminary setup section:
+
+::: {.callout-note}
+### Setup
+Before diving into the analyses, you'll configure your computational environment with all necessary software, packages, and dependencies.
+:::
+
+::: {.callout-tip}
+### Part 1: Data Visualization in R
+Starting with the basics: data visualization using `ggplot2` in `R`. In addition, we will work on making our science reproducible using Github.
+:::
+
+::: {.callout-tip}
+### Part 2: RNA-seq Analysis
+Explore transcriptomics through an RNA-seq workflow. 
+:::
+
+::: {.callout-tip}
+### Part 3: Genome Assembly
+Explore the challenges of reconstructing genomes from sequencing reads.
+:::
+
+## Prerequisites
+
+- Basic understanding of molecular biology concepts
+- Basic programming experience (R or similar language) is beneficial
+- Enthusiasm for learning computational approaches to biology!
+
+## Getting Started
+
+Ready to begin? Head to the [Setup](setup/index.qmd) section to prepare your computational environment, then proceed through the course parts in order. Enjoy!
+

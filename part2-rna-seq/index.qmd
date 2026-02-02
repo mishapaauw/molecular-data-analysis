@@ -1,0 +1,11 @@
+---
+title: "RNA-seq and differential gene expression analysis"
+sidebar: part2
+---
+
+TODO:
+
+- Take contents from RNA-seq workshop bioDSC. 
+- Adapt to fit MDA program. 
+- Find good Arabidopsis RNA-seq dataset for assignment. Create clear expectations for the assignment.
+

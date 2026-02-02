@@ -1,0 +1,64 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Molecular Data Analysis"
+  navbar:
+    background: primary
+    search: true
+    left:
+      - text: "Home"
+        file: index.qmd
+      - text: "Setup"
+        file: setup/index.qmd
+      - text: "Part 1: Data visualization in R"
+        file: part1-dataviz/index.qmd
+      - text: "Part 2: RNA-seq Analysis"
+        file: part2-rna-seq/index.qmd
+      - text: "Part 3: Genome Assembly"
+        file: part3-genome-assembly/index.qmd
+  
+  sidebar:
+    - id: setup
+      title: "Setup"
+      style: "docked"
+      collapse-level: 1
+      contents:
+        - setup/index.qmd
+        - section: "Episodes"
+          contents: setup/*.qmd
+    
+    - id: part1
+      title: "Part 1: Data Viz in R"
+      style: "docked"
+      collapse-level: 0
+      contents:
+        - part1-dataviz/index.qmd
+        - section: "Episodes"
+          contents: part1-dataviz/*.qmd
+    
+    - id: part2
+      title: "Part 2: RNA-seq Analysis"
+      style: "docked"
+      collapse-level: 0
+      contents:
+        - part2-rna-seq/index.qmd
+        - section: "Episodes"
+          contents: part2-rna-seq/*.qmd
+    
+    - id: part3
+      title: "Part 3: Genome Assembly"
+      style: "docked"
+      collapse-level: 0
+      contents:
+        - part3-genome-assembly/index.qmd
+        - section: "Episodes"
+          contents: part3-genome-assembly/*.qmd
+
+format:
+  html:
+    theme: flatly
+    css: /styles.css
+    toc: true
+    toc-depth: 3

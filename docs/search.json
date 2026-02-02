@@ -1,0 +1,143 @@
+[
+  {
+    "objectID": "part2-rna-seq/index.html",
+    "href": "part2-rna-seq/index.html",
+    "title": "RNA-seq and differential gene expression analysis",
+    "section": "",
+    "text": "TODO:\n\nTake contents from RNA-seq workshop bioDSC.\nAdapt to fit MDA program.\nFind good Arabidopsis RNA-seq dataset for assignment. Create clear expectations for the assignment.",
+    "crumbs": [
+      "Home",
+      "RNA-seq and differential gene expression analysis"
+    ]
+  },
+  {
+    "objectID": "part1-dataviz/index.html",
+    "href": "part1-dataviz/index.html",
+    "title": "Data visualization and reproducible science",
+    "section": "",
+    "text": "Topics or episodes to cover:",
+    "crumbs": [
+      "Home",
+      "Data visualization and reproducible science"
+    ]
+  },
+  {
+    "objectID": "part1-dataviz/index.html#r-wrangling",
+    "href": "part1-dataviz/index.html#r-wrangling",
+    "title": "Data visualization and reproducible science",
+    "section": "R wrangling:",
+    "text": "R wrangling:\n\nBased on carpentries + other tutorials\nImporting data into R\nData frame manipulation using dplyr\nMaking graphs using ggplot2",
+    "crumbs": [
+      "Home",
+      "Data visualization and reproducible science"
+    ]
+  },
+  {
+    "objectID": "part1-dataviz/index.html#introduction-to-unix-shell",
+    "href": "part1-dataviz/index.html#introduction-to-unix-shell",
+    "title": "Data visualization and reproducible science",
+    "section": "Introduction to unix shell:",
+    "text": "Introduction to unix shell:\n\nBased on carpentries and other tutorials\nBasic set of unix commands (e.g. cd, ls, etc)\nContinue with basic bioinformatics filetypes (.fasta, .fastq)\nIntroduce sanity check concept",
+    "crumbs": [
+      "Home",
+      "Data visualization and reproducible science"
+    ]
+  },
+  {
+    "objectID": "part1-dataviz/index.html#reproducible-science-using-github",
+    "href": "part1-dataviz/index.html#reproducible-science-using-github",
+    "title": "Data visualization and reproducible science",
+    "section": "Reproducible science using Github:",
+    "text": "Reproducible science using Github:\n\nIntroduce github website\nIntroduce concept of version control\nMake people create a github account, make a repository, and push some changes to the repository",
+    "crumbs": [
+      "Home",
+      "Data visualization and reproducible science"
+    ]
+  },
+  {
+    "objectID": "part1-dataviz/index.html#data-visualization-in-r",
+    "href": "part1-dataviz/index.html#data-visualization-in-r",
+    "title": "Data visualization and reproducible science",
+    "section": "Data visualization in R:",
+    "text": "Data visualization in R:\n\nSome data viz theory\nContinue working with ggplot2, slightly more advanced\nAssignment: take a dataset and create a very BAD plot and a very GOOD plot with this data. Explain why the bad plot is bad and the good plot is good. Present? Hand in in CANVAS? Push to github is maybe better? How to grade this?",
+    "crumbs": [
+      "Home",
+      "Data visualization and reproducible science"
+    ]
+  },
+  {
+    "objectID": "setup/index.html",
+    "href": "setup/index.html",
+    "title": "Setup",
+    "section": "",
+    "text": "text goes here!",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#overview",
+    "href": "setup/index.html#overview",
+    "title": "Setup",
+    "section": "",
+    "text": "text goes here!",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
+  },
+  {
+    "objectID": "part3-genome-assembly/index.html",
+    "href": "part3-genome-assembly/index.html",
+    "title": "Genome assembly",
+    "section": "",
+    "text": "Have people download different read datasets of the same organism:\n\nShort reads vs long reads\nDifferent levels of coverage (10x, 20x, 50x, 100x)\n\nAssemble genome using appropriate tool (xyz for short reads, flye for long reads)\nRegister assembly metrics in google sheet\nVisualize results! Each student pair gets to analyze a different assembly metric. Perhaps present results?",
+    "crumbs": [
+      "Home",
+      "Genome assembly"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Molecular Data Analysis",
+    "section": "",
+    "text": "This course is designed to equip you with essential computational skills for modern biological research, from data visualization to advanced genomics analyses. The module will guide you through practical, hands-on approaches to analyzing biological data. Throughout this course, you’ll work with real-world datasets and industry-standard tools, building a strong foundation in reproducible computational biology."
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "Molecular Data Analysis",
+    "section": "",
+    "text": "This course is designed to equip you with essential computational skills for modern biological research, from data visualization to advanced genomics analyses. The module will guide you through practical, hands-on approaches to analyzing biological data. Throughout this course, you’ll work with real-world datasets and industry-standard tools, building a strong foundation in reproducible computational biology."
+  },
+  {
+    "objectID": "index.html#learning-objectives",
+    "href": "index.html#learning-objectives",
+    "title": "Molecular Data Analysis",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this module, you will be able to:\n\nSet up and configure a complete bioinformatics analysis environment in R\nCreate publication-quality data visualizations using modern R packages\nDesign and implement effective graphics for exploring complex biological datasets\nPerform end-to-end RNA-seq analysis, from raw reads to differential expression\nInterpret RNA-seq results and conduct functional enrichment analyses\nUnderstand the principles and workflows of genome assembly\nApply quality control measures and validation strategies for genomic data\nIntegrate multiple bioinformatics tools into reproducible analysis pipelines\nDocument and communicate your analyses effectively"
+  },
+  {
+    "objectID": "index.html#course-structure",
+    "href": "index.html#course-structure",
+    "title": "Molecular Data Analysis",
+    "section": "Course Structure",
+    "text": "Course Structure\nThis module is organized into three main parts, with a preliminary setup section:\n\n\n\n\n\n\nSetup\n\n\n\nBefore diving into the analyses, you’ll configure your computational environment with all necessary software, packages, and dependencies.\n\n\n\n\n\n\n\n\nPart 1: Data Visualization in R\n\n\n\nStarting with the basics: data visualization using ggplot2 in R. In addition, we will work on making our science reproducible using Github.\n\n\n\n\n\n\n\n\nPart 2: RNA-seq Analysis\n\n\n\nExplore transcriptomics through an RNA-seq workflow.\n\n\n\n\n\n\n\n\nPart 3: Genome Assembly\n\n\n\nExplore the challenges of reconstructing genomes from sequencing reads."
+  },
+  {
+    "objectID": "index.html#prerequisites",
+    "href": "index.html#prerequisites",
+    "title": "Molecular Data Analysis",
+    "section": "Prerequisites",
+    "text": "Prerequisites\n\nBasic understanding of molecular biology concepts\nBasic programming experience (R or similar language) is beneficial\nEnthusiasm for learning computational approaches to biology!"
+  },
+  {
+    "objectID": "index.html#getting-started",
+    "href": "index.html#getting-started",
+    "title": "Molecular Data Analysis",
+    "section": "Getting Started",
+    "text": "Getting Started\nReady to begin? Head to the Setup section to prepare your computational environment, then proceed through the course parts in order. Enjoy!"
+  }
+]

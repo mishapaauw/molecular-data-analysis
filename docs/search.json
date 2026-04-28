@@ -11,91 +11,63 @@
     ]
   },
   {
-    "objectID": "part1-dataviz/index.html",
-    "href": "part1-dataviz/index.html",
-    "title": "Data visualization and reproducible science",
+    "objectID": "part1-dataviz/02-data-viz.html",
+    "href": "part1-dataviz/02-data-viz.html",
+    "title": "Episode 2: Data visualisation",
     "section": "",
-    "text": "Topics or episodes to cover:",
+    "text": "In this episode, you will practice making honest, and beautiful, data visualisations using ggplot2 in RStudio. You will start with the R Project you created in the previous episode. First, we will load the required package for this episode:\nR\n\nlibrary(tidyverse)\nWe will work with the palmerpenguins dataset. This is a dataset describing 344 penguins. There are three different species, occuring on three different islands, and several parameters have been recorded.\nLet’s have a look at the general properties of the dataset:\nR\n\nhead(penguins)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_len\nbill_dep\nflipper_len\nbody_mass\nsex\nyear\n\n\n\n\nAdelie\nTorgersen\n39.1\n18.7\n181\n3750\nmale\n2007\n\n\nAdelie\nTorgersen\n39.5\n17.4\n186\n3800\nfemale\n2007\n\n\nAdelie\nTorgersen\n40.3\n18.0\n195\n3250\nfemale\n2007\n\n\nAdelie\nTorgersen\nNA\nNA\nNA\nNA\nNA\n2007\n\n\nAdelie\nTorgersen\n36.7\n19.3\n193\n3450\nfemale\n2007\n\n\nAdelie\nTorgersen\n39.3\n20.6\n190\n3650\nmale\n2007\n\n\n\n\n\nstr(penguins)\n\n'data.frame':   344 obs. of  8 variables:\n $ species    : Factor w/ 3 levels \"Adelie\",\"Chinstrap\",..: 1 1 1 1 1 1 1 1 1 1 ...\n $ island     : Factor w/ 3 levels \"Biscoe\",\"Dream\",..: 3 3 3 3 3 3 3 3 3 3 ...\n $ bill_len   : num  39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...\n $ bill_dep   : num  18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...\n $ flipper_len: int  181 186 195 NA 193 190 181 195 193 190 ...\n $ body_mass  : int  3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...\n $ sex        : Factor w/ 2 levels \"female\",\"male\": 2 1 1 NA 1 2 1 2 NA NA ...\n $ year       : int  2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...\nIndeed, the are 344 observations. We have some categorical data encoded as factors (species, island, sex) and some measurements of the bodies of the penguins (bill_len, flipper_len).\nTo make a bar plot, we first need to calculate the mean and standard error. In this case, we will group by species, and calculate the mean body_mass:\nR\n\npenguins_summary &lt;- penguins %&gt;% \n  group_by(species) %&gt;% \n  summarize(mean = mean(body_mass, na.rm = TRUE),\n            se = sd(body_mass, na.rm = TRUE) / sqrt(n()))\nLet’s inspect the results:\nR\n\nhead(penguins_summary)\n\n\n\n\n\n\nspecies\nmean\nse\n\n\n\n\nAdelie\n3700.662\n37.19462\n\n\nChinstrap\n3733.088\n46.60747\n\n\nGentoo\n5076.016\n45.27097\nOkay, looks like the Gentoo penguins have a much higher body mass than the other two species.",
     "crumbs": [
-      "Home",
-      "Data visualization and reproducible science"
+      "Part 1: Data visualization in R",
+      "Episodes",
+      "Episode 2: Data visualisation"
     ]
   },
   {
-    "objectID": "part1-dataviz/index.html#r-wrangling",
-    "href": "part1-dataviz/index.html#r-wrangling",
-    "title": "Data visualization and reproducible science",
-    "section": "R wrangling:",
-    "text": "R wrangling:\n\nBased on carpentries + other tutorials\nImporting data into R\nData frame manipulation using dplyr\nMaking graphs using ggplot2",
+    "objectID": "part1-dataviz/02-data-viz.html#from-bar-plot-to-sina-plot",
+    "href": "part1-dataviz/02-data-viz.html#from-bar-plot-to-sina-plot",
+    "title": "Episode 2: Data visualisation",
+    "section": "From bar plot to sina plot",
+    "text": "From bar plot to sina plot\nLet’s visualise the mean body mass using a ‘traditional’ barplot with error bars.\n\n\n\nR\n\npenguins_summary %&gt;% \n  ggplot(aes(x = species, y = mean)) +\n  geom_col() +\n  geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.2)\n\n\n\n\n\n\n\n\n\nIt does show what we just discovered, but it hides a lot. The standard error bars give some sort of idea of the spread of the data, but what does the spread really look like? A boxplot helps to solve this proble, at least partially:\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = species, y = body_mass)) +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\nInstead of the mean, boxplots highlight the median value (thick line), the 25% and 75% percentile value (the box), and 15 * IQR (the lines) (where IQR is the inter-quartile range, or distance between the first and third quartiles). It’s better, but it still hides the actual data. Let’s add each individual datapoint. To do this, we use geom_jitter() to add a little bit of noise in the x-axis direction:\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = species, y = body_mass)) +\n  geom_boxplot() +\n  geom_jitter(width = 0.2, alpha = 0.5)\n\n\n\n\n\n\n\n\n\nThis is nice, but we can let the shape that we’re plotting follow the distribution of the underlying datapoints rather than just plot boxes. The boxplots then become violin plots:\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = species, y = body_mass)) +\n  geom_violin() +\n  geom_jitter(width = 0.2, alpha = 0.5)\n\n\n\n\n\n\n\n\n\nThis is an improvement, but the points don’t follow their distribution very well. We can change that by moving from geom_jitter to geom_quasirandom, from the ggbeeswarm package. The combination of violin plot with individual datapoints that follow their distribution is called a sina plot.\n\n\n\nR\n\nlibrary(ggbeeswarm)\n\npenguins %&gt;% \n  ggplot(aes(x = species, y = body_mass)) +\n  geom_violin() +\n  geom_quasirandom(alpha = 0.5, width = 0.2)\n\n\n\n\n\n\n\n\n\nThis is starting to become an honest, information dense plot. However, the default choice of y-axis range exaggerates the difference in body mass between Gentoo penguins and the other species.\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = species, y = body_mass)) +\n  geom_violin() +\n  geom_quasirandom(alpha = 0.5, width = 0.2) +\n  scale_y_continuous(limits = c(0, NA))\n\n\n\n\n\n\n\n\n\nLet’s now work a bit on the visuals. To achieve a higher data-to-ink ratio, we remove the grey background and most grid lines:\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = species, y = body_mass)) +\n  geom_violin() +\n  geom_quasirandom(alpha = 0.5, width = 0.2) +\n  scale_y_continuous(limits = c(0, NA)) +\n   labs(\n    x = \"Species\",\n    y = \"Body mass (g)\"\n  ) +\n  theme_classic() +\n  theme(\n    legend.position = \"none\",  \n    axis.line = element_line(linewidth = 0.4),\n    axis.ticks = element_line(linewidth = 0.4),\n    axis.text = element_text(size = 11),\n    axis.title = element_text(size = 12),\n    panel.grid.major.y = element_line(color = \"grey90\", linewidth = 0.4),  \n    plot.margin = margin(10, 10, 10, 10)\n  )",
     "crumbs": [
-      "Home",
-      "Data visualization and reproducible science"
+      "Part 1: Data visualization in R",
+      "Episodes",
+      "Episode 2: Data visualisation"
     ]
   },
   {
-    "objectID": "part1-dataviz/index.html#introduction-to-unix-shell",
-    "href": "part1-dataviz/index.html#introduction-to-unix-shell",
-    "title": "Data visualization and reproducible science",
-    "section": "Introduction to unix shell:",
-    "text": "Introduction to unix shell:\n\nBased on carpentries and other tutorials\nBasic set of unix commands (e.g. cd, ls, etc)\nContinue with basic bioinformatics filetypes (.fasta, .fastq)\nIntroduce sanity check concept",
+    "objectID": "part1-dataviz/02-data-viz.html#simpsons-paradox",
+    "href": "part1-dataviz/02-data-viz.html#simpsons-paradox",
+    "title": "Episode 2: Data visualisation",
+    "section": "Simpson’s Paradox",
+    "text": "Simpson’s Paradox\nSimpson’s paradox is a phenomenon in data visualisation where a trend appears in aggregated groups of data, but disappears or even reverses when grouping information is taken into account. palmerpenguins contains a beatiful example of Simpson’s paradox:\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = bill_len, y = bill_dep)) +\n  geom_point(alpha = 0.5) + \n  geom_smooth(method = \"lm\", colour = \"black\", se = FALSE) +\n  theme_classic()\n\n\n\n\n\n\n\n\n\nOkay, so, the bill depth is negatively correlated to the bill length! Let’s color the points by species, just to make sure this is correct.\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = bill_len, y = bill_dep, colour = species)) +\n  geom_point(alpha = 0.5) + \n  geom_smooth(method = \"lm\", se = FALSE) +\n  theme_classic()\n\n\n\n\n\n\n\n\n\nWoah!\nTODO:\n\nadd color palettes\nadd ggsave\ncreate google slides repository to hold slides",
     "crumbs": [
-      "Home",
-      "Data visualization and reproducible science"
+      "Part 1: Data visualization in R",
+      "Episodes",
+      "Episode 2: Data visualisation"
     ]
   },
   {
-    "objectID": "part1-dataviz/index.html#reproducible-science-using-github",
-    "href": "part1-dataviz/index.html#reproducible-science-using-github",
-    "title": "Data visualization and reproducible science",
-    "section": "Reproducible science using Github:",
-    "text": "Reproducible science using Github:\n\nIntroduce github website\nIntroduce concept of version control\nMake people create a github account, make a repository, and push some changes to the repository",
+    "objectID": "part1-dataviz/02-data-viz.html#assignment",
+    "href": "part1-dataviz/02-data-viz.html#assignment",
+    "title": "Episode 2: Data visualisation",
+    "section": "Assignment",
+    "text": "Assignment\n\n\n\n\n\n\nAssignment\n\n\n\nYou have learned what makes a good visualization. Now do the opposite: make the worst possible figure from the palmerpenguins dataset. Aim to commit as many of these ‘data visualisation sins’ as you can:\n\nHide the truth:\n\nUse a barplot with no indication of spread or sample size\nPool across species or sex to hide real patterns\nTruncate the y-axis to exaggerate tiny differences\n\nUse unclear visuals:\n\nUse clashing, non-colorblind-friendly colors\nLeave axis labels as raw column names, give the plot a misleading title\nMap the same variable to color, shape, and size simultaneously\n\nProduce this plot in 1 code chunk, save it as a .png file.\nknit your .Rmd file, push all changes to Github.\nAdd you plot into the shared Google Presentations sheet, and add three bullet points describing why your plot is the most ugly and misleading plot ever made.",
     "crumbs": [
-      "Home",
-      "Data visualization and reproducible science"
+      "Part 1: Data visualization in R",
+      "Episodes",
+      "Episode 2: Data visualisation"
     ]
   },
   {
-    "objectID": "part1-dataviz/index.html#data-visualization-in-r",
-    "href": "part1-dataviz/index.html#data-visualization-in-r",
-    "title": "Data visualization and reproducible science",
-    "section": "Data visualization in R:",
-    "text": "Data visualization in R:\n\nSome data viz theory\nContinue working with ggplot2, slightly more advanced\nAssignment: take a dataset and create a very BAD plot and a very GOOD plot with this data. Explain why the bad plot is bad and the good plot is good. Present? Hand in in CANVAS? Push to github is maybe better? How to grade this?",
+    "objectID": "part1-dataviz/02-data-viz.html#references",
+    "href": "part1-dataviz/02-data-viz.html#references",
+    "title": "Episode 2: Data visualisation",
+    "section": "References",
+    "text": "References\n\nFundamentals of Data Visualization, Claus O. Wilke",
     "crumbs": [
-      "Home",
-      "Data visualization and reproducible science"
-    ]
-  },
-  {
-    "objectID": "setup/index.html",
-    "href": "setup/index.html",
-    "title": "Setup",
-    "section": "",
-    "text": "text goes here!",
-    "crumbs": [
-      "Home",
-      "Setup"
-    ]
-  },
-  {
-    "objectID": "setup/index.html#overview",
-    "href": "setup/index.html#overview",
-    "title": "Setup",
-    "section": "",
-    "text": "text goes here!",
-    "crumbs": [
-      "Home",
-      "Setup"
-    ]
-  },
-  {
-    "objectID": "part3-genome-assembly/index.html",
-    "href": "part3-genome-assembly/index.html",
-    "title": "Genome assembly",
-    "section": "",
-    "text": "Have people download different read datasets of the same organism:\n\nShort reads vs long reads\nDifferent levels of coverage (10x, 20x, 50x, 100x)\n\nAssemble genome using appropriate tool (xyz for short reads, flye for long reads)\nRegister assembly metrics in google sheet\nVisualize results! Each student pair gets to analyze a different assembly metric. Perhaps present results?",
-    "crumbs": [
-      "Home",
-      "Genome assembly"
+      "Part 1: Data visualization in R",
+      "Episodes",
+      "Episode 2: Data visualisation"
     ]
   },
   {
@@ -103,21 +75,21 @@
     "href": "index.html",
     "title": "Molecular Data Analysis",
     "section": "",
-    "text": "This course is designed to equip you with essential computational skills for modern biological research, from data visualization to advanced genomics analyses. The module will guide you through practical, hands-on approaches to analyzing biological data. Throughout this course, you’ll work with real-world datasets and industry-standard tools, building a strong foundation in reproducible computational biology."
+    "text": "This module is designed to equip you with essential computational skills for modern biological research, from data visualization to advanced genomics analyses. Throughout this course, you’ll work with real-world datasets and industry-standard tools, building a strong foundation in reproducible computational biology."
   },
   {
     "objectID": "index.html#welcome",
     "href": "index.html#welcome",
     "title": "Molecular Data Analysis",
     "section": "",
-    "text": "This course is designed to equip you with essential computational skills for modern biological research, from data visualization to advanced genomics analyses. The module will guide you through practical, hands-on approaches to analyzing biological data. Throughout this course, you’ll work with real-world datasets and industry-standard tools, building a strong foundation in reproducible computational biology."
+    "text": "This module is designed to equip you with essential computational skills for modern biological research, from data visualization to advanced genomics analyses. Throughout this course, you’ll work with real-world datasets and industry-standard tools, building a strong foundation in reproducible computational biology."
   },
   {
     "objectID": "index.html#learning-objectives",
     "href": "index.html#learning-objectives",
     "title": "Molecular Data Analysis",
     "section": "Learning Objectives",
-    "text": "Learning Objectives\nBy the end of this module, you will be able to:\n\nSet up and configure a complete bioinformatics analysis environment in R\nCreate publication-quality data visualizations using modern R packages\nDesign and implement effective graphics for exploring complex biological datasets\nPerform end-to-end RNA-seq analysis, from raw reads to differential expression\nInterpret RNA-seq results and conduct functional enrichment analyses\nUnderstand the principles and workflows of genome assembly\nApply quality control measures and validation strategies for genomic data\nIntegrate multiple bioinformatics tools into reproducible analysis pipelines\nDocument and communicate your analyses effectively"
+    "text": "Learning Objectives\nBy the end of this module, you will be able to:\n\nSet up and configure a complete data analysis environment in R\nCreate publication-quality data visualizations using R packages\nPerform end-to-end RNA-seq analysis, from raw reads to differential expression\nInterpret RNA-seq results and conduct functional enrichment analyses\nUnderstand the principles and workflows of genome assembly\nIntegrate multiple bioinformatics tools into reproducible analysis pipelines\nDocument and communicate your analyses effectively"
   },
   {
     "objectID": "index.html#course-structure",
@@ -139,5 +111,104 @@
     "title": "Molecular Data Analysis",
     "section": "Getting Started",
     "text": "Getting Started\nReady to begin? Head to the Setup section to prepare your computational environment, then proceed through the course parts in order. Enjoy!"
+  },
+  {
+    "objectID": "part3-genome-assembly/index.html",
+    "href": "part3-genome-assembly/index.html",
+    "title": "Genome assembly",
+    "section": "",
+    "text": "Have people download different read datasets of the same organism:\n\nShort reads vs long reads\nDifferent levels of coverage (10x, 20x, 50x, 100x)\n\nAssemble genome using appropriate tool (xyz for short reads, flye for long reads)\nRegister assembly metrics in google sheet\nVisualize results! Each student pair gets to analyze a different assembly metric. Perhaps present results?",
+    "crumbs": [
+      "Home",
+      "Genome assembly"
+    ]
+  },
+  {
+    "objectID": "setup/index.html",
+    "href": "setup/index.html",
+    "title": "Setup",
+    "section": "",
+    "text": "Episodes to cover:",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#overview",
+    "href": "setup/index.html#overview",
+    "title": "Setup",
+    "section": "",
+    "text": "Episodes to cover:",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#setup",
+    "href": "setup/index.html#setup",
+    "title": "Setup",
+    "section": "Setup:",
+    "text": "Setup:\nThis episode will describe the computational setup for this module.",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#r-wrangling",
+    "href": "setup/index.html#r-wrangling",
+    "title": "Setup",
+    "section": "R wrangling:",
+    "text": "R wrangling:\nThis episode will cover some R basics (most likely already covered in first weeks of course by Emiel?)\n\nBased on carpentries + other tutorials\nImporting data into R\nData frame manipulation using dplyr\nMaking graphs using ggplot2",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#introduction-to-unix-shell",
+    "href": "setup/index.html#introduction-to-unix-shell",
+    "title": "Setup",
+    "section": "Introduction to unix shell:",
+    "text": "Introduction to unix shell:\nThis episode will cover some unix shell basics to prepare for the RNA-seq and genome assembly section,\n\nBased on carpentries and other tutorials\nBasic set of unix commands (e.g. cd, ls, etc)\nContinue with basic bioinformatics filetypes (.fasta, .fastq)\nIntroduce sanity check concept",
+    "crumbs": [
+      "Home",
+      "Setup"
+    ]
+  },
+  {
+    "objectID": "part1-dataviz/index.html",
+    "href": "part1-dataviz/index.html",
+    "title": "Reproducible data visualisation using R and Github",
+    "section": "",
+    "text": "Episodes to make:",
+    "crumbs": [
+      "Home",
+      "Reproducible data visualisation using R and Github"
+    ]
+  },
+  {
+    "objectID": "part1-dataviz/index.html#reproducible-science-using-github",
+    "href": "part1-dataviz/index.html#reproducible-science-using-github",
+    "title": "Reproducible data visualisation using R and Github",
+    "section": "Reproducible science using Github:",
+    "text": "Reproducible science using Github:\n\nIntroduce github website\nIntroduce concept of version control\nMake people create a github account, make a repository, and push some changes to the repository",
+    "crumbs": [
+      "Home",
+      "Reproducible data visualisation using R and Github"
+    ]
+  },
+  {
+    "objectID": "part1-dataviz/index.html#data-visualization-in-r",
+    "href": "part1-dataviz/index.html#data-visualization-in-r",
+    "title": "Reproducible data visualisation using R and Github",
+    "section": "Data visualization in R:",
+    "text": "Data visualization in R:\n\nSome data viz theory\nContinue working with ggplot2, slightly more advanced\nAssignment: take a dataset and create a very BAD plot and a very GOOD plot with this data. Explain why the bad plot is bad and the good plot is good. Present? Hand in in CANVAS? Push to github is maybe better? How to grade this?",
+    "crumbs": [
+      "Home",
+      "Reproducible data visualisation using R and Github"
+    ]
   }
 ]

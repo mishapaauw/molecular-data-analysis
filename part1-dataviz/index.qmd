@@ -1,23 +1,9 @@
 ---
-title: "Data visualization and reproducible science"
+title: "Reproducible data visualisation using R and Github"
 sidebar: part1
 ---
 
-Topics or episodes to cover:
-
-## R wrangling:
-
-- Based on carpentries + other tutorials
-- Importing data into R
-- Data frame manipulation using `dplyr`
-- Making graphs using `ggplot2`
-
-## Introduction to unix shell:
-
-- Based on carpentries and other tutorials 
-- Basic set of unix commands (e.g. cd, ls, etc)
-- Continue with basic bioinformatics filetypes (`.fasta`, `.fastq`)
-- Introduce sanity check concept
+Episodes to make:
 
 ## Reproducible science using Github:
 

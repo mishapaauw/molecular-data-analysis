@@ -1,0 +1,188 @@
+---
+title: "Episode 2: Data visualisation"
+execute: 
+    df-print: kable
+    warning: false
+knitr:
+  opts_chunk:
+    fig.width: 4
+    fig.height: 3.2
+---
+
+In this episode, you will practice making honest, and beautiful, data visualisations using `ggplot2` in `RStudio`. You will start with the R Project you created in the previous episode. First, we will load the required package for this episode:
+
+```{R filename="R"}
+#| warning: false
+library(tidyverse)
+```
+
+We will work with the `palmerpenguins` dataset. This is a dataset describing 344 penguins. There are three different species, occuring on three different islands, and several parameters have been recorded.
+
+::: {.column-margin}
+If you want to know more about this dataset, see [this nice slideshow](https://apreshill.github.io/palmerpenguins-useR-2022/#/what-is-palmerpenguins).
+:::
+
+Let's have a look at the general properties of the dataset:
+
+```{R filename="R"}
+head(penguins)
+
+str(penguins)
+```
+
+Indeed, the are 344 observations. We have some categorical data encoded as factors (`species`, `island`, `sex`) and some measurements of the bodies of the penguins (`bill_len`, `flipper_len`).
+
+To make a bar plot, we first need to calculate the mean and standard error. In this case, we will group by `species`, and calculate the mean `body_mass`:
+
+```{R filename="R"}
+penguins_summary <- penguins %>% 
+  group_by(species) %>% 
+  summarize(mean = mean(body_mass, na.rm = TRUE),
+            se = sd(body_mass, na.rm = TRUE) / sqrt(n()))
+```
+
+Let's inspect the results:
+
+```{R filename="R"}
+head(penguins_summary)
+```
+
+Okay, looks like the Gentoo penguins have a much higher body mass than the other two species. 
+
+## From bar plot to sina plot
+
+Let's visualise the mean body mass using a 'traditional' barplot with error bars.
+
+```{R filename="R"}
+penguins_summary %>% 
+  ggplot(aes(x = species, y = mean)) +
+  geom_col() +
+  geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.2)
+```
+
+It does show what we just discovered, but it hides a lot. The standard error bars give some sort of idea of the spread of the data, but what does the spread _really_ look like? A boxplot helps to solve this proble, at least partially:
+
+```{R filename="R"}
+penguins %>% 
+  ggplot(aes(x = species, y = body_mass)) +
+  geom_boxplot()
+```
+
+Instead of the mean, boxplots highlight the _median_ value (thick line), the 25% and 75% percentile value (the box), and 15 * IQR (the lines) (where IQR is the inter-quartile range, or distance between the first and third quartiles). It's better, but it still hides the actual data. Let's add each individual datapoint. To do this, we use `geom_jitter()` to add a little bit of noise in the x-axis direction:
+
+```{R filename="R"}
+penguins %>% 
+  ggplot(aes(x = species, y = body_mass)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.2, alpha = 0.5)
+```
+
+This is nice, but we can let the shape that we're plotting _follow the distribution_ of the underlying datapoints rather than just plot boxes. The boxplots then become _violin_ plots:
+
+```{R filename="R"}
+penguins %>% 
+  ggplot(aes(x = species, y = body_mass)) +
+  geom_violin() +
+  geom_jitter(width = 0.2, alpha = 0.5)
+```
+
+This is an improvement, but the points don't follow their distribution very well. We can change that by moving from `geom_jitter` to `geom_quasirandom`, from the `ggbeeswarm` package. The combination of violin plot with individual datapoints that follow their distribution is called a _sina_ plot.
+
+```{R filename="R"}
+library(ggbeeswarm)
+
+penguins %>% 
+  ggplot(aes(x = species, y = body_mass)) +
+  geom_violin() +
+  geom_quasirandom(alpha = 0.5, width = 0.2)
+```
+
+This is starting to become an honest, information dense plot. However, the default choice of y-axis range exaggerates the difference in body mass between Gentoo penguins and the other species.
+
+```{R filename="R"}
+penguins %>% 
+  ggplot(aes(x = species, y = body_mass)) +
+  geom_violin() +
+  geom_quasirandom(alpha = 0.5, width = 0.2) +
+  scale_y_continuous(limits = c(0, NA))
+```
+
+Let's now work a bit on the visuals. To achieve a higher data-to-ink ratio, we remove the grey background and most grid lines:
+
+```{R filename="R"}
+penguins %>% 
+  ggplot(aes(x = species, y = body_mass)) +
+  geom_violin() +
+  geom_quasirandom(alpha = 0.5, width = 0.2) +
+  scale_y_continuous(limits = c(0, NA)) +
+   labs(
+    x = "Species",
+    y = "Body mass (g)"
+  ) +
+  theme_classic() +
+  theme(
+    legend.position = "none",  
+    axis.line = element_line(linewidth = 0.4),
+    axis.ticks = element_line(linewidth = 0.4),
+    axis.text = element_text(size = 11),
+    axis.title = element_text(size = 12),
+    panel.grid.major.y = element_line(color = "grey90", linewidth = 0.4),  
+    plot.margin = margin(10, 10, 10, 10)
+  )
+```
+
+## Simpson's Paradox
+
+Simpson's paradox is a phenomenon in data visualisation where a trend appears in aggregated groups of data, but disappears or even reverses when grouping information is taken into account. `palmerpenguins` contains a beatiful example of Simpson's paradox:
+
+```{R filename="R"}
+penguins %>% 
+  ggplot(aes(x = bill_len, y = bill_dep)) +
+  geom_point(alpha = 0.5) + 
+  geom_smooth(method = "lm", colour = "black", se = FALSE) +
+  theme_classic()
+```
+
+Okay, so, the bill depth is negatively correlated to the bill length! Let's color the points by species, just to make sure this is correct.
+
+```{R filename="R"}
+penguins %>% 
+  ggplot(aes(x = bill_len, y = bill_dep, colour = species)) +
+  geom_point(alpha = 0.5) + 
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_classic()
+```
+
+Woah!
+
+TODO:
+
+- add color palettes
+- add ggsave
+- create google slides repository to hold slides
+
+## Assignment
+
+::: {.callout-note}
+### Assignment
+You have learned what makes a good visualization. Now do the opposite: make the worst possible figure from the `palmerpenguins` dataset. Aim to commit as many of these 'data visualisation sins' as you can:
+
+- Hide the truth:
+    - Use a barplot with no indication of spread or sample size
+    - Pool across species or sex to hide real patterns
+    - Truncate the y-axis to exaggerate tiny differences
+
+- Use unclear visuals:
+    - Use clashing, non-colorblind-friendly colors
+    - Leave axis labels as raw column names, give the plot a misleading title
+    - Map the same variable to color, shape, and size simultaneously
+
+
+- Produce this plot in 1 code chunk, save it as a `.png` file.
+- knit your `.Rmd` file, push all changes to Github.
+- Add you plot into the shared Google Presentations sheet, and add three bullet points describing _why_ your plot is the most ugly and misleading plot ever made.
+:::
+
+## References
+
+> [Fundamentals of Data Visualization, Claus O. Wilke](https://clauswilke.com/dataviz/)

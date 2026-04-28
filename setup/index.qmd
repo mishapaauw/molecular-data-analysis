@@ -5,4 +5,26 @@ sidebar: setup
 
 ## Overview
 
-text goes here!
+Episodes to cover:
+
+## Setup:
+
+This episode will describe the computational setup for this module.
+
+## R wrangling:
+
+This episode will cover some R basics (most likely already covered in first weeks of course by Emiel?)
+
+- Based on carpentries + other tutorials
+- Importing data into R
+- Data frame manipulation using `dplyr`
+- Making graphs using `ggplot2`
+
+## Introduction to unix shell:
+
+This episode will cover some unix shell basics to prepare for the RNA-seq and genome assembly section,
+
+- Based on carpentries and other tutorials 
+- Basic set of unix commands (e.g. cd, ls, etc)
+- Continue with basic bioinformatics filetypes (`.fasta`, `.fastq`)
+- Introduce sanity check concept

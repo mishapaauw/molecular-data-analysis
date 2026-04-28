@@ -4,6 +4,8 @@ project:
 
 website:
   title: "Molecular Data Analysis"
+  bread-crumbs: false
+  page-navigation: true
   navbar:
     background: primary
     search: true
@@ -23,7 +25,7 @@ website:
     - id: setup
       title: "Setup"
       style: "docked"
-      collapse-level: 1
+      collapse-level: 0
       contents:
         - setup/index.qmd
         - section: "Episodes"

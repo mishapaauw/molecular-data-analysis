@@ -1,55 +1,63 @@
 ---
-title: "Molecular Data Analysis"
+title: "Molecular Data Analysis & Bioinformatics"
 subtitle: "Module of Quantitative Skills (MSc Biological Sciences)"
 ---
 
-## Welcome
+This module is designed to equip you with essential computational skills for modern biological research, from data visualization to advanced genomics analyses. Throughout this module, you'll work with real-world datasets and well-known bioinformatics tools, to build a strong foundation in reproducible computational biology.
 
-This module is designed to equip you with essential computational skills for modern biological research, from data visualization to advanced genomics analyses. Throughout this course, you'll work with real-world datasets and industry-standard tools, building a strong foundation in reproducible computational biology.
-
-## Learning Objectives
+## Learning objectives
 
 By the end of this module, you will be able to:
 
-- Set up and configure a complete data analysis environment in R
 - Create publication-quality data visualizations using R packages
-- Perform end-to-end RNA-seq analysis, from raw reads to differential expression
-- Interpret RNA-seq results and conduct functional enrichment analyses
-- Understand the principles and workflows of genome assembly
-- Integrate multiple bioinformatics tools into reproducible analysis pipelines
+- Perform RNA-seq analysis, from mapping raw reads to differential expression analysis
+- Integrate RNA-seq results into a research project with a biological question
+- Perform a genome assembly, and assess the quality of the resulting assembly
 - Document and communicate your analyses effectively
 
-## Course Structure
+## Module structure
 
-This module is organized into three main parts, with a preliminary setup section:
+This module is organized into three parts, and there's a setup section ('part 0'):
 
-::: {.callout-note}
-### Setup
-Before diving into the analyses, you'll configure your computational environment with all necessary software, packages, and dependencies.
-:::
+- **Part 0: Setup**: Before diving into the analyses, you'll configure your computational environment with all necessary software, packages, and dependencies.
+- **Part 1: Data visualization in R**: Starting with the basics: data visualization using `ggplot2` in `R`. In addition, we will work on making our science reproducible using Github.
+- **Part 2: RNA-seq analysis**: Explore transcriptomics through an RNA-seq workflow. 
+- **Part 3: Genome assembly**: Explore the challenges of reconstructing genomes from sequencing reads.
 
-::: {.callout-tip}
-### Part 1: Data Visualization in R
-Starting with the basics: data visualization using `ggplot2` in `R`. In addition, we will work on making our science reproducible using Github.
-:::
+## Timetable
 
-::: {.callout-tip}
-### Part 2: RNA-seq Analysis
-Explore transcriptomics through an RNA-seq workflow. 
-:::
+The following timetable is preliminary and still subject to change:
 
-::: {.callout-tip}
-### Part 3: Genome Assembly
-Explore the challenges of reconstructing genomes from sequencing reads.
-:::
+### Week 1:
+| Date | Time | Location | Type | Topic |
+|--|---|--|--|---------|
+| 28 sept | 13:00 - 14:00 | xx | Lecture | Module introduction |
+| 28 sept | 14:00 - 17:00 | xx | WC | Introduction: Shell, R, tidyverse |
+| 29 sept | 13:00 - 14:00 | xx | Lecture | Principles of data visualization |
+| 29 sept | 14:00 - 17:00 | xx | WC | Part 1: Data visualization in R (including mini presentation)|
+| 30 sept | 13:00 - 14:00 | xx | Lecture | RNA-seq lecture |
+| 30 sept | 14:00 - 17:00 | xx | WC | Part 2: RNA-seq analysis (mapping reads) |
+
+### Week 2:
+| Date | Time | Location | Type | Topic |
+|--|---|--|--|---------|
+| 5 oct | 13:00 - 15:00 | xx | WC | Part 2: RNA-seq analysis (differential expression analysis)|
+| 5 oct | 15:00 - 17:00 | xx | :exclamation:*Assignment*:exclamation: | Part 2: Assignment RNA-seq |
+| 6 oct | 13:00 - 17:00 | xx | :exclamation:*Assignment*:exclamation: | Part 2: Assignment RNA-seq |
+| 8 oct | 13:00 - 15:00 | xx | Lecture | Genome assembly & comparative genomics lecture |
+
+### Week 3:
+| Date | Time | Location | Type | Topic |
+|--|---|--|--|---------|
+| 12 oct | 13:00 - 17:00 | xx | WC | Part 3: Genome assembly & comparative genomics |
 
 ## Prerequisites
 
 - Basic understanding of molecular biology concepts
-- Basic programming experience (R or similar language) is beneficial
+- Basic programming experience in R
 - Enthusiasm for learning computational approaches to biology!
 
-## Getting Started
+## Getting started
 
-Ready to begin? Head to the [Setup](setup/index.qmd) section to prepare your computational environment, then proceed through the course parts in order. Enjoy!
+Ready to begin? Head to the [Setup](setup/index.qmd) section to prepare your computational environment.
 

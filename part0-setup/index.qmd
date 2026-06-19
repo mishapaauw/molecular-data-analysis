@@ -1,11 +1,18 @@
 ---
 title: "Setup"
-sidebar: setup
+sidebar: part0
 ---
 
-## Overview
+::: {.callout-note}
+## Learning goals:
 
-Episodes to cover:
+After this lesson, you should be able to:
+
+- bla
+- blie
+- bloe
+
+:::
 
 ## Setup:
 

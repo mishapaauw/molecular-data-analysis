@@ -3,6 +3,20 @@ title: "Genome assembly"
 sidebar: part3
 ---
 
+::: {.callout-note}
+## Learning goals:
+
+After this lesson, you should be able to:
+
+- Explain how read length and sequencing depth affect assembly quality
+- Execute a genome assembly, using command-line tools
+- Select appropriate metrics for assessing genome assembly quality
+- Interpret assembly quality metrics to identify potential issues with a genome assembly
+- Justify the choice of sequencing technology for a genome assembly experiment
+:::
+
+
+
 - Have people download different read datasets of the same organism:
     - Short reads vs long reads
     - Different levels of coverage (10x, 20x, 50x, 100x)

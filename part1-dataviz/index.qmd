@@ -3,13 +3,36 @@ title: "Reproducible data visualisation using R and Github"
 sidebar: part1
 ---
 
+::: {.callout-note}
+## Learning goals:
+
+After this lesson, you should be able to:
+
+With regard to data visualization:
+
+- Select the appropriate chart type given the structure of the data
+- Design data visualizations that follow principles of visual clarity (e.g. data-to-ink ratio)
+- Justify the choice of color palette for a particular visualization, including accessibility considerations regarding color blindness
+- Critically evaluate data visualizations and propose improvements
+
+With regard to reproducibility:
+
+- Explain the FAIR principles and their relevance to data management in the biological sciences
+- Apply version control to a small data analysis project using `git`
+- Communicate analysis results to collaborations via `Github`
+:::
+
+
+
 Episodes to make:
 
 ## Reproducible science using Github:
 
 - Introduce github website
-- Introduce concept of version control
+- Introduce concept of version control / FAIR data management
 - Make people create a github account, make a repository, and push some changes to the repository
+- TODO: look at Johannes data management workshop
+
 
 ## Data visualization in R:
 

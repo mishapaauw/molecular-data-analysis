@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -91,11 +125,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
-<span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../setup/index.html"> 
+    <a class="nav-link" href="../part0-setup/index.html"> 
 <span class="menu-text">Setup</span></a>
   </li>  
   <li class="nav-item">
@@ -104,11 +134,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../part2-rna-seq/index.html"> 
-<span class="menu-text">Part 2: RNA-seq Analysis</span></a>
+<span class="menu-text">Part 2: RNA-seq analysis</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../part3-genome-assembly/index.html"> 
-<span class="menu-text">Part 3: Genome Assembly</span></a>
+<span class="menu-text">Part 3: Genome assembly</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -167,8 +197,16 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setting-up-a-repository" id="toc-setting-up-a-repository" class="nav-link active" data-scroll-target="#setting-up-a-repository">Setting up a repository</a></li>
+  <li><a href="#cloning-the-repository-to-the-cluster" id="toc-cloning-the-repository-to-the-cluster" class="nav-link" data-scroll-target="#cloning-the-repository-to-the-cluster">Cloning the repository to the cluster</a></li>
+  <li><a href="#adding-a-new-file-and-committing-it." id="toc-adding-a-new-file-and-committing-it." class="nav-link" data-scroll-target="#adding-a-new-file-and-committing-it.">Adding a new file and committing it.</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -192,8 +230,79 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>You may have heard of the <strong>FAIR principle</strong> for research data: Findable, Accessible, Interoperable, Reusable. These principles focus on how you manage your data, scripts, and results. Adhering to these principles makes tracking and sharing your work easier. You can imagine that a script sitting somewhere on your computer fails FAIR on nearly all aspects: nobody else can find it, access it, or reuse it: and a year from now, neither can you. <code>git</code> and <code>Github</code> address this directly. Putting the data and scripts of your analysis under ‘version control’ gives you a timestamped history of every change that you made. Pushing that history to <code>Github</code> makes it accessible for others.</p>
+<p>Today we will setup a <code>Github</code> repository and push an analysis to it, from the cluster.</p>
+<section id="setting-up-a-repository" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-a-repository">Setting up a repository</h2>
+<ol type="1">
+<li><p>Make a GitHub account Go to github.com → Sign up → follow the prompts</p></li>
+<li><p>Make a repository on GitHub</p>
+<ol type="1">
+<li>Click the + (top right) → New repository</li>
+<li>Name it (e.g.&nbsp;`data_visualization_episode)</li>
+<li>Leave it Public, tick Add a README</li>
+<li>Create repository</li>
+</ol></li>
+</ol>
+<p>Github is very serious about safety. This is good, but it forces us to use a bit more complicate authentication methods than just a password.</p>
+<ol start="3" type="1">
+<li>Generate a <strong>Personal Access Token</strong> (your “password” when committing changes).
+<ol type="1">
+<li>Log in → click your profile picture (top right) → Settings</li>
+<li>Left sidebar, scroll down → Developer settings</li>
+<li>Personal access tokens → Tokens (classic)</li>
+<li>Generate new token (classic)</li>
+<li>Name: <code>bioinformatics</code> · Expiration: <code>14 days</code> · Check the box: <code>repo</code></li>
+<li>Generate token → copy it now (you won’t see it again) → paste it somewhere safe (e.g.&nbsp;a text file) for later</li>
+</ol></li>
+</ol>
+</section>
+<section id="cloning-the-repository-to-the-cluster" class="level2">
+<h2 class="anchored" data-anchor-id="cloning-the-repository-to-the-cluster">Cloning the repository to the cluster</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/<span class="op">&lt;</span>your-username<span class="op">&gt;</span>/<span class="op">&lt;</span>repo-name<span class="op">&gt;</span>.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>repo-name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This may prompt you for your password, use the token here:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Username:</span> <span class="op">&lt;</span>your-github-username<span class="op">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> <span class="op">&lt;</span>paste your token here — NOT your GitHub password<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="adding-a-new-file-and-committing-it." class="level2">
+<h2 class="anchored" data-anchor-id="adding-a-new-file-and-committing-it.">Adding a new file and committing it.</h2>
+<p>Let’s make a <code>data</code> directory, and add a data file to it:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> data/penguins.csv https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>First we verify that we actually have the dataset:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It’s really there! Now, we can run <code>git status</code> to verify that <code>git</code> is actually also aware that the file now exists in our repository. But, <code>git</code> is not yet keeping track of this file.</p>
+<div class="sourceCode" id="annotated-cell-5"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-1" class="code-annotation-target"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-5-4" class="code-annotation-target"><a href="#annotated-cell-5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"added pinguins dataset"</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-5-5" class="code-annotation-target"><a href="#annotated-cell-5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="1" data-code-annotation="1"><code>git</code> sees that the file is there, but it’s not being tracked.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="2">Let’s add all files to the git tracking!</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="3" data-code-annotation="3">Yes, now <code>git</code> has ‘staged’ the data file.</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="4" data-code-annotation="4">Now we ‘commit’ the file</span>
+</dd>
+<dt data-target-cell="annotated-cell-5" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-5" data-code-lines="5" data-code-annotation="5">The final step is pushing the changes to github.</span>
+</dd>
+</dl>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

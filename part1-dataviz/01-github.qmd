@@ -1,3 +1,72 @@
 ---
 title: "Episode 1: Reproducible science using Github"
 ---
+
+You may have heard of the **FAIR principle** for research data: Findable, Accessible, Interoperable, Reusable. These principles focus on how you manage your data, scripts, and results. Adhering to these principles makes tracking and sharing your work easier. You can imagine that a script sitting somewhere on your computer fails FAIR on nearly all aspects: nobody else can find it, access it, or reuse it: and a year from now, neither can you. `git` and `Github` address this directly. Putting the data and scripts of your analysis under 'version control' gives you a timestamped history of every change that you made. Pushing that history to `Github` makes it accessible for others.
+
+Today we will setup a `Github` repository and push an analysis to it, from the cluster.
+
+## Setting up a repository
+
+1. Make a GitHub account
+Go to github.com → Sign up → follow the prompts
+
+2. Make a repository on GitHub
+    1. Click the + (top right) → New repository
+    2. Name it (e.g. `data_visualization_episode)
+    3. Leave it Public, tick Add a README
+    4. Create repository
+
+Github is very serious about safety. This is good, but it forces us to use a bit more complicate authentication methods than just a password.
+
+3. Generate a **Personal Access Token** (your "password" when committing changes).
+    1. Log in → click your profile picture (top right) → Settings
+    2. Left sidebar, scroll down → Developer settings
+    3. Personal access tokens → Tokens (classic)
+    4. Generate new token (classic)
+    5. Name: `bioinformatics` · Expiration: `14 days` · Check the box: `repo`
+    6. Generate token → copy it now (you won't see it again) → paste it somewhere safe (e.g. a text file) for later
+
+## Cloning the repository to the cluster
+
+```bash
+git clone https://github.com/<your-username>/<repo-name>.git
+cd <repo-name>
+```
+This may prompt you for your password, use the token here:
+
+```bash
+Username: <your-github-username>
+Password: <paste your token here — NOT your GitHub password>
+```
+
+## Adding a new file and committing it.
+
+Let's make a `data` directory, and add a data file to it:
+
+```bash
+mkdir data
+wget -O data/penguins.csv https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv
+```
+
+First we verify that we actually have the dataset:
+
+```bash
+ls data/
+```
+
+It's really there! Now, we can run `git status` to verify that `git` is actually also aware that the file now exists in our repository. But, `git` is not yet keeping track of this file.
+
+```bash
+git status # <1>
+git add . # <2>
+git status # <3>
+git commit -m "added pinguins dataset" # <4>
+git push # <5>
+```
+
+1. `git` sees that the file is there, but it's not being tracked.
+2. Let's add all files to the git tracking!
+3. Yes, now `git` has 'staged' the data file. 
+4. Now we 'commit' the file
+5. The final step is pushing the changes to github.

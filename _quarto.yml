@@ -10,26 +10,24 @@ website:
     background: primary
     search: true
     left:
-      - text: "Home"
-        file: index.qmd
       - text: "Setup"
-        file: setup/index.qmd
+        file: part0-setup/index.qmd
       - text: "Part 1: Data visualization in R"
         file: part1-dataviz/index.qmd
-      - text: "Part 2: RNA-seq Analysis"
+      - text: "Part 2: RNA-seq analysis"
         file: part2-rna-seq/index.qmd
-      - text: "Part 3: Genome Assembly"
+      - text: "Part 3: Genome assembly"
         file: part3-genome-assembly/index.qmd
   
   sidebar:
-    - id: setup
+    - id: part0
       title: "Setup"
       style: "docked"
       collapse-level: 0
       contents:
-        - setup/index.qmd
+        - part0-setup/index.qmd
         - section: "Episodes"
-          contents: setup/*.qmd
+          contents: part0-setup/*.qmd
     
     - id: part1
       title: "Part 1: Data Viz in R"
@@ -41,7 +39,7 @@ website:
           contents: part1-dataviz/*.qmd
     
     - id: part2
-      title: "Part 2: RNA-seq Analysis"
+      title: "Part 2: RNA-seq analysis"
       style: "docked"
       collapse-level: 0
       contents:
@@ -50,7 +48,7 @@ website:
           contents: part2-rna-seq/*.qmd
     
     - id: part3
-      title: "Part 3: Genome Assembly"
+      title: "Part 3: Genome assembly"
       style: "docked"
       collapse-level: 0
       contents:
@@ -60,6 +58,7 @@ website:
 
 format:
   html:
+    from: markdown+emoji
     theme: flatly
     css: /styles.css
     toc: true

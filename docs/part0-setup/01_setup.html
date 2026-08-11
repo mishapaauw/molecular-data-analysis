@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Setup – Molecular Data Analysis</title>
+<title>Computational setup – Molecular Data Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../part0-setup/01_setup.html" rel="next">
+<link href="../part0-setup/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -117,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title">Setup</h1>
+          <h1 class="quarto-secondary-nav-title">Computational setup</h1>
         </a>     
     </div>
   </nav>
@@ -130,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part0-setup/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../part0-setup/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Setup</span></a>
   </div>
 </li>
@@ -145,8 +179,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part0-setup/01_setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Setup</span></a>
+  <a href="../part0-setup/01_setup.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Computational setup</span></a>
   </div>
 </li>
       </ul>
@@ -156,22 +190,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup:</a></li>
-  <li><a href="#introduction-to-unix-shell" id="toc-introduction-to-unix-shell" class="nav-link" data-scroll-target="#introduction-to-unix-shell">Introduction to unix shell:</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Setup</h1>
+<h1 class="title d-none d-lg-block">Computational setup</h1>
 </div>
 
 
@@ -188,42 +215,30 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Learning goals:
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>After this lesson, you should be able to:</p>
-<ul>
-<li>bla</li>
-<li>blie</li>
-<li>bloe</li>
-</ul>
-</div>
-</div>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup:</h2>
-<p>This episode will describe the computational setup for this module. Briefly, we will connect to the University of Amsterdam compute cluster Crunchomics.</p>
-</section>
-<section id="introduction-to-unix-shell" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-to-unix-shell">Introduction to unix shell:</h2>
-<p>This episode will cover the basics of working with a command line interface (or Unix shell). This episode prepares you for the RNA-seq and genome assembly tutorials later on. The materials are based on <a href="https://datacarpentry.github.io/shell-genomics/01-introduction.html">Data Carpentries: Introduction to the Command Line for Genomics</a> and <a href="https://ndombrowski.github.io/cli_workshop/source/bash_intro.html">Introduction to the CLI</a>.</p>
-<p>—– probably don’t include R wrangling basics —— ## R wrangling:</p>
-<p>This episode will cover some R basics (most likely already covered in first weeks of course by Emiel?)</p>
-<ul>
-<li>Based on carpentries + other tutorials</li>
-<li>Importing data into R</li>
-<li>Data frame manipulation using <code>dplyr</code></li>
-<li>Making graphs using <code>ggplot2</code></li>
-</ul>
+<p>In this course, you will learn how to analyse sequencing data (both RNA-seq and genome sequencing). These kinds of datasets require specialized software to be processed, which are typically run on Linux servers. Therefore, we will make use of a command-line interface on the Crunchomics compute cluster of the University of Amsterdam. The contents of this course are tailored to students who may have never used a command-line interface before. You need to take a few simple steps to connect to Crunchomics.</p>
+<p>Easy way (recommended if you are not planning on using Crunchomics or another server outside of this course):</p>
+<ol type="1">
+<li><p>One software that is running on the Crunchomics server is RStudio, which you should be familiar with. To connect to the RStudio server, open an internet browser window (e.g.&nbsp;Google Chrome) and go to <a href="https://omics-app01.science.uva.nl/">https://omics-app01.science.uva.nl/</a></p></li>
+<li><p>After signing on with your usual UvA password, you should see the familiar RStudio environment in your browser:</p></li>
+</ol>
+<p><img src="../images/R_Studio_aheintz.png" class="img-fluid"></p>
+<p>In the bottom-left panel, you see three tabs: Console, Terminal and Background Jobs. Click on Terminal to bring it to the foreground.</p>
+<p><img src="../images/R-Studio_aheintz_terminal.png" class="img-fluid"></p>
+<ol start="3" type="1">
+<li>In this terminal, type the following command. Replace <code>YOURSTUDENTNUMBER</code> with….. your student number <span class="emoji" data-emoji="smiley">😃</span>.</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> YOURSTUDENTNUMBER@omics-h0.science.uva.nl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now you are connected to the crunchomics “headnode”, where you can run all sorts of software. You will need to do these steps every time you sign into the headnode to run programs.</p>
+<ol start="4" type="1">
+<li>Again in the terminal, type the following two commands to properly initialize your account (you only need to run these commands once):</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/zfs/omics/software/script/omics_install_script</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/zfs/omics/software/script/omics_mv_rstudio_cache</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>That’s it! You are now ready to start working on Crunchomics.</p>
+<p>TODO: add list of small achievements so far.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -648,11 +663,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../part0-setup/index.html" class="pagination-link" aria-label="Setup">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Setup</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part0-setup/01_setup.html" class="pagination-link" aria-label="Setup">
-        <span class="nav-page-text">Setup</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

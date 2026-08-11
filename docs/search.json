@@ -14,7 +14,7 @@
     "href": "part0-setup/index.html#setup",
     "title": "Setup",
     "section": "Setup:",
-    "text": "Setup:\nThis episode will describe the computational setup for this module.",
+    "text": "Setup:\nThis episode will describe the computational setup for this module. Briefly, we will connect to the University of Amsterdam compute cluster Crunchomics.",
     "crumbs": [
       "Setup"
     ]
@@ -34,7 +34,7 @@
     "href": "part0-setup/index.html#introduction-to-unix-shell",
     "title": "Setup",
     "section": "Introduction to unix shell:",
-    "text": "Introduction to unix shell:\nThis episode will cover some unix shell basics to prepare for the RNA-seq and genome assembly section,\n\nBased on carpentries and other tutorials\nBasic set of unix commands (e.g. cd, ls, etc)\nContinue with basic bioinformatics filetypes (.fasta, .fastq)\nIntroduce sanity check concept",
+    "text": "Introduction to unix shell:\nThis episode will cover the basics of working with a command line interface (or Unix shell). This episode prepares you for the RNA-seq and genome assembly tutorials later on. The materials are based on Data Carpentries: Introduction to the Command Line for Genomics and Introduction to the CLI.\n—– probably don’t include R wrangling basics —— ## R wrangling:\nThis episode will cover some R basics (most likely already covered in first weeks of course by Emiel?)\n\nBased on carpentries + other tutorials\nImporting data into R\nData frame manipulation using dplyr\nMaking graphs using ggplot2",
     "crumbs": [
       "Setup"
     ]
@@ -242,6 +242,30 @@
     "crumbs": [
       "Setup",
       "RNA-seq and differential gene expression analysis"
+    ]
+  },
+  {
+    "objectID": "part0-setup/01_setup.html",
+    "href": "part0-setup/01_setup.html",
+    "title": "Computational setup",
+    "section": "",
+    "text": "In this course, you will learn how to analyse sequencing data (both RNA-seq and genome sequencing). These kinds of datasets require specialized software to be processed, which are typically run on Linux servers. Therefore, we will make use of a command-line interface on the Crunchomics compute cluster of the University of Amsterdam. The contents of this course are tailored to students who may have never used a command-line interface before. You need to take a few simple steps to connect to Crunchomics.\nEasy way (recommended if you are not planning on using Crunchomics or another server outside of this course):\n\nOne software that is running on the Crunchomics server is RStudio, which you should be familiar with. To connect to the RStudio server, open an internet browser window (e.g. Google Chrome) and go to https://omics-app01.science.uva.nl/\nAfter signing on with your usual UvA password, you should see the familiar RStudio environment in your browser:\n\n\nIn the bottom-left panel, you see three tabs: Console, Terminal and Background Jobs. Click on Terminal to bring it to the foreground.\n\n\nIn this terminal, type the following command. Replace YOURSTUDENTNUMBER with….. your student number 😃.\n\nssh YOURSTUDENTNUMBER@omics-h0.science.uva.nl\nNow you are connected to the crunchomics “headnode”, where you can run all sorts of software. You will need to do these steps every time you sign into the headnode to run programs.\n\nAgain in the terminal, type the following two commands to properly initialize your account (you only need to run these commands once):\n\n/zfs/omics/software/script/omics_install_script\nand\n/zfs/omics/software/script/omics_mv_rstudio_cache\nThat’s it! You are now ready to start working on Crunchomics.\nTODO: add list of small achievements so far.",
+    "crumbs": [
+      "Setup",
+      "Episodes",
+      "Computational setup"
+    ]
+  },
+  {
+    "objectID": "part0-setup/01_setup.html#setup",
+    "href": "part0-setup/01_setup.html#setup",
+    "title": "Setup",
+    "section": "",
+    "text": "This episode will describe the computational setup for this module. Briefly, we will connect to the University of Amsterdam compute cluster Crunchomics.",
+    "crumbs": [
+      "Setup",
+      "Episodes",
+      "Setup"
     ]
   }
 ]

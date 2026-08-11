@@ -16,8 +16,13 @@ After this lesson, you should be able to:
 
 ## Setup:
 
-This episode will describe the computational setup for this module.
+This episode will describe the computational setup for this module. Briefly, we will connect to the University of Amsterdam compute cluster Crunchomics. 
 
+## Introduction to unix shell:
+
+This episode will cover the basics of working with a command line interface (or Unix shell). This episode prepares you for the RNA-seq and genome assembly tutorials later on. The materials are based on [Data Carpentries: Introduction to the Command Line for Genomics](https://datacarpentry.github.io/shell-genomics/01-introduction.html) and [Introduction to the CLI](https://ndombrowski.github.io/cli_workshop/source/bash_intro.html).
+
+----- probably don't include R wrangling basics ------
 ## R wrangling:
 
 This episode will cover some R basics (most likely already covered in first weeks of course by Emiel?)
@@ -26,12 +31,3 @@ This episode will cover some R basics (most likely already covered in first week
 - Importing data into R
 - Data frame manipulation using `dplyr`
 - Making graphs using `ggplot2`
-
-## Introduction to unix shell:
-
-This episode will cover some unix shell basics to prepare for the RNA-seq and genome assembly section,
-
-- Based on carpentries and other tutorials 
-- Basic set of unix commands (e.g. cd, ls, etc)
-- Continue with basic bioinformatics filetypes (`.fasta`, `.fastq`)
-- Introduce sanity check concept

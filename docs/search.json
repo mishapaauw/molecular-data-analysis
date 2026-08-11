@@ -1,42 +1,146 @@
 [
   {
-    "objectID": "part0-setup/index.html",
-    "href": "part0-setup/index.html",
-    "title": "Setup",
+    "objectID": "part0-setup/01_setup.html",
+    "href": "part0-setup/01_setup.html",
+    "title": "Computational setup",
     "section": "",
-    "text": "Learning goals:\n\n\n\nAfter this lesson, you should be able to:\n\nbla\nblie\nbloe",
+    "text": "In this course, you will learn how to analyse sequencing data (both RNA-seq and genome sequencing). These kinds of datasets require specialized software to be processed, which are typically run on Linux servers. Therefore, we will make use of a command-line interface (CLI) on the Crunchomics compute cluster of the University of Amsterdam. Command-line interfaces are an alternative to graphical user interface, with which you are probably more familiar. The contents of this course are tailored to students who may have never used a command-line interface before. You need to take a few simple steps to connect to Crunchomics.\n\nOne software that is running on the Crunchomics server is RStudio, which you should be familiar with. To connect to the RStudio server, open an internet browser window (e.g. Google Chrome) and go to https://omics-app01.science.uva.nl/\nAfter signing on with your usual UvA password, you should see the familiar RStudio environment in your browser:\n\n\nIn the bottom-left panel, you see three tabs: Console, Terminal and Background Jobs. Click on Terminal to bring it to the foreground.\n\n\nIn this terminal, type the following command. Replace YOURSTUDENTNUMBER with….. your student number 😃.\n\nssh YOURSTUDENTNUMBER@omics-h0.science.uva.nl\nNow you are connected to the Crunchomics “headnode”, where you can run all sorts of software. You will need to do these steps every time you sign into the headnode to run programs.\n\nAgain in the terminal, type the following two commands to properly initialize your account (you only need to run these commands once):\n\n/zfs/omics/software/script/omics_install_script\nand\n/zfs/omics/software/script/omics_mv_rstudio_cache\nThat’s it! You are now ready to start working on Crunchomics. Let’s take a moment to recap what we did:\n\nWe used the red route on the left-hand side on this schematic to connect to the Crunchomics application server (via the blue “AAS” arrow). To reach the headnode (h0) we used a ssh (the dark green arrow) command on the terminal. You can also directly connect to the headnode by using an ssh connection from a command line on your local computer (terminal app for Mac users, MobaXterm or other options for Windows users). You can also see that both the application server and the headnode have access to the Crunchomics storage server. Finally, there are 5 ‘compute nodes’ on Crunchomics; this is where large computations can be sent to via a job submission system (we will not use this system in this course, unfortunately!).\nIn the next episode we will learn the basics of navigating the filesystem on your Crunchomics account. We will do this on the command line only!",
     "crumbs": [
-      "Setup"
+      "Setup",
+      "Episodes",
+      "Computational setup"
     ]
   },
   {
-    "objectID": "part0-setup/index.html#setup",
-    "href": "part0-setup/index.html#setup",
-    "title": "Setup",
-    "section": "Setup:",
-    "text": "Setup:\nThis episode will describe the computational setup for this module. Briefly, we will connect to the University of Amsterdam compute cluster Crunchomics.",
+    "objectID": "part0-setup/02_CLI_basics.html",
+    "href": "part0-setup/02_CLI_basics.html",
+    "title": "Introduction to the command line",
+    "section": "",
+    "text": "During the setup, you already ran some first commands. In this episode, we will learn a handful of very useful basic unix commands to navigate your filesystem, to move around files, and to inspect the content of files. If you’re logged in to the head node, you should see something like this:\nIt shows your user name (mpaauw), the name of the node we are connected to (omics-h0), and after the $ sign, a blinking cursor. That’s where we will start typing commands to interact with the filesystem.",
     "crumbs": [
-      "Setup"
+      "Setup",
+      "Episodes",
+      "Introduction to the command line"
     ]
   },
   {
-    "objectID": "part0-setup/index.html#r-wrangling",
-    "href": "part0-setup/index.html#r-wrangling",
-    "title": "Setup",
-    "section": "R wrangling:",
-    "text": "R wrangling:\nThis episode will cover some R basics (most likely already covered in first weeks of course by Emiel?)\n\nBased on carpentries + other tutorials\nImporting data into R\nData frame manipulation using dplyr\nMaking graphs using ggplot2",
+    "objectID": "part0-setup/02_CLI_basics.html#pwd-find-out-where-we-are",
+    "href": "part0-setup/02_CLI_basics.html#pwd-find-out-where-we-are",
+    "title": "Introduction to the command line",
+    "section": "pwd: Find out where we are",
+    "text": "pwd: Find out where we are\nLet’s orient ourselves by typing our first command, pwd, into the terminal, and pressing enter.\npwd\npwd prints the location of the current working directory and tells you where exactly you are in the file system. In my case, this prints /home/mpaauw as output.",
     "crumbs": [
-      "Setup"
+      "Setup",
+      "Episodes",
+      "Introduction to the command line"
     ]
   },
   {
-    "objectID": "part0-setup/index.html#introduction-to-unix-shell",
-    "href": "part0-setup/index.html#introduction-to-unix-shell",
-    "title": "Setup",
-    "section": "Introduction to unix shell:",
-    "text": "Introduction to unix shell:\nThis episode will cover the basics of working with a command line interface (or Unix shell). This episode prepares you for the RNA-seq and genome assembly tutorials later on. The materials are based on Data Carpentries: Introduction to the Command Line for Genomics and Introduction to the CLI.\n—– probably don’t include R wrangling basics —— ## R wrangling:\nThis episode will cover some R basics (most likely already covered in first weeks of course by Emiel?)\n\nBased on carpentries + other tutorials\nImporting data into R\nData frame manipulation using dplyr\nMaking graphs using ggplot2",
+    "objectID": "part0-setup/02_CLI_basics.html#ls-list-the-contents-of-a-directory",
+    "href": "part0-setup/02_CLI_basics.html#ls-list-the-contents-of-a-directory",
+    "title": "Introduction to the command line",
+    "section": "ls: List the contents of a directory",
+    "text": "ls: List the contents of a directory\nNow that we know where we are, let’s find out what files and folders exist in our home directory. For this, you can use the ls command, which lists the contents of the directory you are currently in:\nls\nIf you set-up you Crunchomics account correctly, you should see a folder called personal. That’s where you can store up to 500GB of data on Crunchomics. Try adding the following modifier, or flag, to the ls command to change the output format:",
     "crumbs": [
-      "Setup"
+      "Setup",
+      "Episodes",
+      "Introduction to the command line"
+    ]
+  },
+  {
+    "objectID": "part0-setup/02_CLI_basics.html#cd-moving-between-directories",
+    "href": "part0-setup/02_CLI_basics.html#cd-moving-between-directories",
+    "title": "Introduction to the command line",
+    "section": "cd: Moving between directories",
+    "text": "cd: Moving between directories\nTo be able to use the personal directory, we have to move in there. The command cd exists to do just that. Essentially, it’s equivalent to clicking on a directory in the file navigation system on your own computer.\ncd personal/\nLet’s verify that we actually ended up in this personal folder:\npwd\nShould now print /home/mpaauw/personal.\nYou can move back ‘up’ in the hierarchy of directories by running:\ncd ..",
+    "crumbs": [
+      "Setup",
+      "Episodes",
+      "Introduction to the command line"
+    ]
+  },
+  {
+    "objectID": "part0-setup/02_CLI_basics.html#mkdir-make-new-folders",
+    "href": "part0-setup/02_CLI_basics.html#mkdir-make-new-folders",
+    "title": "Introduction to the command line",
+    "section": "mkdir: Make new folders",
+    "text": "mkdir: Make new folders\nWe can also make new folders. Let’s navigate into personal again, and create a folder that will contain all the code and data for the Molecular Data Analysis module. We’ll abbreviate it to MDA.\ncd personal/\n\nmkdir MDA\n\n\n\n\n\n\nExercise\n\n\n\n\n\n\nVerify that the MDA directory was created.\nNavigate into it.\nVerify that you are now working in the MDA directory.\nInspect the contents of the MDA directory.\nWithin MDA, create another directory, called intro-to-cli, and navigate into it.\n\n\n\nClick me to see the answer\n# 1. Yes, I see the MDA folder now!\nls\n\n# 2. Let's navigate into it\ncd MDA/\n\n# 3. This should print confirmation that you are now in MDA\npwd\n\n# 4. This folder should be empty\nls\n\n# 5. \nmkdir intro-to-cli\ncd intro-to-cli/",
+    "crumbs": [
+      "Setup",
+      "Episodes",
+      "Introduction to the command line"
+    ]
+  },
+  {
+    "objectID": "part0-setup/02_CLI_basics.html#wget-download-data",
+    "href": "part0-setup/02_CLI_basics.html#wget-download-data",
+    "title": "Introduction to the command line",
+    "section": "wget: Download data",
+    "text": "wget: Download data\nNext, let’s download some sequencing data. We will use the wget command to download data from a repository, into the currect working directory.\nTODO: add wget command to github repo with some minimal sequencing data.",
+    "crumbs": [
+      "Setup",
+      "Episodes",
+      "Introduction to the command line"
+    ]
+  },
+  {
+    "objectID": "part0-setup/02_CLI_basics.html#cp-copying-data",
+    "href": "part0-setup/02_CLI_basics.html#cp-copying-data",
+    "title": "Introduction to the command line",
+    "section": "cp” copying data",
+    "text": "cp” copying data\nWhen doing bioinformatics projects, a clear folder structure is essential to keep yourself organized. We will copy the data to a new folder that we call data.\nmkdir data\n\ncp NAMEDATA.fastq data/\n\n# Verify that it worked\nls -l\nls -l data\nYou should see that we now have two copies of the .fastq data. One file is in the working directory, and the other one is in the data folder. Notice that we added a flag, or option, to the ls command: -l. This specifies that the output is now presented in a list format.",
+    "crumbs": [
+      "Setup",
+      "Episodes",
+      "Introduction to the command line"
+    ]
+  },
+  {
+    "objectID": "part0-setup/02_CLI_basics.html#rm-remove-files-and-folders",
+    "href": "part0-setup/02_CLI_basics.html#rm-remove-files-and-folders",
+    "title": "Introduction to the command line",
+    "section": "rm: remove files and folders",
+    "text": "rm: remove files and folders\nWe only need one copy of the data: let’s remove the sequencing data that is now stored in our working directory with a new command rm.\nrm NAMEDATA.fastq\n\n# check if it worked\nls -l \n\n\n\n\n\n\nImportant\n\n\n\nUnix does not have an undelete command, a trash can, or a bin\nThis means that if you delete something with rm, it’s gone. Therefore, use rm with care and check what you write twice before pressing enter!",
+    "crumbs": [
+      "Setup",
+      "Episodes",
+      "Introduction to the command line"
+    ]
+  },
+  {
+    "objectID": "part0-setup/02_CLI_basics.html#history-keeping-track-of-what-you-did",
+    "href": "part0-setup/02_CLI_basics.html#history-keeping-track-of-what-you-did",
+    "title": "Introduction to the command line",
+    "section": "history: keeping track of what you did",
+    "text": "history: keeping track of what you did\nThe history command is quite useful: it keeps a list of all the commands that you used today. You can view this as a simple automated labjournal, although it does not contain any output, or information whether a command worked at all.\n\n\n\n\n\n\nExercise\n\n\n\n\n\n\nRemove the sequencing data from the data folder as well.\nUse history to find back the command to download the data.\nRedownload the data, and this time, move (mv) the data to the data folder.\nUse ls commands to inspect what happened by using mv rather than cp.\n\n\n\nClick me to see the answer\n# 1. Oh no, I removed my raw data!\nrm data/FASTQ.fastq\n\n# 2. Ah, I remember, it was the wget command.\nhistory\n\n# 3. Let's download again, and this time move it instead of copu\nwget ....\nmv data.fastq data/\n\n# 4. Now we only have one copy of the data, in the data folder.\nls -l\nls -l data/\n\n\n\n\n\nInstead of retyping commands, you can also press the arrow ‘up’ key to cycle through commands you already ran before.",
+    "crumbs": [
+      "Setup",
+      "Episodes",
+      "Introduction to the command line"
+    ]
+  },
+  {
+    "objectID": "part0-setup/02_CLI_basics.html#todo",
+    "href": "part0-setup/02_CLI_basics.html#todo",
+    "title": "Introduction to the command line",
+    "section": "TODO",
+    "text": "TODO\n\nExploring the contents of files (head, tail, cat)\nExploring the size of files (wc -l)\nPiping: simple but powerful pipelines.",
+    "crumbs": [
+      "Setup",
+      "Episodes",
+      "Introduction to the command line"
+    ]
+  },
+  {
+    "objectID": "part0-setup/02_CLI_basics.html#credits",
+    "href": "part0-setup/02_CLI_basics.html#credits",
+    "title": "Introduction to the command line",
+    "section": "Credits",
+    "text": "Credits\nMaterials for this episode were strongly inspired by, and partly copied from, Nina Dombrowski’s ‘Introduction to the cli’ tutorial.",
+    "crumbs": [
+      "Setup",
+      "Episodes",
+      "Introduction to the command line"
     ]
   },
   {
@@ -245,26 +349,32 @@
     ]
   },
   {
-    "objectID": "part0-setup/01_setup.html",
-    "href": "part0-setup/01_setup.html",
-    "title": "Computational setup",
+    "objectID": "part0-setup/index.html",
+    "href": "part0-setup/index.html",
+    "title": "Setup",
     "section": "",
-    "text": "In this course, you will learn how to analyse sequencing data (both RNA-seq and genome sequencing). These kinds of datasets require specialized software to be processed, which are typically run on Linux servers. Therefore, we will make use of a command-line interface on the Crunchomics compute cluster of the University of Amsterdam. The contents of this course are tailored to students who may have never used a command-line interface before. You need to take a few simple steps to connect to Crunchomics.\nEasy way (recommended if you are not planning on using Crunchomics or another server outside of this course):\n\nOne software that is running on the Crunchomics server is RStudio, which you should be familiar with. To connect to the RStudio server, open an internet browser window (e.g. Google Chrome) and go to https://omics-app01.science.uva.nl/\nAfter signing on with your usual UvA password, you should see the familiar RStudio environment in your browser:\n\n\nIn the bottom-left panel, you see three tabs: Console, Terminal and Background Jobs. Click on Terminal to bring it to the foreground.\n\n\nIn this terminal, type the following command. Replace YOURSTUDENTNUMBER with….. your student number 😃.\n\nssh YOURSTUDENTNUMBER@omics-h0.science.uva.nl\nNow you are connected to the crunchomics “headnode”, where you can run all sorts of software. You will need to do these steps every time you sign into the headnode to run programs.\n\nAgain in the terminal, type the following two commands to properly initialize your account (you only need to run these commands once):\n\n/zfs/omics/software/script/omics_install_script\nand\n/zfs/omics/software/script/omics_mv_rstudio_cache\nThat’s it! You are now ready to start working on Crunchomics.\nTODO: add list of small achievements so far.",
+    "text": "Learning goals:\n\n\n\nAfter this lesson, you should be able to:\n\nbla\nblie\nbloe",
     "crumbs": [
-      "Setup",
-      "Episodes",
-      "Computational setup"
+      "Setup"
     ]
   },
   {
-    "objectID": "part0-setup/01_setup.html#setup",
-    "href": "part0-setup/01_setup.html#setup",
+    "objectID": "part0-setup/index.html#setup",
+    "href": "part0-setup/index.html#setup",
     "title": "Setup",
-    "section": "",
-    "text": "This episode will describe the computational setup for this module. Briefly, we will connect to the University of Amsterdam compute cluster Crunchomics.",
+    "section": "Setup:",
+    "text": "Setup:\nThis episode will describe the computational setup for this module. Briefly, we will connect to the University of Amsterdam compute cluster Crunchomics.",
     "crumbs": [
-      "Setup",
-      "Episodes",
+      "Setup"
+    ]
+  },
+  {
+    "objectID": "part0-setup/index.html#introduction-to-unix-shell",
+    "href": "part0-setup/index.html#introduction-to-unix-shell",
+    "title": "Setup",
+    "section": "Introduction to unix shell:",
+    "text": "Introduction to unix shell:\nThis episode will cover the basics of working with a command line interface (or Unix shell). This episode prepares you for the RNA-seq and genome assembly tutorials later on. The materials are based on Data Carpentries: Introduction to the Command Line for Genomics and Introduction to the CLI.\n—– probably don’t include R wrangling basics —— ## R wrangling:\nThis episode will cover some R basics (most likely already covered in first weeks of course by Emiel?)\n\nBased on carpentries + other tutorials\nImporting data into R\nData frame manipulation using dplyr\nMaking graphs using ggplot2",
+    "crumbs": [
       "Setup"
     ]
   }

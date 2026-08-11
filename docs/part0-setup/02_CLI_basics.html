@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Setup – Molecular Data Analysis</title>
+<title>Introduction to the command line – Molecular Data Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../part0-setup/01_setup.html" rel="next">
+<link href="../part0-setup/01_setup.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -117,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title">Setup</h1>
+          <h1 class="quarto-secondary-nav-title">Introduction to the command line</h1>
         </a>     
     </div>
   </nav>
@@ -130,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part0-setup/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../part0-setup/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Setup</span></a>
   </div>
 </li>
@@ -151,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part0-setup/02_CLI_basics.html" class="sidebar-item-text sidebar-link">
+  <a href="../part0-setup/02_CLI_basics.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Introduction to the command line</span></a>
   </div>
 </li>
@@ -167,8 +201,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup:</a></li>
-  <li><a href="#introduction-to-unix-shell" id="toc-introduction-to-unix-shell" class="nav-link" data-scroll-target="#introduction-to-unix-shell">Introduction to unix shell:</a></li>
+  <li><a href="#pwd-find-out-where-we-are" id="toc-pwd-find-out-where-we-are" class="nav-link active" data-scroll-target="#pwd-find-out-where-we-are"><code>pwd</code>: Find out where we are</a></li>
+  <li><a href="#ls-list-the-contents-of-a-directory" id="toc-ls-list-the-contents-of-a-directory" class="nav-link" data-scroll-target="#ls-list-the-contents-of-a-directory"><code>ls</code>: List the contents of a directory</a></li>
+  <li><a href="#cd-moving-between-directories" id="toc-cd-moving-between-directories" class="nav-link" data-scroll-target="#cd-moving-between-directories"><code>cd</code>: Moving between directories</a></li>
+  <li><a href="#mkdir-make-new-folders" id="toc-mkdir-make-new-folders" class="nav-link" data-scroll-target="#mkdir-make-new-folders"><code>mkdir</code>: Make new folders</a></li>
+  <li><a href="#wget-download-data" id="toc-wget-download-data" class="nav-link" data-scroll-target="#wget-download-data"><code>wget</code>: Download data</a></li>
+  <li><a href="#cp-copying-data" id="toc-cp-copying-data" class="nav-link" data-scroll-target="#cp-copying-data"><code>cp</code>” copying data</a></li>
+  <li><a href="#rm-remove-files-and-folders" id="toc-rm-remove-files-and-folders" class="nav-link" data-scroll-target="#rm-remove-files-and-folders"><code>rm</code>: remove files and folders</a></li>
+  <li><a href="#history-keeping-track-of-what-you-did" id="toc-history-keeping-track-of-what-you-did" class="nav-link" data-scroll-target="#history-keeping-track-of-what-you-did"><code>history</code>: keeping track of what you did</a></li>
+  <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo">TODO</a></li>
+  <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
     </div>
@@ -177,7 +219,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Setup</h1>
+<h1 class="title d-none d-lg-block">Introduction to the command line</h1>
 </div>
 
 
@@ -194,39 +236,174 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
+<p>During the setup, you already ran some first commands. In this episode, we will learn a handful of very useful basic unix commands to navigate your filesystem, to move around files, and to inspect the content of files. If you’re logged in to the head node, you should see something like this:</p>
+<p><img src="../images/command_prompt.png" class="img-fluid"></p>
+<p>It shows your user name (<code>mpaauw</code>), the name of the node we are connected to (<code>omics-h0</code>), and after the <code>$</code> sign, a blinking cursor. That’s where we will start typing commands to interact with the filesystem.</p>
+<section id="pwd-find-out-where-we-are" class="level2">
+<h2 class="anchored" data-anchor-id="pwd-find-out-where-we-are"><code>pwd</code>: Find out where we are</h2>
+<p>Let’s orient ourselves by typing our first command, <code>pwd</code>, into the terminal, and pressing enter.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>pwd</code> prints the location of the current working directory and tells you where exactly you are in the file system. In my case, this prints <code>/home/mpaauw</code> as output.</p>
+</section>
+<section id="ls-list-the-contents-of-a-directory" class="level2">
+<h2 class="anchored" data-anchor-id="ls-list-the-contents-of-a-directory"><code>ls</code>: List the contents of a directory</h2>
+<p>Now that we know where we are, let’s find out what files and folders exist in our home directory. For this, you can use the <code>ls</code> command, which lists the contents of the directory you are currently in:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you set-up you Crunchomics account correctly, you should see a folder called <code>personal</code>. That’s where you can store up to 500GB of data on Crunchomics. Try adding the following modifier, or flag, to the <code>ls</code> command to change the output format:</p>
+</section>
+<section id="cd-moving-between-directories" class="level2">
+<h2 class="anchored" data-anchor-id="cd-moving-between-directories"><code>cd</code>: Moving between directories</h2>
+<p>To be able to use the <code>personal</code> directory, we have to move in there. The command <code>cd</code> exists to do just that. Essentially, it’s equivalent to clicking on a directory in the file navigation system on your own computer.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> personal/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Let’s verify that we actually ended up in this <code>personal</code> folder:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Should now print <code>/home/mpaauw/personal</code>.</p>
+<p>You can move back ‘up’ in the hierarchy of directories by running:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="mkdir-make-new-folders" class="level2">
+<h2 class="anchored" data-anchor-id="mkdir-make-new-folders"><code>mkdir</code>: Make new folders</h2>
+<p>We can also make new folders. Let’s navigate into <code>personal</code> again, and create a folder that will contain all the code and data for the Molecular Data Analysis module. We’ll abbreviate it to <code>MDA</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> personal/</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> MDA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Verify that the <code>MDA</code> directory was created.</li>
+<li>Navigate into it.</li>
+<li>Verify that you are now working in the <code>MDA</code> directory.</li>
+<li>Inspect the contents of the <code>MDA</code> directory.</li>
+<li>Within <code>MDA</code>, create another directory, called <code>intro-to-cli</code>, and navigate into it.</li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Click me to see the answer</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Yes, I see the MDA folder now!</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Let's navigate into it</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> MDA/</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. This should print confirmation that you are now in MDA</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. This folder should be empty</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. </span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> intro-to-cli</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> intro-to-cli/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="wget-download-data" class="level2">
+<h2 class="anchored" data-anchor-id="wget-download-data"><code>wget</code>: Download data</h2>
+<p>Next, let’s download some sequencing data. We will use the <code>wget</code> command to download data from a repository, into the currect working directory.</p>
+<p>TODO: add wget command to github repo with some minimal sequencing data.</p>
+</section>
+<section id="cp-copying-data" class="level2">
+<h2 class="anchored" data-anchor-id="cp-copying-data"><code>cp</code>” copying data</h2>
+<p>When doing bioinformatics projects, a clear folder structure is essential to keep yourself organized. We will copy the data to a new folder that we call <code>data</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> NAMEDATA.fastq data/</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify that it worked</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You should see that we now have two copies of the <code>.fastq</code> data. One file is in the working directory, and the other one is in the <code>data</code> folder. Notice that we added a flag, or option, to the <code>ls</code> command: <code>-l</code>. This specifies that the output is now presented in a list format.</p>
+</section>
+<section id="rm-remove-files-and-folders" class="level2">
+<h2 class="anchored" data-anchor-id="rm-remove-files-and-folders"><code>rm</code>: remove files and folders</h2>
+<p>We only need one copy of the data: let’s remove the sequencing data that is now stored in our working directory with a new command <code>rm</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> NAMEDATA.fastq</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># check if it worked</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Learning goals:
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>After this lesson, you should be able to:</p>
-<ul>
-<li>bla</li>
-<li>blie</li>
-<li>bloe</li>
-</ul>
+<p><strong>Unix does not have an undelete command, a trash can, or a bin</strong></p>
+<p>This means that if you delete something with <code>rm</code>, it’s <strong>gone</strong>. Therefore, use <code>rm</code> with care and check what you write twice before pressing enter!</p>
 </div>
 </div>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup:</h2>
-<p>This episode will describe the computational setup for this module. Briefly, we will connect to the University of Amsterdam compute cluster Crunchomics.</p>
 </section>
-<section id="introduction-to-unix-shell" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-to-unix-shell">Introduction to unix shell:</h2>
-<p>This episode will cover the basics of working with a command line interface (or Unix shell). This episode prepares you for the RNA-seq and genome assembly tutorials later on. The materials are based on <a href="https://datacarpentry.github.io/shell-genomics/01-introduction.html">Data Carpentries: Introduction to the Command Line for Genomics</a> and <a href="https://ndombrowski.github.io/cli_workshop/source/bash_intro.html">Introduction to the CLI</a>.</p>
-<p>—– probably don’t include R wrangling basics —— ## R wrangling:</p>
-<p>This episode will cover some R basics (most likely already covered in first weeks of course by Emiel?)</p>
+<section id="history-keeping-track-of-what-you-did" class="level2">
+<h2 class="anchored" data-anchor-id="history-keeping-track-of-what-you-did"><code>history</code>: keeping track of what you did</h2>
+<p>The <code>history</code> command is quite useful: it keeps a list of all the commands that you used today. You can view this as a simple automated labjournal, although it does not contain any output, or information whether a command worked at all.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Remove the sequencing data from the <code>data</code> folder as well.</li>
+<li>Use <code>history</code> to find back the command to download the data.</li>
+<li>Redownload the data, and this time, move (<code>mv</code>) the data to the <code>data</code> folder.</li>
+<li>Use <code>ls</code> commands to inspect what happened by using <code>mv</code> rather than <code>cp</code>.</li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Click me to see the answer</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Oh no, I removed my raw data!</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> data/FASTQ.fastq</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Ah, I remember, it was the wget command.</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Let's download again, and this time move it instead of copu</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ....</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> data.fastq data/</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Now we only have one copy of the data, in the data folder.</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<p>Instead of retyping commands, you can also press the arrow ‘up’ key to cycle through commands you already ran before.</p>
+</section>
+<section id="todo" class="level2">
+<h2 class="anchored" data-anchor-id="todo">TODO</h2>
 <ul>
-<li>Based on carpentries + other tutorials</li>
-<li>Importing data into R</li>
-<li>Data frame manipulation using <code>dplyr</code></li>
-<li>Making graphs using <code>ggplot2</code></li>
+<li>Exploring the contents of files (head, tail, cat)</li>
+<li>Exploring the size of files (wc -l)</li>
+<li>Piping: simple but powerful pipelines.</li>
 </ul>
+</section>
+<section id="credits" class="level2">
+<h2 class="anchored" data-anchor-id="credits">Credits</h2>
+<p>Materials for this episode were strongly inspired by, and partly copied from, <a href="https://ndombrowski.github.io/cli_workshop/source/bash_intro.html">Nina Dombrowski’s ‘Introduction to the cli’ tutorial</a>.</p>
 
 
 </section>
@@ -654,11 +831,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../part0-setup/01_setup.html" class="pagination-link" aria-label="Computational setup">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Computational setup</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part0-setup/01_setup.html" class="pagination-link" aria-label="Computational setup">
-        <span class="nav-page-text">Computational setup</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

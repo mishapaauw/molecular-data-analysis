@@ -3,9 +3,7 @@ title: "Computational setup"
 sidebar: part0
 ---
 
-In this course, you will learn how to analyse sequencing data (both RNA-seq and genome sequencing). These kinds of datasets require specialized software to be processed, which are typically run on Linux servers. Therefore, we will make use of a command-line interface on the Crunchomics compute cluster of the University of Amsterdam. The contents of this course are tailored to students who may have never used a command-line interface before. You need to take a few simple steps to connect to Crunchomics.
-
-Easy way (recommended if you are not planning on using Crunchomics or another server outside of this course):
+In this course, you will learn how to analyse sequencing data (both RNA-seq and genome sequencing). These kinds of datasets require specialized software to be processed, which are typically run on Linux servers. Therefore, we will make use of a **command-line interface (CLI)** on the Crunchomics compute cluster of the University of Amsterdam. Command-line interfaces are an alternative to graphical user interface, with which you are probably more familiar. The contents of this course are tailored to students who may have never used a command-line interface before. You need to take a few simple steps to connect to Crunchomics.
 
 1) One software that is running on the Crunchomics server is RStudio, which you should be familiar with. To connect to the RStudio server, open an internet browser window (e.g. Google Chrome) and go to [https://omics-app01.science.uva.nl/](https://omics-app01.science.uva.nl/)
 
@@ -23,7 +21,7 @@ In the bottom-left panel, you see three tabs: Console, Terminal and Background J
 ssh YOURSTUDENTNUMBER@omics-h0.science.uva.nl
 ```
 
-Now you are connected to the crunchomics "headnode", where you can run all sorts of software. You will need to do these steps every time you sign into the headnode to run programs.
+Now you are connected to the Crunchomics "headnode", where you can run all sorts of software. You will need to do these steps every time you sign into the headnode to run programs.
 
 4) Again in the terminal, type the following two commands to properly initialize your account (you only need to run these commands once):
 
@@ -37,6 +35,11 @@ and
 /zfs/omics/software/script/omics_mv_rstudio_cache
 ```
 
-That's it! You are now ready to start working on Crunchomics. 
+That's it! You are now ready to start working on Crunchomics. Let's take a moment to recap what we did:
 
-TODO: add list of small achievements so far.
+![](../images/Crunchomics_architecture.jpg)
+
+We used the red route on the left-hand side on this schematic to connect to the Crunchomics application server (via the blue "AAS" arrow). To reach the headnode (`h0`) we used a `ssh` (the dark green arrow) command on the terminal. You can also directly connect to the headnode by using an `ssh` connection from a command line on your local computer (`terminal` app for Mac users, `MobaXterm` or other options for Windows users). You can also see that both the application server and the headnode have access to the Crunchomics storage server. Finally, there are 5 'compute nodes' on Crunchomics; this is where large computations can be sent to via a job submission system (we will not use this system in this course, unfortunately!).
+
+In the next episode we will learn the basics of navigating the filesystem on your Crunchomics account. We will do this on the command line only! 
+

@@ -201,15 +201,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#pwd-find-out-where-we-are" id="toc-pwd-find-out-where-we-are" class="nav-link active" data-scroll-target="#pwd-find-out-where-we-are"><code>pwd</code>: Find out where we are</a></li>
-  <li><a href="#ls-list-the-contents-of-a-directory" id="toc-ls-list-the-contents-of-a-directory" class="nav-link" data-scroll-target="#ls-list-the-contents-of-a-directory"><code>ls</code>: List the contents of a directory</a></li>
-  <li><a href="#cd-moving-between-directories" id="toc-cd-moving-between-directories" class="nav-link" data-scroll-target="#cd-moving-between-directories"><code>cd</code>: Moving between directories</a></li>
-  <li><a href="#mkdir-make-new-folders" id="toc-mkdir-make-new-folders" class="nav-link" data-scroll-target="#mkdir-make-new-folders"><code>mkdir</code>: Make new folders</a></li>
-  <li><a href="#wget-download-data" id="toc-wget-download-data" class="nav-link" data-scroll-target="#wget-download-data"><code>wget</code>: Download data</a></li>
-  <li><a href="#cp-copying-data" id="toc-cp-copying-data" class="nav-link" data-scroll-target="#cp-copying-data"><code>cp</code>” copying data</a></li>
+  <li><a href="#pwd-find-out-where-we-are" id="toc-pwd-find-out-where-we-are" class="nav-link active" data-scroll-target="#pwd-find-out-where-we-are"><code>pwd</code>: find out where we are</a></li>
+  <li><a href="#ls-list-the-contents-of-a-directory" id="toc-ls-list-the-contents-of-a-directory" class="nav-link" data-scroll-target="#ls-list-the-contents-of-a-directory"><code>ls</code>: list the contents of a directory</a></li>
+  <li><a href="#cd-moving-between-directories" id="toc-cd-moving-between-directories" class="nav-link" data-scroll-target="#cd-moving-between-directories"><code>cd</code>: moving between directories</a></li>
+  <li><a href="#mkdir-make-new-folders" id="toc-mkdir-make-new-folders" class="nav-link" data-scroll-target="#mkdir-make-new-folders"><code>mkdir</code>: make new folders</a></li>
+  <li><a href="#wget-download-data" id="toc-wget-download-data" class="nav-link" data-scroll-target="#wget-download-data"><code>wget</code>: download data</a></li>
+  <li><a href="#cp-copying-data" id="toc-cp-copying-data" class="nav-link" data-scroll-target="#cp-copying-data"><code>cp</code>: copying data</a></li>
   <li><a href="#rm-remove-files-and-folders" id="toc-rm-remove-files-and-folders" class="nav-link" data-scroll-target="#rm-remove-files-and-folders"><code>rm</code>: remove files and folders</a></li>
   <li><a href="#history-keeping-track-of-what-you-did" id="toc-history-keeping-track-of-what-you-did" class="nav-link" data-scroll-target="#history-keeping-track-of-what-you-did"><code>history</code>: keeping track of what you did</a></li>
-  <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo">TODO</a></li>
+  <li><a href="#gunzip-uncompress-files" id="toc-gunzip-uncompress-files" class="nav-link" data-scroll-target="#gunzip-uncompress-files"><code>gunzip</code>: uncompress files</a></li>
+  <li><a href="#head-tail-and-cat-inspecting-the-contents-of-a-file" id="toc-head-tail-and-cat-inspecting-the-contents-of-a-file" class="nav-link" data-scroll-target="#head-tail-and-cat-inspecting-the-contents-of-a-file"><code>head</code>, <code>tail</code>, and <code>cat</code>: inspecting the contents of a file</a>
+  <ul class="collapse">
+  <li><a href="#head-view-the-first-10-rows-of-a-file" id="toc-head-view-the-first-10-rows-of-a-file" class="nav-link" data-scroll-target="#head-view-the-first-10-rows-of-a-file"><code>head</code>: view the first 10 rows of a file</a></li>
+  <li><a href="#tail-view-the-first-10-rows-of-a-file" id="toc-tail-view-the-first-10-rows-of-a-file" class="nav-link" data-scroll-target="#tail-view-the-first-10-rows-of-a-file"><code>tail</code>: view the first 10 rows of a file</a></li>
+  <li><a href="#cat-view-the-full-file" id="toc-cat-view-the-full-file" class="nav-link" data-scroll-target="#cat-view-the-full-file"><code>cat</code>: view the full file</a></li>
+  </ul></li>
+  <li><a href="#grep-searching-things" id="toc-grep-searching-things" class="nav-link" data-scroll-target="#grep-searching-things"><code>grep</code>: searching things</a></li>
+  <li><a href="#wc-counting-things" id="toc-wc-counting-things" class="nav-link" data-scroll-target="#wc-counting-things"><code>wc</code>: counting things</a></li>
+  <li><a href="#and-creating-litle-pipelines" id="toc-and-creating-litle-pipelines" class="nav-link" data-scroll-target="#and-creating-litle-pipelines"><code>|</code> and <code>&gt;</code>: creating litle pipelines</a></li>
+  <li><a href="#seqkit-sequence-file-manipulation" id="toc-seqkit-sequence-file-manipulation" class="nav-link" data-scroll-target="#seqkit-sequence-file-manipulation"><code>seqkit</code>: sequence file manipulation</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up">Wrap-up</a></li>
   <li><a href="#credits" id="toc-credits" class="nav-link" data-scroll-target="#credits">Credits</a></li>
   </ul>
 </nav>
@@ -240,19 +252,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="../images/command_prompt.png" class="img-fluid"></p>
 <p>It shows your user name (<code>mpaauw</code>), the name of the node we are connected to (<code>omics-h0</code>), and after the <code>$</code> sign, a blinking cursor. That’s where we will start typing commands to interact with the filesystem.</p>
 <section id="pwd-find-out-where-we-are" class="level2">
-<h2 class="anchored" data-anchor-id="pwd-find-out-where-we-are"><code>pwd</code>: Find out where we are</h2>
+<h2 class="anchored" data-anchor-id="pwd-find-out-where-we-are"><code>pwd</code>: find out where we are</h2>
 <p>Let’s orient ourselves by typing our first command, <code>pwd</code>, into the terminal, and pressing enter.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>pwd</code> prints the location of the current working directory and tells you where exactly you are in the file system. In my case, this prints <code>/home/mpaauw</code> as output.</p>
 </section>
 <section id="ls-list-the-contents-of-a-directory" class="level2">
-<h2 class="anchored" data-anchor-id="ls-list-the-contents-of-a-directory"><code>ls</code>: List the contents of a directory</h2>
+<h2 class="anchored" data-anchor-id="ls-list-the-contents-of-a-directory"><code>ls</code>: list the contents of a directory</h2>
 <p>Now that we know where we are, let’s find out what files and folders exist in our home directory. For this, you can use the <code>ls</code> command, which lists the contents of the directory you are currently in:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If you set-up you Crunchomics account correctly, you should see a folder called <code>personal</code>. That’s where you can store up to 500GB of data on Crunchomics. Try adding the following modifier, or flag, to the <code>ls</code> command to change the output format:</p>
 </section>
 <section id="cd-moving-between-directories" class="level2">
-<h2 class="anchored" data-anchor-id="cd-moving-between-directories"><code>cd</code>: Moving between directories</h2>
+<h2 class="anchored" data-anchor-id="cd-moving-between-directories"><code>cd</code>: moving between directories</h2>
 <p>To be able to use the <code>personal</code> directory, we have to move in there. The command <code>cd</code> exists to do just that. Essentially, it’s equivalent to clicking on a directory in the file navigation system on your own computer.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> personal/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s verify that we actually ended up in this <code>personal</code> folder:</p>
@@ -262,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="mkdir-make-new-folders" class="level2">
-<h2 class="anchored" data-anchor-id="mkdir-make-new-folders"><code>mkdir</code>: Make new folders</h2>
+<h2 class="anchored" data-anchor-id="mkdir-make-new-folders"><code>mkdir</code>: make new folders</h2>
 <p>We can also make new folders. Let’s navigate into <code>personal</code> again, and create a folder that will contain all the code and data for the Molecular Data Analysis module. We’ll abbreviate it to <code>MDA</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> personal/</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -311,29 +323,30 @@ Exercise
 </div>
 </section>
 <section id="wget-download-data" class="level2">
-<h2 class="anchored" data-anchor-id="wget-download-data"><code>wget</code>: Download data</h2>
-<p>Next, let’s download some sequencing data. We will use the <code>wget</code> command to download data from a repository, into the currect working directory.</p>
-<p>TODO: add wget command to github repo with some minimal sequencing data.</p>
+<h2 class="anchored" data-anchor-id="wget-download-data"><code>wget</code>: download data</h2>
+<p>Next, let’s download some sequencing data. We will use the <code>wget</code> command to download some sequencing data from a repository, into the currect working directory.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/mishapaauw/molecular-data-analysis/blob/main/part0-setup/data/sample1.fastq.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As always, verify that your file arrived by running <code>ls</code>.</p>
 </section>
 <section id="cp-copying-data" class="level2">
-<h2 class="anchored" data-anchor-id="cp-copying-data"><code>cp</code>” copying data</h2>
+<h2 class="anchored" data-anchor-id="cp-copying-data"><code>cp</code>: copying data</h2>
 <p>When doing bioinformatics projects, a clear folder structure is essential to keep yourself organized. We will copy the data to a new folder that we call <code>data</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> NAMEDATA.fastq data/</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify that it worked</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> sample1.fastq.gz data/</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify that it worked</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You should see that we now have two copies of the <code>.fastq</code> data. One file is in the working directory, and the other one is in the <code>data</code> folder. Notice that we added a flag, or option, to the <code>ls</code> command: <code>-l</code>. This specifies that the output is now presented in a list format.</p>
 </section>
 <section id="rm-remove-files-and-folders" class="level2">
 <h2 class="anchored" data-anchor-id="rm-remove-files-and-folders"><code>rm</code>: remove files and folders</h2>
 <p>We only need one copy of the data: let’s remove the sequencing data that is now stored in our working directory with a new command <code>rm</code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> NAMEDATA.fastq</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># check if it worked</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> sample1.fastq.gz</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># check if it worked</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -373,19 +386,19 @@ Exercise
 <div class="cell">
 <details class="code-fold">
 <summary>Click me to see the answer</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Oh no, I removed my raw data!</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> data/FASTQ.fastq</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Ah, I remember, it was the wget command.</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Let's download again, and this time move it instead of copu</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> ....</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> data.fastq data/</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Now we only have one copy of the data, in the data folder.</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Oh no, I removed my raw data!</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> data/sample1.fastq.gz</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Ah, I remember, it was the wget command.</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">history</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Let's download again, and this time move it instead of copy</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part0-setup/data/sample1.fastq.gz</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> sample1.fastq.gz data/</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Now we only have one copy of the data, in the data folder.</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -393,13 +406,176 @@ Exercise
 </div>
 <p>Instead of retyping commands, you can also press the arrow ‘up’ key to cycle through commands you already ran before.</p>
 </section>
-<section id="todo" class="level2">
-<h2 class="anchored" data-anchor-id="todo">TODO</h2>
-<ul>
-<li>Exploring the contents of files (head, tail, cat)</li>
-<li>Exploring the size of files (wc -l)</li>
-<li>Piping: simple but powerful pipelines.</li>
-</ul>
+<section id="gunzip-uncompress-files" class="level2">
+<h2 class="anchored" data-anchor-id="gunzip-uncompress-files"><code>gunzip</code>: uncompress files</h2>
+<p>You may have noticed that the file with sequencing data has<code>.gz</code> as file extension. This means that the file is compressed, or zipped. This saves storage space. While many bioinformatics tools can deal with compressed files, we will uncompress it to be able to inspect the file.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> data/sample1.fastq.gz</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This should now show that you have a single file in the <code>data/</code> folder: <code>sample1.fastq</code>.</p>
+</section>
+<section id="head-tail-and-cat-inspecting-the-contents-of-a-file" class="level2">
+<h2 class="anchored" data-anchor-id="head-tail-and-cat-inspecting-the-contents-of-a-file"><code>head</code>, <code>tail</code>, and <code>cat</code>: inspecting the contents of a file</h2>
+<p>Many bioinformatics files, including <code>.fastq</code> files, are essentially just text files. We will learn a few more command to inspect files on the terminal. After all, we can’t just open them in Notepad.</p>
+<section id="head-view-the-first-10-rows-of-a-file" class="level3">
+<h3 class="anchored" data-anchor-id="head-view-the-first-10-rows-of-a-file"><code>head</code>: view the first 10 rows of a file</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> data/sample1.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="tail-view-the-first-10-rows-of-a-file" class="level3">
+<h3 class="anchored" data-anchor-id="tail-view-the-first-10-rows-of-a-file"><code>tail</code>: view the first 10 rows of a file</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> data/sample1.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="cat-view-the-full-file" class="level3">
+<h3 class="anchored" data-anchor-id="cat-view-the-full-file"><code>cat</code>: view the full file</h3>
+<p>Warning! Your terminal <strong>will</strong> just print everything if you ask it to. If your file is huge, this may take a while. If you’re stuck in such a situation, you can always hits <code>control</code> + <code>C</code> to break out of it.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> data/sample1.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="grep-searching-things" class="level2">
+<h2 class="anchored" data-anchor-id="grep-searching-things"><code>grep</code>: searching things</h2>
+<p>Each read is represented by four rows in a <code>.fastq</code> file. First, there’s the read header (or name, if you want). Then, there’s the actual sequence. Finally, there’s a spacer row and a row with quality encoding (more on that in a later episode!). Let’s say we are only interested in the read name and their sequence at this point. We can use <code>grep</code> to search for patterns (much like you’d use <code>control</code> + <code>F</code> in a Word file on your computer!).</p>
+<p>As you may have seen, each read name starts with <code>@ERR</code>. We can use that to search:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> @ERR data/sample1.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And voila, we get just the read headers printed to our terminal.</p>
+<p>We can also ask <code>grep</code> to report the first line <em>after</em> a search hit by adding the <code>-A 1</code> option (likewise, we could ask for a line <em>before</em> a search hit: <code>-B 1</code>).</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> @ERR data/sample1.fastq <span class="at">-A</span> 1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="wc-counting-things" class="level2">
+<h2 class="anchored" data-anchor-id="wc-counting-things"><code>wc</code>: counting things</h2>
+<p>We might be interested in the number of reads in our <code>.fastq</code> file. We know now that each read takes four rows; if we could find out the number of rows we could calculate the number of reads! The <code>wc</code> (word count) command does just that, if we specify that we are interested in lines (<code>-l</code>).</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wc</span> <span class="at">-l</span> data/sample1.fastq </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Okay, there are 200,000 rows. So there must be 50,000 reads in this dataset!</p>
+</section>
+<section id="and-creating-litle-pipelines" class="level2">
+<h2 class="anchored" data-anchor-id="and-creating-litle-pipelines"><code>|</code> and <code>&gt;</code>: creating litle pipelines</h2>
+<p>It would be nice to find out the number of reads in a dataset without having to do a manual calculation. We have the tools to do so: we could <code>grep</code> for <code>@ERR</code>, giving us a list of just the read headers, and then count the number of lines using <code>wc -l</code>. We just need to learn how to string them together. In command-line interfaces, this is called ‘piping’ and is done with the <code>|</code> symbol. Let’s try.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">'@ERR'</span> data/sample1.fastq <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>50,000! This command directly prints the answer to your terminal. What happens is that the list of read headers is redirected into the <code>wc -l</code> command, instead of being printed to the terminal.</p>
+<p>We can add one more step to this pipeline and save this number to a file to keep for later reference:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="st">'@ERR'</span> data/sample1.fastq <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span> <span class="op">&gt;</span> number_of_reads.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="seqkit-sequence-file-manipulation" class="level2">
+<h2 class="anchored" data-anchor-id="seqkit-sequence-file-manipulation"><code>seqkit</code>: sequence file manipulation</h2>
+<p>We can do a lot with a small set of basic terminal commands, but luckily, people have developed tools to make working with sequencing files easier. One of such tools is <code>seqkit</code>, which has numerous ‘sub-commands’.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats data/sample1.fastq </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This confirms that we have 50,000 sequences, and additionaly, we learn that the reads are 101 basepairs long.</p>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Sometimes, sequencing reads can still contain the <em>adapter sequences</em> that are ligated to the DNA molecules before sequencing. A fragment of the Illumina TruSeq adapter that you might find is <code>AGATCGGAAGAGC</code>. Since these fragments do not contain biological information, reads with adapter fragments are considered ‘contaminated’ and should be cleaned or removed.</p>
+<ol type="1">
+<li>Search for the adapter sequence using <code>grep</code>. How many times do find the adapter sequence in this dataset? And where do you find the adapters in the reads?</li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Click me to see the answer</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> AGATCGGAAGAGC data/sample1.fastq <span class="co"># the adapters are located at the start or the end of the reads, never somewhere in the middle.</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-c</span> AGATCGGAAGAGC data/sample1.fastq <span class="co"># 51 hits!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="2" type="1">
+<li>Add the read headers for the contaminated reads, by modifying your <code>grep</code> command.</li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Click me to see the answer</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> AGATCGGAAGAGC data/sample1.fastq <span class="at">-B</span> 1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="3" type="1">
+<li>Now, pipe <code>|</code> these results into a new command to <em>just</em> get the headers and get rid of the sequences.</li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Click me to see the answer</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> AGATCGGAAGAGC data/sample1.fastq <span class="at">-B</span> 1 <span class="kw">|</span> <span class="fu">grep</span> ERR</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="4" type="1">
+<li>Clean up the read headers. For now we are just interested in the read ID; that’s any information that starts with the <code>@</code> sign until the first space. Hint: you will need the <code>cut</code> command, which we have not yet learned. Use <code>man cut</code> to read the official documentation, or search online.</li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Click me to see the answer</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> AGATCGGAAGAGC data/sample1.fastq <span class="at">-B</span> 1 <span class="kw">|</span> <span class="fu">grep</span> ERR <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1 <span class="at">-d</span> <span class="st">' '</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="5" type="1">
+<li>Finally, save the output of this pipeline into a file called <code>contaminated_reads.txt</code>.</li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Click me to see the answer</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> AGATCGGAAGAGC data/sample1.fastq <span class="at">-B</span> 1 <span class="kw">|</span> <span class="fu">grep</span> ERR <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f</span> 1 <span class="at">-d</span> <span class="st">' '</span> <span class="op">&gt;</span> contaminated_reads.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p><code>seqkit</code> can be used to filter reads by average quality scores. Run the following command: <code>seqkit seq --min-qual 25 data/sample1.fastq</code>.</p>
+<ol type="1">
+<li>You will see that the high-quality reads are printed to your terminal. That’s not very useful, store the results into a new file called <code>sample1-HQ-reads.fastq</code></li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Click me to see the answer</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> seq <span class="at">--min-qual</span> 25 data/sample1.fastq <span class="op">&gt;</span> data/sample1-HQ.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="2" type="1">
+<li>Count the number of reads that passed the quality filtering step.</li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Click me to see the answer</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats data/sample1-HQ.fastq <span class="co"># 38,416 reads survived</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="3" type="1">
+<li>Try running the following code <code>seqkit stats data/sample1*.fastq</code>. Discuss with your neighbour what the <code>*</code> character is doing in this command.</li>
+</ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Click me to see the answer</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats data/sample1<span class="pp">*</span>.fastq</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">processed</span> files:  2 / 2 <span class="pp">[</span><span class="ss">======================================</span><span class="pp">]</span> ETA: 0s. done</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">file</span>                   format  type  num_seqs    sum_len  min_len  avg_len  max_len</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="ex">data/sample1.fastq</span>     FASTQ   DNA     50,000  5,050,000      101      101      101</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="ex">data/sample1-HQ.fastq</span>  FASTQ   DNA     38,416  3,880,016      101      101      101</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># It looks like the wildcard helped seqkit to find both fastq files! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="wrap-up" class="level2">
+<h2 class="anchored" data-anchor-id="wrap-up">Wrap-up</h2>
+<p>That’s it for today. You just learned a handful of commands to work in a command-line environment. Although the commands are simple, combining them into small pipelines they can become very powerful tools to manipulate and analyze text files. In the following tutorials, we will start learning more specialized bioinformatics commands.</p>
 </section>
 <section id="credits" class="level2">
 <h2 class="anchored" data-anchor-id="credits">Credits</h2>

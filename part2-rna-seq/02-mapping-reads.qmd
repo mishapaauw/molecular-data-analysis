@@ -42,9 +42,30 @@ Create a directory to store the raw data, and download the reads that we will us
 ```bash
 mkdir data
 cd data/
+
+# download 4 read sets, move to subdirectory reads
+wget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/sample1.fastq.gz
+wget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/sample2.fastq.gz
+wget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/sample3.fastq.gz
+wget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/sample4.fastq.gz
+
+mkdir reads
+mv sample*.gz reads/
+
+# download reference genome, move to subdirectory genome
+wget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/TAIR10.fasta.gz
+wget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/TAIR10_GFF3_genes.gff.gz
+
+mkdir genome
+mv TAIR10*.gz genome/
 ```
 
-TODO: update setup instructions to work on Crunchomics.
+```bash
+cd ..
+pwd
+```
+
+Make sure your working directory is `rna-seq` again.
 
 ## Quality control: `fastqc`
 
@@ -61,7 +82,7 @@ Let's look at one read. Note that our `.fastq` files are compressed: they have e
 
 ```{bash filename="bash"}
 #| eval: false
-zcat reads/sample1.fastq.gz | head -n 4
+zcat data/reads/sample1.fastq.gz | head -n 4
 
 @ERR1406259.2 HWI-ST1034:108:D1HW4ACXX:1:1101:1627:2208/1
 CCGAAACAATCTCTCTCTCGTCGCCGGAAGCAAAAGAAGAATTAAGATAAGCCTCATCCATCCAGTGATGCAAATCACCAACCCATATGGTTTTATTCTCA
@@ -76,7 +97,7 @@ Let's run `fastqc` on one sample:
 ```{bash filename="bash"}
 #| eval: false
 mkdir fastqc_reports # <1>
-fastqc -o fastqc_reports reads/sample1.fastq.gz # <2>
+fastqc -o fastqc_reports data/reads/sample1.fastq.gz # <2>
 ```
 
 1. First we make a directory (`mkdir`) to store the `fastqc` reports.
@@ -101,7 +122,7 @@ Doing this manually for every sample would be quite tiring, especially when we w
 
 ```{bash filename="bash"}
 #| eval: false
-for sample in reads/*.fastq.gz # <1>
+for sample in data/reads/*.fastq.gz # <1>
 do # <2>
   fastqc -o fastqc_reports ${sample} # <3>
 done
@@ -123,7 +144,7 @@ sample2_fastqc.html  sample3_fastqc.zip
 ```
 1. `ls` is a command to 'list' all the files present in a directory.
 
-Finally, let's inspect the QC results. If you are working in the Google Colab, you can browse the files in the workspace by clicking the directory symbol. Find `fastqc_reports` and download the `.html` files to your local computer. You can open these in any browser. `fastqc` gives each dataset a score (Pass, Warning, or Fail) on several different modules. All scores are reported in the **Summary**. The next section contains basic statistics like the number of reads, average sequence length, and the GC content. Generally it is a good idea to keep track of the total number of reads sequenced for each sample and to make sure the read length and GC content is as expected (based on what you know of your studied organism). One of the most important analysis modules is the **“Per base sequence quality”** plot. This plot provides the distribution of quality scores at each position in the read across all reads. This plot can alert us to whether there were any problems occuring during sequencing. For example, see a good and bad quality result below:
+Finally, let's inspect the QC results. In Rstudio, go to the 'files' window. Navigate to the `MDA/rna-seq/` directory (by clicking, this time :) ). In the `fastqc_reports/` directory, you can click on any of the `.html` files and display it in your browser. Alternatively, you could download them to your local computer by clicking `More > Export`. `fastqc` gives each dataset a score (Pass, Warning, or Fail) on several different modules. All scores are reported in the **Summary**. The next section contains basic statistics like the number of reads, average sequence length, and the GC content. Generally it is a good idea to keep track of the total number of reads sequenced for each sample and to make sure the read length and GC content is as expected (based on what you know of your studied organism). One of the most important analysis modules is the **“Per base sequence quality”** plot. This plot provides the distribution of quality scores at each position in the read across all reads. This plot can alert us to whether there were any problems occuring during sequencing. For example, see a good and bad quality result below:
 
 ![](../images/fastqc-good-bad.png)
 
@@ -147,10 +168,10 @@ A common anomaly detected by `fastqc` is sequencing adapters still being present
 ```{bash filename="bash"}
 #| eval: false
 mkdir fastp_reports
-mkdir trimmed_reads
+mkdir data/trimmed_reads
 fastp \ 
-  -i reads/sample1.fastq.gz \
-  -o trimmed_reads/sample1.trimmed.fastq.gz \
+  -i data/reads/sample1.fastq.gz \
+  -o data/trimmed_reads/sample1.trimmed.fastq.gz \
   --thread 2 \
   --html fastp_reports/sample1_fastp_report.html
 ```
@@ -201,18 +222,22 @@ So, for RNA-seq we need splice-aware aligners. Can you come up with an experimen
 In experiments where we don't need to think about exon-intron boundaries. This is the case when the reads originate from genomic DNA, for example for whole genome sequencing experiments, or enrichment sequencing experiments like Chip-Seq. We also don't need a splice-aware aligner if we map RNA-seq reads from organisms that don't have introns, such as bacteria.
 :::
 
-To use an alignment tool, we must first get the **reference genome** (e.g. via [NCBI Genomes](https://www.ncbi.nlm.nih.gov/datasets/genome/), [ENSEMBL](https://www.ensembl.org/info/data/ftp/index.html), [ENSEMBL Plants](https://plants.ensembl.org/info/data/ftp/index.html) or various organism specific databases), in `.fa` or `.fasta` format. A genome assembly contains the entire genome sequence of an organism as plain text, organized by chromosome (for 'high-quality' assemblies) or many some unplaced contigs (for 'draft' genomes). You will also need an annotation file with all the predicted gene models (`.gff` or `.gtf`format). For this workshop, the *A. thaliana* reference genome and annotation are included in the workshop materials. 
+To use an alignment tool, we must first get the **reference genome** (e.g. via [NCBI Genomes](https://www.ncbi.nlm.nih.gov/datasets/genome/), [ENSEMBL](https://www.ensembl.org/info/data/ftp/index.html), [ENSEMBL Plants](https://plants.ensembl.org/info/data/ftp/index.html) or various organism specific databases), in `.fa` or `.fasta` format. A genome assembly contains the entire genome sequence of an organism as plain text, organized by chromosome (for 'high-quality' assemblies) or many some unplaced contigs (for 'draft' genomes). You will also need an annotation file with all the predicted gene models (`.gff` or `.gtf`format). For this tutorial, the *A. thaliana* reference genome and annotation are included in the workshop materials. 
 
-Let's have a quick look at the reference genome:
+Let's have a quick look at the reference genome, after uncompressing them first:
 
 ```{bash filename="bash"}
 #| eval: false
-head genome/TAIR10.fasta # <1>
+gunzip data/genome/TAIR10.fasta.gz 
+gunzip data/genome/TAIR10_GFF3_genes.gff.gz 
+
+# Inspect
+head data/genome/TAIR10.fasta # <1>
 >1 dna:chromosome chromosome:TAIR10:1:1:30427671:1 REF
 CCCTAAACCCTAAACCCTAAACCCTAAACCTCTGAATCCTTAATCCCTAAATCCCTAAAT
 CTTTAAATCCTACATCCATGAATCCCTAAATACCTAATTCCCTAAACCCGAAACCGGTTT (...)
 
-grep ">" genome/TAIR10.fasta # <2>
+grep ">" data/genome/TAIR10.fasta # <2>
 >1 dna:chromosome chromosome:TAIR10:1:1:30427671:1 REF
 >2 dna:chromosome chromosome:TAIR10:2:1:19698289:1 REF
 >3 dna:chromosome chromosome:TAIR10:3:1:23459830:1 REF
@@ -221,12 +246,13 @@ grep ">" genome/TAIR10.fasta # <2>
 >Mt dna:chromosome chromosome:TAIR10:Mt:1:366924:1 REF
 >Pt dna:chromosome chromosome:TAIR10:Pt:1:154478:1 REF
 ```
+
 1. Look at the first 10 lines: a fasta header starting with `>`, chromosome number, and some metadata. Then, the sequence of that chromosome starts.
 2. Search for the character `>`, which is an essential part of a fasta sequence header. We then see a list of chromosomes included in this genome assembly.
 
 Ok, our Arabidopsis genome assemblies contains 5 chromosomes, and the genomes of the organelles: mitochondria (`Mt`) and plastid (`Pt`).
 
-Before we start mapping we need to *index* the reference genome. Indexing the genome prepares the genome in a way that allows a computer to search it efficiently. The genome, a multi-million basepair long string of text, is encoded into a different, computer-friendly datastructure such as a suffix tree. The details of this procedure are beyond the scope of this workshop, but it's important to do it. The *Arabidopsis thaliana* genome is already present in the notebook. We make the index using `STAR`:
+Before we start mapping we need to *index* the reference genome. Indexing the genome prepares the genome in a way that allows a computer to search it efficiently. The genome, a multi-million basepair long string of text, is encoded into a different, computer-friendly datastructure such as a suffix tree. The details of this procedure are beyond the scope of this tutorial, but it's important to do it. The *Arabidopsis thaliana* genome is already present in the notebook. We make the index using `STAR`:
 
 ```{bash filename="bash"}
 #| eval: false

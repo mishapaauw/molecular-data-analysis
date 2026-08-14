@@ -6,7 +6,7 @@
     "section": "",
     "text": "In this course, you will learn how to analyse sequencing data (both RNA-seq and genome sequencing). These kinds of datasets require specialized software to be processed, which are typically run on Linux servers. Therefore, we will make use of a command-line interface (CLI) on the Crunchomics compute cluster of the University of Amsterdam. Command-line interfaces are an alternative to graphical user interface, with which you are probably more familiar. The contents of this course are tailored to students who may have never used a command-line interface before. You need to take a few simple steps to connect to Crunchomics.\n\nOne software that is running on the Crunchomics server is RStudio, which you should be familiar with. To connect to the RStudio server, open an internet browser window (e.g. Google Chrome) and go to https://omics-app01.science.uva.nl/\nAfter signing on with your usual UvA password, you should see the familiar RStudio environment in your browser:\n\n\nIn the bottom-left panel, you see three tabs: Console, Terminal and Background Jobs. Click on Terminal to bring it to the foreground.\n\n\nIn this terminal, type the following command. Replace YOURSTUDENTNUMBER with….. your student number 😃.\n\nssh YOURSTUDENTNUMBER@omics-h0.science.uva.nl\nNow you are connected to the Crunchomics “headnode”, where you can run all sorts of software. You will need to do these steps every time you sign into the headnode to run programs.\n\nAgain in the terminal, type the following two commands to properly initialize your account (you only need to run these commands once):\n\n/zfs/omics/software/script/omics_install_script\nand\n/zfs/omics/software/script/omics_mv_rstudio_cache\nThat’s it! You are now ready to start working on Crunchomics. Let’s take a moment to recap what we did:\n\nWe used the red route on the left-hand side on this schematic to connect to the Crunchomics application server (via the blue “AAS” arrow). To reach the headnode (h0) we used a ssh (the dark green arrow) command on the terminal. You can also directly connect to the headnode by using an ssh connection from a command line on your local computer (terminal app for Mac users, MobaXterm or other options for Windows users). You can also see that both the application server and the headnode have access to the Crunchomics storage server. Finally, there are 5 ‘compute nodes’ on Crunchomics; this is where large computations can be sent to via a job submission system (we will not use this system in this course, unfortunately!).\nIn the next episode we will learn the basics of navigating the filesystem on your Crunchomics account. We will do this on the command line only!",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Computational setup"
     ]
@@ -18,7 +18,7 @@
     "section": "",
     "text": "During the setup, you already ran some first commands. In this episode, we will learn a handful of very useful basic unix commands to navigate your filesystem, to move around files, and to inspect the content of files. If you’re logged in to the head node, you should see something like this:\nIt shows your user name (mpaauw), the name of the node we are connected to (omics-h0), and after the $ sign, a blinking cursor. That’s where we will start typing commands to interact with the filesystem.",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -28,9 +28,9 @@
     "href": "part0-setup/02_CLI_basics.html#pwd-find-out-where-we-are",
     "title": "Introduction to the command line",
     "section": "pwd: find out where we are",
-    "text": "pwd: find out where we are\nLet’s orient ourselves by typing our first command, pwd, into the terminal, and pressing enter.\npwd\npwd prints the location of the current working directory and tells you where exactly you are in the file system. In my case, this prints /home/mpaauw as output.",
+    "text": "pwd: find out where we are\nLet’s orient ourselves by typing our first command, pwd (short for print working directory), into the terminal, and pressing enter.\npwd\npwd prints the location of the current working directory and tells you where exactly you are in the file system. In my case, this prints /home/mpaauw as output. This means that any commands will be executed within this directory. Think of it as having your file explorer open in a certain directory on your local machine.",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -40,9 +40,9 @@
     "href": "part0-setup/02_CLI_basics.html#ls-list-the-contents-of-a-directory",
     "title": "Introduction to the command line",
     "section": "ls: list the contents of a directory",
-    "text": "ls: list the contents of a directory\nNow that we know where we are, let’s find out what files and folders exist in our home directory. For this, you can use the ls command, which lists the contents of the directory you are currently in:\nls\nIf you set-up you Crunchomics account correctly, you should see a folder called personal. That’s where you can store up to 500GB of data on Crunchomics. Try adding the following modifier, or flag, to the ls command to change the output format:",
+    "text": "ls: list the contents of a directory\nNow that we know where we are, let’s find out what files and folders exist in our home directory. For this, you can use the ls command, which lists the contents of the directory you are currently in:\nls\nIf you set-up you Crunchomics account correctly, you should see a folder called personal. That’s where you can store up to 500GB of data on Crunchomics.",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -52,9 +52,9 @@
     "href": "part0-setup/02_CLI_basics.html#cd-moving-between-directories",
     "title": "Introduction to the command line",
     "section": "cd: moving between directories",
-    "text": "cd: moving between directories\nTo be able to use the personal directory, we have to move in there. The command cd exists to do just that. Essentially, it’s equivalent to clicking on a directory in the file navigation system on your own computer.\ncd personal/\nLet’s verify that we actually ended up in this personal folder:\npwd\nShould now print /home/mpaauw/personal.\nYou can move back ‘up’ in the hierarchy of directories by running:\ncd ..",
+    "text": "cd: moving between directories\nTo be able to use the personal directory, we have to move in there. The command cd (change directory) exists to do just that. Essentially, it’s equivalent to clicking on a directory in the file navigation system on your own computer.\ncd personal/\nLet’s verify that we actually ended up in this personal folder:\npwd\nShould now print /home/mpaauw/personal.\nYou can move back ‘up’ in the hierarchy of directories by running:\ncd ..\nOr you can move back to the ‘home’ directory by running:\ncd ~\nNotice how we can give cd multiple options, like navigating to personal/, up .., or home ~. These inputs are called arguments.",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -64,9 +64,9 @@
     "href": "part0-setup/02_CLI_basics.html#mkdir-make-new-folders",
     "title": "Introduction to the command line",
     "section": "mkdir: make new folders",
-    "text": "mkdir: make new folders\nWe can also make new folders. Let’s navigate into personal again, and create a folder that will contain all the code and data for the Molecular Data Analysis module. We’ll abbreviate it to MDA.\ncd personal/\n\nmkdir MDA\n\n\n\n\n\n\nExercise\n\n\n\n\n\n\nVerify that the MDA directory was created.\nNavigate into it.\nVerify that you are now working in the MDA directory.\nInspect the contents of the MDA directory.\nWithin MDA, create another directory, called intro-to-cli, and navigate into it.\n\n\n\nClick me to see the answer\n# 1. Yes, I see the MDA folder now!\nls\n\n# 2. Let's navigate into it\ncd MDA/\n\n# 3. This should print confirmation that you are now in MDA\npwd\n\n# 4. This folder should be empty\nls\n\n# 5. \nmkdir intro-to-cli\ncd intro-to-cli/",
+    "text": "mkdir: make new folders\nWe can also make new folders. Let’s navigate into personal again, and create a folder that will contain all the code and data for the Molecular Data Analysis module. We’ll abbreviate it to MDA.\ncd personal/\n\nmkdir MDA\n\n\n\n\n\n\nExercise\n\n\n\n\n\n\nVerify that the MDA directory was created.\nNavigate into it.\nVerify that you are now working in the MDA directory.\nInspect the contents of the MDA directory.\nWithin MDA, create another directory for this tutorial session, called intro-to-cli, and navigate into it.\nFinally, confirm that you are now working in the expected directory.\n\n\n\nClick me to see the answer\n# 1. Yes, I see the MDA folder now!\nls\n\n# 2. Let's navigate into it\ncd MDA/\n\n# 3. This should print confirmation that you are now in MDA\npwd\n\n# 4. This folder should be empty\nls\n\n# 5. \nmkdir intro-to-cli\ncd intro-to-cli/\n\n# 6. \npwd",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -78,7 +78,7 @@
     "section": "wget: download data",
     "text": "wget: download data\nNext, let’s download some sequencing data. We will use the wget command to download some sequencing data from a repository, into the currect working directory.\nwget https://github.com/mishapaauw/molecular-data-analysis/blob/main/part0-setup/data/sample1.fastq.gz\nAs always, verify that your file arrived by running ls.",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -88,9 +88,9 @@
     "href": "part0-setup/02_CLI_basics.html#cp-copying-data",
     "title": "Introduction to the command line",
     "section": "cp: copying data",
-    "text": "cp: copying data\nWhen doing bioinformatics projects, a clear folder structure is essential to keep yourself organized. We will copy the data to a new folder that we call data.\nmkdir data\n\ncp sample1.fastq.gz data/\n\n# Verify that it worked\nls -l\nls -l data\nYou should see that we now have two copies of the .fastq data. One file is in the working directory, and the other one is in the data folder. Notice that we added a flag, or option, to the ls command: -l. This specifies that the output is now presented in a list format.",
+    "text": "cp: copying data\nWhen doing bioinformatics projects, a clear folder structure is essential to keep yourself organized. We will copy the data to a new folder that we call data.\nmkdir data\n\ncp sample1.fastq.gz data/\nNotice how cp takes 2 arguments: the first being the file that needs to be copied, the second being the destination.\n# Verify that it worked\nls -l\nls -l data\nYou should see that we now have two copies of the .fastq data. One file is in the working directory, and the other one is in the data folder. Notice that we added a flag, or option, to the ls command: -l. This specifies that the output is now presented in a list format.",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -102,7 +102,7 @@
     "section": "rm: remove files and folders",
     "text": "rm: remove files and folders\nWe only need one copy of the data: let’s remove the sequencing data that is now stored in our working directory with a new command rm.\nrm sample1.fastq.gz\n\n# check if it worked\nls -l \n\n\n\n\n\n\nImportant\n\n\n\nUnix does not have an undelete command, a trash can, or a bin\nThis means that if you delete something with rm, it’s gone. Therefore, use rm with care and check what you write twice before pressing enter!",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -112,9 +112,9 @@
     "href": "part0-setup/02_CLI_basics.html#history-keeping-track-of-what-you-did",
     "title": "Introduction to the command line",
     "section": "history: keeping track of what you did",
-    "text": "history: keeping track of what you did\nThe history command is quite useful: it keeps a list of all the commands that you used today. You can view this as a simple automated labjournal, although it does not contain any output, or information whether a command worked at all.\n\n\n\n\n\n\nExercise\n\n\n\n\n\n\nRemove the sequencing data from the data folder as well.\nUse history to find back the command to download the data.\nRedownload the data, and this time, move (mv) the data to the data folder.\nUse ls commands to inspect what happened by using mv rather than cp.\n\n\n\nClick me to see the answer\n# 1. Oh no, I removed my raw data!\nrm data/sample1.fastq.gz\n\n# 2. Ah, I remember, it was the wget command.\nhistory\n\n# 3. Let's download again, and this time move it instead of copy\nwget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part0-setup/data/sample1.fastq.gz\nmv sample1.fastq.gz data/\n\n# 4. Now we only have one copy of the data, in the data folder.\nls -l\nls -l data/\n\n\n\n\n\nInstead of retyping commands, you can also press the arrow ‘up’ key to cycle through commands you already ran before.",
+    "text": "history: keeping track of what you did\nThe history command is quite useful: it keeps a list of all the commands that you used today. You can view this as a simple automated labjournal, although it does not contain any output, or information whether a command worked at all. It can be useful for example in a scenario where you would delete your data by accident (see following exercise).\n\n\n\n\n\n\nExercise\n\n\n\n\n\n\nRemove the sequencing data from the data folder as well.\nUse history to find back the command to download the data.\nRedownload the data, and this time, move (mv) the data to the data folder.\nUse ls commands to inspect what happened by using mv rather than cp.\n\n\n\nClick me to see the answer\n# 1. Oh no, I removed my raw data!\nrm data/sample1.fastq.gz\n\n# 2. Ah, I remember, it was the wget command.\nhistory\n\n# 3. Let's download again, and this time move it instead of copy\nwget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part0-setup/data/sample1.fastq.gz\nmv sample1.fastq.gz data/\n\n# 4. Now we only have one copy of the data, in the data folder.\nls -l\nls -l data/\n\n\n\n\n\nInstead of retyping commands, you can also press the arrow ‘up’ key to cycle through commands you already ran before.",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -126,7 +126,7 @@
     "section": "gunzip: uncompress files",
     "text": "gunzip: uncompress files\nYou may have noticed that the file with sequencing data has.gz as file extension. This means that the file is compressed, or zipped. This saves storage space. While many bioinformatics tools can deal with compressed files, we will uncompress it to be able to inspect the file.\ngunzip data/sample1.fastq.gz\n\nls data/\nThis should now show that you have a single file in the data/ folder: sample1.fastq.",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -138,7 +138,7 @@
     "section": "head, tail, and cat: inspecting the contents of a file",
     "text": "head, tail, and cat: inspecting the contents of a file\nMany bioinformatics files, including .fastq files, are essentially just text files. We will learn a few more command to inspect files on the terminal. After all, we can’t just open them in Notepad.\n\nhead: view the first 10 rows of a file\nhead data/sample1.fastq\n\n\ntail: view the first 10 rows of a file\ntail data/sample1.fastq\n\n\ncat: view the full file\nWarning! Your terminal will just print everything if you ask it to. If your file is huge, this may take a while. If you’re stuck in such a situation, you can always hits control + C to break out of it.\ncat data/sample1.fastq",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -150,7 +150,7 @@
     "section": "grep: searching things",
     "text": "grep: searching things\nEach read is represented by four rows in a .fastq file. First, there’s the read header (or name, if you want). Then, there’s the actual sequence. Finally, there’s a spacer row and a row with quality encoding (more on that in a later episode!). Let’s say we are only interested in the read name and their sequence at this point. We can use grep to search for patterns (much like you’d use control + F in a Word file on your computer!).\nAs you may have seen, each read name starts with @ERR. We can use that to search:\ngrep @ERR data/sample1.fastq\nAnd voila, we get just the read headers printed to our terminal.\nWe can also ask grep to report the first line after a search hit by adding the -A 1 option (likewise, we could ask for a line before a search hit: -B 1).\ngrep @ERR data/sample1.fastq -A 1",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -162,7 +162,7 @@
     "section": "wc: counting things",
     "text": "wc: counting things\nWe might be interested in the number of reads in our .fastq file. We know now that each read takes four rows; if we could find out the number of rows we could calculate the number of reads! The wc (word count) command does just that, if we specify that we are interested in lines (-l).\nwc -l data/sample1.fastq \nOkay, there are 200,000 rows. So there must be 50,000 reads in this dataset!",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -174,7 +174,7 @@
     "section": "| and >: creating litle pipelines",
     "text": "| and &gt;: creating litle pipelines\nIt would be nice to find out the number of reads in a dataset without having to do a manual calculation. We have the tools to do so: we could grep for @ERR, giving us a list of just the read headers, and then count the number of lines using wc -l. We just need to learn how to string them together. In command-line interfaces, this is called ‘piping’ and is done with the | symbol. Let’s try.\ngrep '@ERR' data/sample1.fastq | wc -l\n50,000! This command directly prints the answer to your terminal. What happens is that the list of read headers is redirected into the wc -l command, instead of being printed to the terminal.\nWe can add one more step to this pipeline and save this number to a file to keep for later reference:\ngrep '@ERR' data/sample1.fastq | wc -l &gt; number_of_reads.txt",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -186,7 +186,7 @@
     "section": "seqkit: sequence file manipulation",
     "text": "seqkit: sequence file manipulation\nWe can do a lot with a small set of basic terminal commands, but luckily, people have developed tools to make working with sequencing files easier. One of such tools is seqkit, which has numerous ‘sub-commands’.\nseqkit stats data/sample1.fastq \nThis confirms that we have 50,000 sequences, and additionaly, we learn that the reads are 101 basepairs long.",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -196,9 +196,9 @@
     "href": "part0-setup/02_CLI_basics.html#exercises",
     "title": "Introduction to the command line",
     "section": "Exercises",
-    "text": "Exercises\n\n\n\n\n\n\nExercise\n\n\n\n\n\nSometimes, sequencing reads can still contain the adapter sequences that are ligated to the DNA molecules before sequencing. A fragment of the Illumina TruSeq adapter that you might find is AGATCGGAAGAGC. Since these fragments do not contain biological information, reads with adapter fragments are considered ‘contaminated’ and should be cleaned or removed.\n\nSearch for the adapter sequence using grep. How many times do find the adapter sequence in this dataset? And where do you find the adapters in the reads?\n\n\n\nClick me to see the answer\ngrep AGATCGGAAGAGC data/sample1.fastq # the adapters are located at the start or the end of the reads, never somewhere in the middle.\ngrep -c AGATCGGAAGAGC data/sample1.fastq # 51 hits!\n\n\n\nAdd the read headers for the contaminated reads, by modifying your grep command.\n\n\n\nClick me to see the answer\ngrep AGATCGGAAGAGC data/sample1.fastq -B 1\n\n\n\nNow, pipe | these results into a new command to just get the headers and get rid of the sequences.\n\n\n\nClick me to see the answer\ngrep AGATCGGAAGAGC data/sample1.fastq -B 1 | grep ERR\n\n\n\nClean up the read headers. For now we are just interested in the read ID; that’s any information that starts with the @ sign until the first space. Hint: you will need the cut command, which we have not yet learned. Use man cut to read the official documentation, or search online.\n\n\n\nClick me to see the answer\ngrep AGATCGGAAGAGC data/sample1.fastq -B 1 | grep ERR | cut -f 1 -d ' '\n\n\n\nFinally, save the output of this pipeline into a file called contaminated_reads.txt.\n\n\n\nClick me to see the answer\ngrep AGATCGGAAGAGC data/sample1.fastq -B 1 | grep ERR | cut -f 1 -d ' ' &gt; contaminated_reads.txt\n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nseqkit can be used to filter reads by average quality scores. Run the following command: seqkit seq --min-qual 25 data/sample1.fastq.\n\nYou will see that the high-quality reads are printed to your terminal. That’s not very useful, store the results into a new file called sample1-HQ-reads.fastq\n\n\n\nClick me to see the answer\nseqkit seq --min-qual 25 data/sample1.fastq &gt; data/sample1-HQ.fastq\n\n\n\nCount the number of reads that passed the quality filtering step.\n\n\n\nClick me to see the answer\nseqkit stats data/sample1-HQ.fastq # 38,416 reads survived\n\n\n\nTry running the following code seqkit stats data/sample1*.fastq. Discuss with your neighbour what the * character is doing in this command.\n\n\n\nClick me to see the answer\nseqkit stats data/sample1*.fastq\nprocessed files:  2 / 2 [======================================] ETA: 0s. done\nfile                   format  type  num_seqs    sum_len  min_len  avg_len  max_len\ndata/sample1.fastq     FASTQ   DNA     50,000  5,050,000      101      101      101\ndata/sample1-HQ.fastq  FASTQ   DNA     38,416  3,880,016      101      101      101\n# It looks like the wildcard helped seqkit to find both fastq files!",
+    "text": "Exercises\n\n\n\n\n\n\nExercise\n\n\n\n\n\nseqkit can be used to filter reads by average quality scores. Run the following command: seqkit seq --min-qual 25 data/sample1.fastq.\n\nYou will see that the high-quality reads are printed to your terminal. That’s not very useful, store the results into a new file called sample1-HQ-reads.fastq\n\n\n\nClick me to see the answer\nseqkit seq --min-qual 25 data/sample1.fastq &gt; data/sample1-HQ.fastq\n\n\n\nCount the number of reads that passed the quality filtering step.\n\n\n\nClick me to see the answer\nseqkit stats data/sample1-HQ.fastq # 38,416 reads survived\n\n\n\nTry running the following code seqkit stats data/sample1*.fastq. Discuss with your neighbour what the * character is doing in this command.\n\n\n\nClick me to see the answer\nseqkit stats data/sample1*.fastq\nprocessed files:  2 / 2 [======================================] ETA: 0s. done\nfile                   format  type  num_seqs    sum_len  min_len  avg_len  max_len\ndata/sample1.fastq     FASTQ   DNA     50,000  5,050,000      101      101      101\ndata/sample1-HQ.fastq  FASTQ   DNA     38,416  3,880,016      101      101      101\n# It looks like the wildcard helped seqkit to find both fastq files! \n\n\n\n\n\n\n\n\n\n\n\nExercise\n\n\n\n\n\nSometimes, sequencing reads can still contain the adapter sequences that are ligated to the DNA molecules before sequencing. A fragment of the Illumina TruSeq adapter that you might find is AGATCGGAAGAGC. Since these fragments do not contain biological information, reads with adapter fragments are considered ‘contaminated’ and should be cleaned or removed.\n\nSearch for the adapter sequence using grep. How many times do find the adapter sequence in this dataset? And where do you find the adapters in the reads?\n\n\n\nClick me to see the answer\ngrep AGATCGGAAGAGC data/sample1.fastq # the adapters are located at the start or the end of the reads, never somewhere in the middle.\ngrep -c AGATCGGAAGAGC data/sample1.fastq # 51 hits!\n\n\n\nAdd the read headers for the contaminated reads, by modifying your grep command.\n\n\n\nClick me to see the answer\ngrep AGATCGGAAGAGC data/sample1.fastq -B 1\n\n\n\nNow, pipe | these results into a new command to just get the headers and get rid of the sequences.\n\n\n\nClick me to see the answer\ngrep AGATCGGAAGAGC data/sample1.fastq -B 1 | grep ERR\n\n\n\nClean up the read headers. For now we are just interested in the read ID; that’s any information that starts with the @ sign until the first space. Hint: you will need the cut command, which we have not yet learned. Use man cut to read the official documentation, or search online.\n\n\n\nClick me to see the answer\ngrep AGATCGGAAGAGC data/sample1.fastq -B 1 | grep ERR | cut -f 1 -d ' '\n\n\n\nFinally, save the output of this pipeline into a file called contaminated_reads.txt.\n\n\n\nClick me to see the answer\ngrep AGATCGGAAGAGC data/sample1.fastq -B 1 | grep ERR | cut -f 1 -d ' ' &gt; contaminated_reads.txt",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -208,9 +208,9 @@
     "href": "part0-setup/02_CLI_basics.html#wrap-up",
     "title": "Introduction to the command line",
     "section": "Wrap-up",
-    "text": "Wrap-up\nThat’s it for today. You just learned a handful of commands to work in a command-line environment. Although the commands are simple, combining them into small pipelines they can become very powerful tools to manipulate and analyze text files. In the following tutorials, we will start learning more specialized bioinformatics commands.",
+    "text": "Wrap-up\nThat’s it for today. You just learned a handful of commands to work in a command-line environment. Although the commands are simple, by combining them into small pipelines they can become very powerful tools to manipulate and analyze text files. In the following tutorials, we will start learning more specialized bioinformatics commands.",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -222,7 +222,7 @@
     "section": "Credits",
     "text": "Credits\nMaterials for this episode were strongly inspired by, and partly copied from, Nina Dombrowski’s ‘Introduction to the cli’ tutorial.",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Episodes",
       "Introduction to the command line"
     ]
@@ -282,7 +282,7 @@
     "section": "",
     "text": "Learning goals:\n\n\n\nAfter this lesson, you should be able to:\nWith regard to data visualization:\n\nSelect the appropriate chart type given the structure of the data\nDesign data visualizations that follow principles of visual clarity (e.g. data-to-ink ratio)\nJustify the choice of color palette for a particular visualization, including accessibility considerations regarding color blindness\nCritically evaluate data visualizations and propose improvements\n\nWith regard to reproducibility:\n\nExplain the FAIR principles and their relevance to data management in the biological sciences\nApply version control to a small data analysis project using git\nCommunicate analysis results to collaborations via Github\nEpisodes to make:",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Reproducible data visualisation using R and Github"
     ]
   },
@@ -293,7 +293,7 @@
     "section": "Reproducible science using Github:",
     "text": "Reproducible science using Github:\n\nIntroduce github website\nIntroduce concept of version control / FAIR data management\nMake people create a github account, make a repository, and push some changes to the repository\nTODO: look at Johannes data management workshop",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Reproducible data visualisation using R and Github"
     ]
   },
@@ -304,7 +304,7 @@
     "section": "Data visualization in R:",
     "text": "Data visualization in R:\n\nSome data viz theory\nContinue working with ggplot2, slightly more advanced\nAssignment: take a dataset and create a very BAD plot and a very GOOD plot with this data. Explain why the bad plot is bad and the good plot is good. Present? Hand in in CANVAS? Push to github is maybe better? How to grade this?",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Reproducible data visualisation using R and Github"
     ]
   },
@@ -315,7 +315,7 @@
     "section": "",
     "text": "Learning goals:\n\n\n\nAfter this lesson, you should be able to:\n\nExplain how read length and sequencing depth affect assembly quality\nExecute a genome assembly, using command-line tools\nSelect appropriate metrics for assessing genome assembly quality\nInterpret assembly quality metrics to identify potential issues with a genome assembly\nJustify the choice of sequencing technology for a genome assembly experiment\n\n\n\n\nHave people download different read datasets of the same organism:\n\nShort reads vs long reads\nDifferent levels of coverage (10x, 20x, 50x, 100x)\n\nAssemble genome using appropriate tool (xyz for short reads, flye for long reads)\nRegister assembly metrics in google sheet\nVisualize results! Each student pair gets to analyze a different assembly metric. Perhaps present results?",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "Genome assembly"
     ]
   },
@@ -334,18 +334,25 @@
     "text": "Learning objectives\nBy the end of this module, you will be able to:\n\nCreate publication-quality data visualizations using R packages\nPerform RNA-seq analysis, from mapping raw reads to differential expression analysis\nIntegrate RNA-seq results into a research project with a biological question\nPerform a genome assembly, and assess the quality of the resulting assembly\nDocument and communicate your analyses effectively"
   },
   {
+    "objectID": "index.html#a-note-on-genai",
+    "href": "index.html#a-note-on-genai",
+    "title": "Molecular Data Analysis & Bioinformatics",
+    "section": "A note on genAI",
+    "text": "A note on genAI\nGenerative AI can be a useful tool to help you build bioinformatics pipelines. We think genAI is most useful when you already have a level of knowledge of a specific topic. Therefore, we strongly advice you to not use genAI to write all your code if you want to become a proficient bioinformatician. Use your time during this module to get to this level by writing code yourself or with help of the teachers. This gives you a solid basis and you will be able to assess whether AI-generated code makes sense, or is bloated with unnecessary parts, or is just plain wrong – the latter two are a common occurence! Later during your career, genAI can help you write better code faster.\ntodo: should we formulate hard rules here?"
+  },
+  {
     "objectID": "index.html#module-structure",
     "href": "index.html#module-structure",
     "title": "Molecular Data Analysis & Bioinformatics",
     "section": "Module structure",
-    "text": "Module structure\nThis module is organized into three parts, and there’s a setup section (‘part 0’):\n\nPart 0: Setup: Before diving into the analyses, you’ll configure your computational environment with all necessary software, packages, and dependencies.\nPart 1: Data visualization in R: Starting with the basics: data visualization using ggplot2 in R. In addition, we will work on making our science reproducible using Github.\nPart 2: RNA-seq analysis: Explore transcriptomics through an RNA-seq workflow.\nPart 3: Genome assembly: Explore the challenges of reconstructing genomes from sequencing reads."
+    "text": "Module structure\nThis module is organized into four parts taught by Misha Paauw and Tijs Bliek, for which you can find the materials on this website. These materials are delivered in a participatory live coding style. That means that the instructor will type code, while sharing the screen, and that the students type along to repeat the code. This is highly effective, evidence-based way of teaching coding skills. The four parts are:\n\nPart 0: Setup: You’ll configure your computational environment. In addition, you will learn the basics of working in a command-line environment.\nPart 1: Data visualization in R: What makes a data visualisation good, and how do we make them? We will explore these concepts using ggplot2 in R. In addition, we will work on making our science reproducible using Github.\nPart 2: RNA-seq analysis: Explore RNA-seq datasets, from read mapping to differential gene expression analysis.\nPart 3: Genome assembly: Take on the challenge of reconstructing a genome from sequencing reads.\n\nThen, Aalt-Jan van Dijk takes over for lectures and tutorials on single-cell transcriptomics and gene-regulatory networks. Teaching materials for these tutorials are distributed via Canvas."
   },
   {
     "objectID": "index.html#timetable",
     "href": "index.html#timetable",
     "title": "Molecular Data Analysis & Bioinformatics",
     "section": "Timetable",
-    "text": "Timetable\nThe following timetable is preliminary and still subject to change:\n\nWeek 1:\n\n\n\n\n\n\n\n\n\n\nDate\nTime\nLocation\nType\nTopic\n\n\n\n\n28 sept\n13:00 - 14:00\nxx\nLecture\nModule introduction\n\n\n28 sept\n14:00 - 17:00\nxx\nWC\nIntroduction: Shell, R, tidyverse\n\n\n29 sept\n13:00 - 14:00\nxx\nLecture\nPrinciples of data visualization\n\n\n29 sept\n14:00 - 17:00\nxx\nWC\nPart 1: Data visualization in R (including mini presentation)\n\n\n30 sept\n13:00 - 14:00\nxx\nLecture\nRNA-seq lecture\n\n\n30 sept\n14:00 - 17:00\nxx\nWC\nPart 2: RNA-seq analysis (mapping reads)\n\n\n\n\n\nWeek 2:\n\n\n\n\n\n\n\n\n\n\nDate\nTime\nLocation\nType\nTopic\n\n\n\n\n5 oct\n13:00 - 15:00\nxx\nWC\nPart 2: RNA-seq analysis (differential expression analysis)\n\n\n5 oct\n15:00 - 17:00\nxx\n❗Assignment❗\nPart 2: Assignment RNA-seq\n\n\n6 oct\n13:00 - 17:00\nxx\n❗Assignment❗\nPart 2: Assignment RNA-seq\n\n\n8 oct\n13:00 - 15:00\nxx\nLecture\nGenome assembly & comparative genomics lecture\n\n\n\n\n\nWeek 3:\n\n\n\n\n\n\n\n\n\n\nDate\nTime\nLocation\nType\nTopic\n\n\n\n\n12 oct\n13:00 - 17:00\nxx\nWC\nPart 3: Genome assembly & comparative genomics"
+    "text": "Timetable\nThe following timetable is preliminary and still subject to change:\n\nWeek 1:\n\n\n\n\n\n\n\n\n\n\nDate\nTime\nLocation\nType\nTopic\n\n\n\n\n28 sept\n13:00 - 14:00\nxx\nLecture\nModule introduction\n\n\n28 sept\n14:00 - 17:00\nxx\nTutorial\nIntroduction: Shell, R, tidyverse\n\n\n29 sept\n13:00 - 14:00\nxx\nLecture\nPrinciples of data visualization\n\n\n29 sept\n14:00 - 17:00\nxx\nTutorial\nPart 1: Data visualization in R (including mini presentation)\n\n\n30 sept\n13:00 - 14:00\nxx\nLecture\nRNA-seq lecture\n\n\n30 sept\n14:00 - 17:00\nxx\nTutorial\nPart 2: RNA-seq analysis (mapping reads)\n\n\n\n\n\nWeek 2:\n\n\n\n\n\n\n\n\n\n\nDate\nTime\nLocation\nType\nTopic\n\n\n\n\n5 oct\n13:00 - 15:00\nxx\nTutorial\nPart 2: RNA-seq analysis (differential expression analysis)\n\n\n5 oct\n15:00 - 17:00\nxx\n❗Assignment❗\nPart 2: Assignment RNA-seq\n\n\n6 oct\n13:00 - 17:00\nxx\n❗Assignment❗\nPart 2: Assignment RNA-seq\n\n\n8 oct\n13:00 - 15:00\nxx\nLecture\nGenome assembly & comparative genomics lecture\n\n\n\n\n\nWeek 3:\n\n\n\n\n\n\n\n\n\n\nDate\nTime\nLocation\nType\nTopic\n\n\n\n\n12 oct\n13:00 - 17:00\nxx\nTutorials\nPart 3: Genome assembly & comparative genomics"
   },
   {
     "objectID": "index.html#prerequisites",
@@ -428,38 +435,41 @@
     "section": "",
     "text": "Learning goals:\n\n\n\nAfter this lesson, you should be able to:\n\nDesign a RNA-seq experiment with enough statistical power\nRecognize common bioinformatics filetypes (.fastq, .fasta, .bam)\nProcess RNA-seq data using appropriate tools, from raw reads to count table\nInterpret PCA and clustering results to asess whether sample groupingds alsign with the experimental design\nApply DESeq2 to obtain lists of differentially expressed genes between two conditions\nApply gene enrichment tests to defined gene lists\nBe able to create key plots such as volcano plots and heat maps\nIntegrate RNA-seq results into a hypothesis about a biological problem\n\n\n\nTODO:\n\nTake contents from RNA-seq workshop bioDSC.\nAdapt to fit MDA program.\nFind good Arabidopsis RNA-seq dataset for assignment. Create clear expectations for the assignment.",
     "crumbs": [
-      "Setup",
+      "Setup and introduction to command line",
       "RNA-seq and differential gene expression analysis"
     ]
   },
   {
     "objectID": "part0-setup/index.html",
     "href": "part0-setup/index.html",
-    "title": "Setup",
+    "title": "Setup and intro to command line",
     "section": "",
-    "text": "Learning goals:\n\n\n\nAfter this lesson, you should be able to:\n\nbla\nblie\nbloe",
+    "text": "Learning goals:\n\n\n\nAfter this lesson, you should be able to:\n\nUnderstand the difference between working on your own laptop and a compute cluster\nNavigate a filesystem using a command-line environment\nCombine commands into short pipelines to perform more complex data-processing tasks\nRecognize the command-line as a powerful tool for exploring biological data\nThere will be two episodes to cover in the tutorial session:",
     "crumbs": [
-      "Setup"
+      "Setup and introduction to command line",
+      "Setup and intro to command line"
     ]
   },
   {
-    "objectID": "part0-setup/index.html#setup",
-    "href": "part0-setup/index.html#setup",
-    "title": "Setup",
-    "section": "Setup:",
-    "text": "Setup:\nThis episode will describe the computational setup for this module. Briefly, we will connect to the University of Amsterdam compute cluster Crunchomics.",
+    "objectID": "part0-setup/index.html#computational-setup",
+    "href": "part0-setup/index.html#computational-setup",
+    "title": "Setup and intro to command line",
+    "section": "Computational setup",
+    "text": "Computational setup\nThis episode will describe the computational setup for this module. Briefly, we will connect to the University of Amsterdam compute cluster Crunchomics.",
     "crumbs": [
-      "Setup"
+      "Setup and introduction to command line",
+      "Setup and intro to command line"
     ]
   },
   {
-    "objectID": "part0-setup/index.html#introduction-to-unix-shell",
-    "href": "part0-setup/index.html#introduction-to-unix-shell",
-    "title": "Setup",
-    "section": "Introduction to unix shell:",
-    "text": "Introduction to unix shell:\nThis episode will cover the basics of working with a command line interface (or Unix shell). This episode prepares you for the RNA-seq and genome assembly tutorials later on. The materials are based on Data Carpentries: Introduction to the Command Line for Genomics and Introduction to the CLI.\n—– probably don’t include R wrangling basics —— ## R wrangling:\nThis episode will cover some R basics (most likely already covered in first weeks of course by Emiel?)\n\nBased on carpentries + other tutorials\nImporting data into R\nData frame manipulation using dplyr\nMaking graphs using ggplot2",
+    "objectID": "part0-setup/index.html#introduction-to-the-command-line",
+    "href": "part0-setup/index.html#introduction-to-the-command-line",
+    "title": "Setup and intro to command line",
+    "section": "Introduction to the command line",
+    "text": "Introduction to the command line\nThis episode will cover the basics of working with a command line interface (or Unix shell). This episode prepares you for the RNA-seq and genome assembly tutorials later on. The materials are based on Data Carpentries: Introduction to the Command Line for Genomics and Introduction to the CLI.",
     "crumbs": [
-      "Setup"
+      "Setup and introduction to command line",
+      "Setup and intro to command line"
     ]
   }
 ]

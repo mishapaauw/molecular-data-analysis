@@ -15,14 +15,22 @@ By the end of this module, you will be able to:
 - Perform a genome assembly, and assess the quality of the resulting assembly
 - Document and communicate your analyses effectively
 
+## A note on genAI
+
+Generative AI can be a useful tool to help you build bioinformatics pipelines. We think genAI is most useful when you already have a level of knowledge of a specific topic. Therefore, we strongly advice you to not use genAI to write all your code if you want to become a proficient bioinformatician. Use your time during this module to get to this level by writing code yourself or with help of the teachers. This gives you a solid basis and you will be able to assess whether AI-generated code makes sense, or is bloated with unnecessary parts, or is just plain wrong – the latter two are a common occurence! Later during your career, genAI can help you write better code faster.
+
+**todo: should we formulate hard rules here?**
+
 ## Module structure
 
-This module is organized into three parts, and there's a setup section ('part 0'):
+This module is organized into four parts taught by Misha Paauw and Tijs Bliek, for which you can find the materials on this website. These materials are delivered in a **participatory live coding** style. That means that the instructor will type code, while sharing the screen, and that the students type along to repeat the code. This is highly effective, evidence-based way of teaching coding skills. The four parts are:
 
-- **Part 0: Setup**: Before diving into the analyses, you'll configure your computational environment with all necessary software, packages, and dependencies.
-- **Part 1: Data visualization in R**: Starting with the basics: data visualization using `ggplot2` in `R`. In addition, we will work on making our science reproducible using Github.
-- **Part 2: RNA-seq analysis**: Explore transcriptomics through an RNA-seq workflow. 
-- **Part 3: Genome assembly**: Explore the challenges of reconstructing genomes from sequencing reads.
+- **Part 0: Setup**: You'll configure your computational environment. In addition, you will learn the basics of working in a command-line environment.
+- **Part 1: Data visualization in R**: What makes a data visualisation *good*, and how do we make them? We will explore these concepts using `ggplot2` in `R`. In addition, we will work on making our science reproducible using Github.
+- **Part 2: RNA-seq analysis**: Explore RNA-seq datasets, from read mapping to differential gene expression analysis.
+- **Part 3: Genome assembly**: Take on the challenge of reconstructing a genome from sequencing reads.
+
+Then, Aalt-Jan van Dijk takes over for lectures and tutorials on **single-cell transcriptomics** and **gene-regulatory networks**. Teaching materials for these tutorials are distributed via Canvas.
 
 ## Timetable
 
@@ -32,16 +40,16 @@ The following timetable is preliminary and still subject to change:
 | Date | Time | Location | Type | Topic |
 |--|---|--|--|---------|
 | 28 sept | 13:00 - 14:00 | xx | Lecture | Module introduction |
-| 28 sept | 14:00 - 17:00 | xx | WC | Introduction: Shell, R, tidyverse |
+| 28 sept | 14:00 - 17:00 | xx | Tutorial | Introduction: Shell, R, tidyverse |
 | 29 sept | 13:00 - 14:00 | xx | Lecture | Principles of data visualization |
-| 29 sept | 14:00 - 17:00 | xx | WC | Part 1: Data visualization in R (including mini presentation)|
+| 29 sept | 14:00 - 17:00 | xx | Tutorial | Part 1: Data visualization in R (including mini presentation)|
 | 30 sept | 13:00 - 14:00 | xx | Lecture | RNA-seq lecture |
-| 30 sept | 14:00 - 17:00 | xx | WC | Part 2: RNA-seq analysis (mapping reads) |
+| 30 sept | 14:00 - 17:00 | xx | Tutorial | Part 2: RNA-seq analysis (mapping reads) |
 
 ### Week 2:
 | Date | Time | Location | Type | Topic |
 |--|---|--|--|---------|
-| 5 oct | 13:00 - 15:00 | xx | WC | Part 2: RNA-seq analysis (differential expression analysis)|
+| 5 oct | 13:00 - 15:00 | xx | Tutorial | Part 2: RNA-seq analysis (differential expression analysis)|
 | 5 oct | 15:00 - 17:00 | xx | :exclamation:*Assignment*:exclamation: | Part 2: Assignment RNA-seq |
 | 6 oct | 13:00 - 17:00 | xx | :exclamation:*Assignment*:exclamation: | Part 2: Assignment RNA-seq |
 | 8 oct | 13:00 - 15:00 | xx | Lecture | Genome assembly & comparative genomics lecture |
@@ -49,7 +57,7 @@ The following timetable is preliminary and still subject to change:
 ### Week 3:
 | Date | Time | Location | Type | Topic |
 |--|---|--|--|---------|
-| 12 oct | 13:00 - 17:00 | xx | WC | Part 3: Genome assembly & comparative genomics |
+| 12 oct | 13:00 - 17:00 | xx | Tutorials | Part 3: Genome assembly & comparative genomics |
 
 ## Prerequisites
 

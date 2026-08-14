@@ -12,13 +12,13 @@ It shows your user name (`mpaauw`), the name of the node we are connected to (`o
 
 ## `pwd`: find out where we are
 
-Let's orient ourselves by typing our first command, `pwd`, into the terminal, and pressing enter.
+Let's orient ourselves by typing our first command, `pwd` (short for `print working directory`), into the terminal, and pressing enter.
 
 ```bash
 pwd
 ```
 
-`pwd` prints the location of the current working directory and tells you where exactly you are in the file system. In my case, this prints `/home/mpaauw` as output. 
+`pwd` prints the location of the current working directory and tells you where exactly you are in the file system. In my case, this prints `/home/mpaauw` as output. This means that any commands will be executed within this directory. Think of it as having your file explorer open in a certain directory on your local machine.
 
 ## `ls`: list the contents of a directory
 
@@ -28,11 +28,11 @@ Now that we know where we are, let's find out what files and folders exist in ou
 ls
 ```
 
-If you set-up you Crunchomics account correctly, you should see a folder called `personal`. That's where you can store up to 500GB of data on Crunchomics. Try adding the following modifier, or flag, to the `ls` command to change the output format:
+If you set-up you Crunchomics account correctly, you should see a folder called `personal`. That's where you can store up to 500GB of data on Crunchomics. 
 
 ## `cd`: moving between directories
 
-To be able to use the `personal` directory, we have to move in there. The command `cd` exists to do just that. Essentially, it's equivalent to clicking on a directory in the file navigation system on your own computer.
+To be able to use the `personal` directory, we have to move in there. The command `cd` (`change directory`) exists to do just that. Essentially, it's equivalent to clicking on a directory in the file navigation system on your own computer.
 
 ```bash
 cd personal/
@@ -51,6 +51,14 @@ You can move back 'up' in the hierarchy of directories by running:
 cd ..
 ```
 
+Or you can move back to the 'home' directory by running:
+
+```bash
+cd ~
+```
+
+Notice how we can give `cd` multiple options, like navigating to `personal/`, up `..`, or home `~`. These inputs are called `arguments`. 
+
 ## `mkdir`: make new folders
 
 We can also make new folders. Let's navigate into `personal` again, and create a folder that will contain all the code and data for the Molecular Data Analysis module. We'll abbreviate it to `MDA`.
@@ -66,7 +74,8 @@ mkdir MDA
 2. Navigate into it.
 3. Verify that you are now working in the `MDA` directory.
 4. Inspect the contents of the `MDA` directory.
-5. Within `MDA`, create another directory, called `intro-to-cli`, and navigate into it.
+5. Within `MDA`, create another directory for this tutorial session, called `intro-to-cli`, and navigate into it.
+6. Finally, confirm that you are now working in the expected directory.
 
 ```{bash}
 #| eval: false
@@ -88,6 +97,9 @@ ls
 # 5. 
 mkdir intro-to-cli
 cd intro-to-cli/
+
+# 6. 
+pwd
 ```
 :::
 
@@ -109,7 +121,11 @@ When doing bioinformatics projects, a clear folder structure is essential to kee
 mkdir data
 
 cp sample1.fastq.gz data/
+```
 
+Notice how `cp` takes **2** arguments: the first being the file that needs to be copied, the second being the destination.
+
+```bash
 # Verify that it worked
 ls -l
 ls -l data
@@ -136,7 +152,7 @@ This means that if you delete something with `rm`, it's **gone**. Therefore, use
 
 ## `history`: keeping track of what you did
 
-The `history` command is quite useful: it keeps a list of all the commands that you used today. You can view this as a simple automated labjournal, although it does not contain any output, or information whether a command worked at all. 
+The `history` command is quite useful: it keeps a list of all the commands that you used today. You can view this as a simple automated labjournal, although it does not contain any output, or information whether a command worked at all. It can be useful for example in a scenario where you would delete your data by accident (see following exercise).
 
 ::: {.callout-caution collapse="false" title="Exercise"}
 1. Remove the sequencing data from the `data` folder as well.
@@ -261,6 +277,42 @@ This confirms that we have 50,000 sequences, and additionaly, we learn that the 
 
 ::: {.callout-caution collapse="false" title="Exercise"}
 
+`seqkit` can be used to filter reads by average quality scores. Run the following command: `seqkit seq --min-qual 25 data/sample1.fastq`.
+
+1. You will see that the high-quality reads are printed to your terminal. That's not very useful, store the results into a new file called `sample1-HQ-reads.fastq`
+
+```{bash}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Click me to see the answer"
+seqkit seq --min-qual 25 data/sample1.fastq > data/sample1-HQ.fastq
+```
+
+2. Count the number of reads that passed the quality filtering step. 
+```{bash}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Click me to see the answer"
+seqkit stats data/sample1-HQ.fastq # 38,416 reads survived
+```
+
+3. Try running the following code `seqkit stats data/sample1*.fastq`. Discuss with your neighbour what the `*` character is doing in this command.
+
+```{bash}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Click me to see the answer"
+seqkit stats data/sample1*.fastq
+processed files:  2 / 2 [======================================] ETA: 0s. done
+file                   format  type  num_seqs    sum_len  min_len  avg_len  max_len
+data/sample1.fastq     FASTQ   DNA     50,000  5,050,000      101      101      101
+data/sample1-HQ.fastq  FASTQ   DNA     38,416  3,880,016      101      101      101
+# It looks like the wildcard helped seqkit to find both fastq files! 
+```
+:::
+
+::: {.callout-caution collapse="false" title="Exercise"}
+
 Sometimes, sequencing reads can still contain the *adapter sequences* that are ligated to the DNA molecules before sequencing. A fragment of the Illumina TruSeq adapter that you might find is `AGATCGGAAGAGC`. Since these fragments do not contain biological information, reads with adapter fragments are considered 'contaminated' and should be cleaned or removed. 
 
 1. Search for the adapter sequence using `grep`. How many times do find the adapter sequence in this dataset? And where do you find the adapters in the reads?
@@ -309,47 +361,10 @@ grep AGATCGGAAGAGC data/sample1.fastq -B 1 | grep ERR | cut -f 1 -d ' ' > contam
 ```
 :::
 
-::: {.callout-caution collapse="false" title="Exercise"}
-
-`seqkit` can be used to filter reads by average quality scores. Run the following command: `seqkit seq --min-qual 25 data/sample1.fastq`.
-
-1. You will see that the high-quality reads are printed to your terminal. That's not very useful, store the results into a new file called `sample1-HQ-reads.fastq`
-
-```{bash}
-#| eval: false
-#| code-fold: true
-#| code-summary: "Click me to see the answer"
-seqkit seq --min-qual 25 data/sample1.fastq > data/sample1-HQ.fastq
-```
-
-2. Count the number of reads that passed the quality filtering step. 
-```{bash}
-#| eval: false
-#| code-fold: true
-#| code-summary: "Click me to see the answer"
-seqkit stats data/sample1-HQ.fastq # 38,416 reads survived
-```
-
-3. Try running the following code `seqkit stats data/sample1*.fastq`. Discuss with your neighbour what the `*` character is doing in this command.
-
-```{bash}
-#| eval: false
-#| code-fold: true
-#| code-summary: "Click me to see the answer"
-seqkit stats data/sample1*.fastq
-processed files:  2 / 2 [======================================] ETA: 0s. done
-file                   format  type  num_seqs    sum_len  min_len  avg_len  max_len
-data/sample1.fastq     FASTQ   DNA     50,000  5,050,000      101      101      101
-data/sample1-HQ.fastq  FASTQ   DNA     38,416  3,880,016      101      101      101
-# It looks like the wildcard helped seqkit to find both fastq files! 
-```
-:::
-
-
 
 ## Wrap-up
 
-That's it for today. You just learned a handful of commands to work in a command-line environment. Although the commands are simple, combining them into small pipelines they can become very powerful tools to manipulate and analyze text files. In the following tutorials, we will start learning more specialized bioinformatics commands.
+That's it for today. You just learned a handful of commands to work in a command-line environment. Although the commands are simple, by combining them into small pipelines they can become very powerful tools to manipulate and analyze text files. In the following tutorials, we will start learning more specialized bioinformatics commands.
 
 ## Credits
 

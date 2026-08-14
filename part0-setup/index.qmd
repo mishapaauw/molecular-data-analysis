@@ -1,5 +1,5 @@
 ---
-title: "Setup"
+title: "Setup and intro to command line"
 sidebar: part0
 ---
 
@@ -8,26 +8,19 @@ sidebar: part0
 
 After this lesson, you should be able to:
 
-- bla
-- blie
-- bloe
+- Understand the difference between working on your own laptop and a compute cluster 
+- Navigate a filesystem using a command-line environment
+- Combine commands into short pipelines to perform more complex data-processing tasks
+- Recognize the command-line as a powerful tool for exploring biological data
 
 :::
 
-## Setup:
+There will be two episodes to cover in the tutorial session:
+
+## Computational setup
 
 This episode will describe the computational setup for this module. Briefly, we will connect to the University of Amsterdam compute cluster Crunchomics. 
 
-## Introduction to unix shell:
+## Introduction to the command line
 
 This episode will cover the basics of working with a command line interface (or Unix shell). This episode prepares you for the RNA-seq and genome assembly tutorials later on. The materials are based on [Data Carpentries: Introduction to the Command Line for Genomics](https://datacarpentry.github.io/shell-genomics/01-introduction.html) and [Introduction to the CLI](https://ndombrowski.github.io/cli_workshop/source/bash_intro.html).
-
------ probably don't include R wrangling basics ------
-## R wrangling:
-
-This episode will cover some R basics (most likely already covered in first weeks of course by Emiel?)
-
-- Based on carpentries + other tutorials
-- Importing data into R
-- Data frame manipulation using `dplyr`
-- Making graphs using `ggplot2`

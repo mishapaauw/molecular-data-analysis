@@ -12,7 +12,7 @@ website:
     background: primary
     search: true
     left:
-      - text: "Setup"
+      - text: "Setup and introduction to command line"
         file: part0-setup/index.qmd
       - text: "Part 1: Data visualization in R"
         file: part1-dataviz/index.qmd

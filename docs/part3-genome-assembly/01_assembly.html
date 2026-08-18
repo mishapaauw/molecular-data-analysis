@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,7 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../part3-genome-assembly/01_assembly.html" rel="next">
+<link href="../part3-genome-assembly/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -130,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part3-genome-assembly/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../part3-genome-assembly/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Genome assembly</span></a>
   </div>
 </li>
@@ -145,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part3-genome-assembly/01_assembly.html" class="sidebar-item-text sidebar-link">
+  <a href="../part3-genome-assembly/01_assembly.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Genome assembly</span></a>
   </div>
 </li>
@@ -156,8 +190,17 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#megahit-assembly-for-short-reads" id="toc-megahit-assembly-for-short-reads" class="nav-link active" data-scroll-target="#megahit-assembly-for-short-reads"><code>megahit</code>: assembly for short reads</a></li>
+  <li><a href="#flye-assembly-for-long-reads" id="toc-flye-assembly-for-long-reads" class="nav-link" data-scroll-target="#flye-assembly-for-long-reads"><code>flye</code>: assembly for long reads</a></li>
+  <li><a href="#gathering-assembly-statistics-in-google-sheets" id="toc-gathering-assembly-statistics-in-google-sheets" class="nav-link" data-scroll-target="#gathering-assembly-statistics-in-google-sheets">Gathering assembly statistics in <code>google sheets</code></a></li>
+  <li><a href="#comparing-assembly-strategies" id="toc-comparing-assembly-strategies" class="nav-link" data-scroll-target="#comparing-assembly-strategies">Comparing assembly strategies</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -181,31 +224,145 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
+<p>To start this tutorial, make sure you’re connected to Crunchomics as discussed in the <a href="../part0-setup/01_setup.html">computational setup episode</a>. As always, let’s organize ourselves by creating a new directory for this tutorial session, in your <code>MDA</code> directory. Also, let’s create a <code>data/</code> directory</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> personal/MDA/</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> genome-assembly</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> genome-assembly/</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">mdir</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To assemble a genome, we need reads. For this tutorial, the reads are stored on Crunchomics. There are different read datasets, and the teacher will assign to you which dataset you should copy. Some datasets contain long Nanopore reads, while other datasets contain short Illumina reads. In addition, different subsets of the data were made by the teaching team (resulting in low and high sequencing depth datasets).If you want to work together you can download the same dataset as your neighbour (maximum group size = 2!). You can discuss the steps, but both of you should process the data.</p>
+<p>Copy your read dataset into to the <code>data</code> directory in your workdirectory. Replace the <code>XY</code> with the dataset number!</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /zfs/omics/projects/education/MDA-materials/genome-assembly/reads/dataset_XY.fastq data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Learning goals:
+Exercise
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
 <div class="callout-body-container callout-body">
-<p>After this lesson, you should be able to:</p>
+<p>Investigate the read set. Find out the following parameters:</p>
 <ul>
-<li>Explain how read length and sequencing depth affect assembly quality</li>
-<li>Execute a genome assembly, using command-line tools</li>
-<li>Select appropriate metrics for assessing genome assembly quality</li>
-<li>Interpret assembly quality metrics to identify potential issues with a genome assembly</li>
-<li>Justify the choice of sequencing technology for a genome assembly experiment</li>
+<li>How many reads do you have?</li>
+<li>How many total basepairs do you have? Assuming a 5 million basepair bacterial genome, what is the sequencing depth?</li>
+<li>What is the size distribution of your dataset (minimum, average, and maximum read length)? Which sequencing platorm was likely used (<code>Illumina</code> or <code>Nanopore</code>)?</li>
+<li>Add this information to this to this <a href="TOMAKE">Google sheet</a>, at the correct dataset number.</li>
 </ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Click me to see the answer</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># We need to run one command to find out everything that is asked</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats data/dataset_XY.fastq</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A shortread dataset has many reads that are short, with a high total sequencing depth.</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># A longread dataset has fewer reads, with a wide distribution of lengths, and a low sequencing depth.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </div>
-<p>You’re going to assemble a genome! The genome will be from a bacterium, and you will discover which species it is during the practical.</p>
-<p>There will be a mini assignment during this tutorial. You will create a figure highlighting the difference between different sequencing technologies for genome assembly. You’ll briefly explain your figure to the teacher. This assignment will not be graded, but you need to <code>pass</code> this assignment. To pass, you need to show that you understand your figure and can clearly explain the main patterns you observe, including the effects of sequencing technology and sequencing depth. If your explanation is unclear or incomplete, we will give you feedback and ask you to continue working on your plot. You can then try the explanation again.</p>
-<p>Let’s start by going to the next episode!</p>
+</div>
+</div>
+<p>Depending on if you have Illumina data or Nanopore data, you will need a different assembly tool. Also, the structure of the output files will look different. Note: in contrast to the RNA-seq tutorial, this tutorial uses <em>real</em> datasets, and the assembly jobs may take a while! Remember from the lecture, assembling a human genome with longread data takes more than 2000 computer-hours! To speed things up, bioinformatics tools can often use more threads at the same time. In this tutorial, we will ask the tools to use a modest amount of threads, since we are sharing the headnode with eachother (and other researchers of IBED and SILS).</p>
+<p>So, head over to the correct section, and start your genome assembly job.</p>
+<section id="megahit-assembly-for-short-reads" class="level2">
+<h2 class="anchored" data-anchor-id="megahit-assembly-for-short-reads"><code>megahit</code>: assembly for short reads</h2>
+<p>If you have short reads, run a <code>megahit</code> genome assembly like this:</p>
+<p>(note this takes too long, megahit was faster?)</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="flye-assembly-for-long-reads" class="level2">
+<h2 class="anchored" data-anchor-id="flye-assembly-for-long-reads"><code>flye</code>: assembly for long reads</h2>
+<p>If you have long reads, run a <code>flye</code> assembly like this:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flye</span> <span class="at">--nano-raw</span> data/dataset_XY.fastq <span class="at">--genome-size</span> 5M <span class="at">--out-dir</span> flye-assembly <span class="at">--threads</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It could take a while!</p>
+<p>Let’s have a look at the output:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> flye-assembly/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There are 5 subfolders which contain a lot of intermediate files, we don’t need them today (although you can look at them if you want). Important files are:</p>
+<ul>
+<li><code>assembly.fasta</code>: the actual genome assembly</li>
+<li><code>assembly_info.txt</code>: small text file with info of each contig</li>
+<li><code>flye.log</code>: the full log file of the <code>flye</code> run. There’s a lot of info, but some useful results can be found at the very end of the file.</li>
+</ul>
+<p>Take a moment to inspect the files with your toolkit of unix commands (<code>cat</code>, <code>head</code>, <code>tail</code>, <code>seqkit</code>, etc).</p>
+</section>
+<section id="gathering-assembly-statistics-in-google-sheets" class="level2">
+<h2 class="anchored" data-anchor-id="gathering-assembly-statistics-in-google-sheets">Gathering assembly statistics in <code>google sheets</code></h2>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Using <code>seqkit stats</code>, in combination with looking at the output of your assembly job, gather the following information of your genome assembly:</p>
+<ul>
+<li>Total assembly length</li>
+<li>Number of contigs</li>
+<li>N50 of contig lengths</li>
+<li>Minimum contig length</li>
+<li>Maximum contig length</li>
+<li>Average coverage</li>
+</ul>
+<p>Add this information to your row in the <a href="TODO.">Google Sheet</a></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Click me to see the answer</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Again, we would get nearly all statistics with seqkit stats:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats data/dataset_XY.fastq</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># for both flye and megahit, the N50 can be found in the end of the log file</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> ....</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> ....</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</div>
+</div>
+</div>
+<p>If you’re fast, you can make another assembly. Look in the google sheet to find out which datasets are still available.</p>
+</section>
+<section id="comparing-assembly-strategies" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-assembly-strategies">Comparing assembly strategies</h2>
+<p>Together with your colleagues, you generated quite some data to make a sensible comparison between short- and longreads, with different sequencing depths, for genome assembly of the same organism. You can import the data stored in the google sheet to an R session with the following code:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>assembly_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://docs.google.com/spreadsheets/d/XXXXXXXXXXXX/export?format=csv"</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you’re here early, make sure to repeat the data import later when your colleagues entered more data to the google sheet.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Assignment">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Assignment
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p><span class="emoji" data-emoji="exclamation">❗</span><em>Mini Assignment</em><span class="emoji" data-emoji="exclamation">❗</span></p>
+<p>Make a figure that compares the assembly statistics across:</p>
+<ul>
+<li>Different sequencing technologies</li>
+<li>Different sequencing depths</li>
+<li>Different assembly statistics</li>
+</ul>
+<p>Think carefully about how you organise your figure so that your main message becomes easy to see. You may use multiple panels if this makes your comparisons more clear.</p>
+<p>When you are done, come to one of the teachers (Misha or Tijs) to discuss your plot. You’ll briefly explain your figure to the teacher. This assignment will not be graded, but you need to <code>pass</code> this assignment. To pass, you need to show that you understand your figure and can clearly explain the main patterns you observe, including the effects of sequencing technology and sequencing depth. If your explanation is unclear or incomplete, we will give you feedback and ask you to continue working on your plot. You can then try the explanation again.</p>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -630,11 +787,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../part3-genome-assembly/index.html" class="pagination-link" aria-label="Genome assembly">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Genome assembly</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part3-genome-assembly/01_assembly.html" class="pagination-link" aria-label="Genome assembly">
-        <span class="nav-page-text">Genome assembly</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

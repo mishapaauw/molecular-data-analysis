@@ -15,12 +15,8 @@ After this lesson, you should be able to:
 - Justify the choice of sequencing technology for a genome assembly experiment
 :::
 
+You're going to assemble a genome! The genome will be from a bacterium, and you will discover which species it is during the practical. 
 
+There will be a mini assignment during this tutorial. You will create a figure highlighting the difference between different sequencing technologies for genome assembly. You'll briefly explain your figure to the teacher. This assignment will not be graded, but you need to `pass` this assignment. To pass, you need to show that you understand your figure and can clearly explain the main patterns you observe, including the effects of sequencing technology and sequencing depth. If your explanation is unclear or incomplete, we will give you feedback and ask you to continue working on your plot. You can then try the explanation again.
 
-- Have people download different read datasets of the same organism:
-    - Short reads vs long reads
-    - Different levels of coverage (10x, 20x, 50x, 100x)
-- Assemble genome using appropriate tool (`xyz` for short reads, `flye` for long reads)
-- Register assembly metrics in google sheet
-- Visualize results! Each student pair gets to analyze a different assembly metric. Perhaps present results?
-
+Let's start by going to the next episode!

@@ -1,0 +1,142 @@
+---
+title: "Genome assembly"
+sidebar: part3
+engine: knitr
+---
+
+To start this tutorial, make sure you're connected to Crunchomics as discussed in the [computational setup episode](../part0-setup/01_setup.qmd). As always, let's organize ourselves by creating a new directory for this tutorial session, in your `MDA` directory. Also, let's create a `data/` directory
+
+```bash
+cd personal/MDA/
+mkdir genome-assembly
+cd genome-assembly/
+mdir data
+```
+
+To assemble a genome, we need reads. For this tutorial, the reads are stored on Crunchomics. There are different read datasets, and the teacher will assign to you which dataset you should copy. Some datasets contain long Nanopore reads, while other datasets contain short Illumina reads. In addition, different subsets of the data were made by the teaching team (resulting in low and high sequencing depth datasets).If you want to work together you can download the same dataset as your neighbour (maximum group size = 2!). You can discuss the steps, but both of you should process the data.
+
+Copy your read dataset into to the `data` directory in your workdirectory. Replace the `XY` with the dataset number!
+
+```bash
+cp /zfs/omics/projects/education/MDA-materials/genome-assembly/reads/dataset_XY.fastq data/
+```
+::: {.callout-caution collapse="false" title="Exercise"}
+Investigate the read set. Find out the following parameters:
+
+- How many reads do you have?
+- How many total basepairs do you have? Assuming a 5 million basepair bacterial genome, what is the sequencing depth?
+- What is the size distribution of your dataset (minimum, average, and maximum read length)? Which sequencing platorm was likely used (`Illumina` or `Nanopore`)?
+- Add this information to this to this [Google sheet](TOMAKE), at the correct dataset number.
+
+```{bash}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Click me to see the answer"
+
+# We need to run one command to find out everything that is asked
+seqkit stats data/dataset_XY.fastq
+
+# A shortread dataset has many reads that are short, with a high total sequencing depth.
+# A longread dataset has fewer reads, with a wide distribution of lengths, and a low sequencing depth.
+```
+:::
+
+Depending on if you have Illumina data or Nanopore data, you will need a different assembly tool. Also, the structure of the output files will look different. Note: in contrast to the RNA-seq tutorial, this tutorial uses *real* datasets, and the assembly jobs may take a while! Remember from the lecture, assembling a human genome with longread data takes more than 2000 computer-hours! To speed things up, bioinformatics tools can often use more threads at the same time. In this tutorial, we will ask the tools to use a modest amount of threads, since we are sharing the headnode with eachother (and other researchers of IBED and SILS).
+
+So, head over to the correct section, and start your genome assembly job.
+
+## `megahit`: assembly for short reads
+
+If you have short reads, run a `megahit` genome assembly like this:
+
+(note this takes too long, megahit was faster?)
+
+```bash
+
+```
+
+## `flye`: assembly for long reads
+
+If you have long reads, run a `flye` assembly like this:
+
+```bash
+flye --nano-raw data/dataset_XY.fastq --genome-size 5M --out-dir flye-assembly --threads 4
+```
+
+It could take a while!
+
+Let's have a look at the output:
+
+```bash
+ls flye-assembly/
+```
+
+There are 5 subfolders which contain a lot of intermediate files, we don't need them today (although you can look at them if you want). Important files are:
+
+- `assembly.fasta`: the actual genome assembly
+- `assembly_info.txt`: small text file with info of each contig
+- `flye.log`: the full log file of the `flye` run. There's a lot of info, but some useful results can be found at the very end of the file.
+
+Take a moment to inspect the files with your toolkit of unix commands (`cat`, `head`, `tail`, `seqkit`, etc).
+
+## Gathering assembly statistics in `google sheets`
+
+::: {.callout-caution collapse="false" title="Exercise"}
+Using `seqkit stats`, in combination with looking at the output of your assembly job, gather the following information of your genome assembly:
+
+- Total assembly length
+- Number of contigs
+- N50 of contig lengths
+- Minimum contig length
+- Maximum contig length
+- Average coverage
+
+Add this information to your row in the [Google Sheet](TODO.)
+
+```{bash}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Click me to see the answer"
+
+# Again, we would get nearly all statistics with seqkit stats:
+seqkit stats data/dataset_XY.fastq
+
+# for both flye and megahit, the N50 can be found in the end of the log file
+tail ....
+tail ....
+```
+:::
+
+If you're fast, you can make another assembly. Look in the google sheet to find out which datasets are still available.
+
+## Comparing assembly strategies
+
+Together with your colleagues, you generated quite some data to make a sensible comparison between short- and longreads, with different sequencing depths, for genome assembly of the same organism. You can import the data stored in the google sheet to an R session with the following code:
+
+```R
+library(readr)
+
+assembly_data <- read_csv(
+  "https://docs.google.com/spreadsheets/d/XXXXXXXXXXXX/export?format=csv"
+)
+```
+
+If you're here early, make sure to repeat the data import later when your colleagues entered more data to the google sheet. 
+
+::: {.callout-caution collapse="false" title="Assignment"}
+:exclamation:*Mini Assignment*:exclamation:
+
+Make a figure that compares the assembly statistics across:
+
+- Different sequencing technologies
+- Different sequencing depths
+- Different assembly statistics
+
+Think carefully about how you organise your figure so that your main message becomes easy to see. You may use multiple panels if this makes your comparisons more clear.
+
+When you are done, come to one of the teachers (Misha or Tijs) to discuss your plot. You'll briefly explain your figure to the teacher. This assignment will not be graded, but you need to `pass` this assignment. To pass, you need to show that you understand your figure and can clearly explain the main patterns you observe, including the effects of sequencing technology and sequencing depth. If your explanation is unclear or incomplete, we will give you feedback and ask you to continue working on your plot. You can then try the explanation again.
+
+:::
+
+
+

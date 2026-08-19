@@ -230,104 +230,176 @@
   {
     "objectID": "part2-rna-seq/index.html",
     "href": "part2-rna-seq/index.html",
-    "title": "RNA-seq and differential gene expression analysis",
+    "title": "Welcome",
     "section": "",
-    "text": "Learning goals:\n\n\n\nAfter this lesson, you should be able to:\n\nDesign a RNA-seq experiment with enough statistical power\nRecognize common bioinformatics filetypes (.fastq, .fasta, .bam)\nProcess RNA-seq data using appropriate tools, from raw reads to count table\nInterpret PCA and clustering results to asess whether sample groupingds alsign with the experimental design\nApply DESeq2 to obtain lists of differentially expressed genes between two conditions\nApply gene enrichment tests to defined gene lists\nBe able to create key plots such as volcano plots and heat maps\nIntegrate RNA-seq results into a hypothesis about a biological problem\n\n\n\nTODO:\n\nTake contents from RNA-seq workshop bioDSC.\nAdapt to fit MDA program.\nFind good Arabidopsis RNA-seq dataset for assignment. Create clear expectations for the assignment.",
+    "text": "Welcome to the RNA-seq tutorial!\n\n\n\n\n\n\nLearning goals:\n\n\n\nAfter this lesson, you should be able to:\n\nDesign a RNA-seq experiment with enough statistical power\nRecognize common bioinformatics filetypes (.fastq, .fasta, .bam)\nProcess RNA-seq data using appropriate tools, from raw reads to count table\nInterpret PCA and clustering results to asess whether sample groupingds alsign with the experimental design\nApply DESeq2 to obtain lists of differentially expressed genes between two conditions\nApply gene enrichment tests to defined gene lists\nBe able to create key plots such as volcano plots and heat maps\nIntegrate RNA-seq results into a hypothesis about a biological problem\n\n\n\nTODO:\n\nTake contents from RNA-seq workshop bioDSC.\nAdapt to fit MDA program.\nFind good Arabidopsis RNA-seq dataset for assignment. Create clear expectations for the assignment.",
     "crumbs": [
       "Setup and introduction to command line",
-      "RNA-seq and differential gene expression analysis"
+      "Welcome"
     ]
   },
   {
     "objectID": "part1-dataviz/01-github.html",
     "href": "part1-dataviz/01-github.html",
-    "title": "Episode 1: Reproducible science using Github",
+    "title": "Reproducible science using Github",
     "section": "",
     "text": "You may have heard of the FAIR principle for research data: Findable, Accessible, Interoperable, Reusable. These principles focus on how you manage your data, scripts, and results. Adhering to these principles makes tracking and sharing your work easier. You can imagine that a script sitting somewhere on your computer fails FAIR on nearly all aspects: nobody else can find it, access it, or reuse it: and a year from now, neither can you. git and Github address this directly. Putting the data and scripts of your analysis under ‘version control’ gives you a timestamped history of every change that you made. Pushing that history to Github makes it accessible for others.\nToday we will setup a Github repository and push an analysis to it, from the cluster.",
     "crumbs": [
       "Part 1: Data visualization in R",
       "Episodes",
-      "Episode 1: Reproducible science using Github"
+      "Reproducible science using Github"
     ]
   },
   {
     "objectID": "part1-dataviz/01-github.html#setting-up-a-repository",
     "href": "part1-dataviz/01-github.html#setting-up-a-repository",
-    "title": "Episode 1: Reproducible science using Github",
+    "title": "Reproducible science using Github",
     "section": "Setting up a repository",
     "text": "Setting up a repository\n\nMake a GitHub account Go to github.com → Sign up → follow the prompts\nMake a repository on GitHub\n\nClick the + (top right) → New repository\nName it (e.g. `data_visualization_episode)\nLeave it Public, tick Add a README\nCreate repository\n\n\nGithub is very serious about safety. This is good, but it forces us to use a bit more complicate authentication methods than just a password.\n\nGenerate a Personal Access Token (your “password” when committing changes).\n\nLog in → click your profile picture (top right) → Settings\nLeft sidebar, scroll down → Developer settings\nPersonal access tokens → Tokens (classic)\nGenerate new token (classic)\nName: bioinformatics · Expiration: 14 days · Check the box: repo\nGenerate token → copy it now (you won’t see it again) → paste it somewhere safe (e.g. a text file) for later",
     "crumbs": [
       "Part 1: Data visualization in R",
       "Episodes",
-      "Episode 1: Reproducible science using Github"
+      "Reproducible science using Github"
     ]
   },
   {
     "objectID": "part1-dataviz/01-github.html#cloning-the-repository-to-the-cluster",
     "href": "part1-dataviz/01-github.html#cloning-the-repository-to-the-cluster",
-    "title": "Episode 1: Reproducible science using Github",
+    "title": "Reproducible science using Github",
     "section": "Cloning the repository to the cluster",
     "text": "Cloning the repository to the cluster\ngit clone https://github.com/&lt;your-username&gt;/&lt;repo-name&gt;.git\ncd &lt;repo-name&gt;\nThis may prompt you for your password, use the token here:\nUsername: &lt;your-github-username&gt;\nPassword: &lt;paste your token here — NOT your GitHub password&gt;",
     "crumbs": [
       "Part 1: Data visualization in R",
       "Episodes",
-      "Episode 1: Reproducible science using Github"
+      "Reproducible science using Github"
     ]
   },
   {
     "objectID": "part1-dataviz/01-github.html#adding-a-new-file-and-committing-it.",
     "href": "part1-dataviz/01-github.html#adding-a-new-file-and-committing-it.",
-    "title": "Episode 1: Reproducible science using Github",
+    "title": "Reproducible science using Github",
     "section": "Adding a new file and committing it.",
     "text": "Adding a new file and committing it.\nLet’s make a data directory, and add a data file to it:\nmkdir data\nwget -O data/penguins.csv https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv\nFirst we verify that we actually have the dataset:\nls data/\nIt’s really there! Now, we can run git status to verify that git is actually also aware that the file now exists in our repository. But, git is not yet keeping track of this file.\n1git status\n2git add .\n3git status\n4git commit -m \"added pinguins dataset\"\n5git push\n\n1\n\ngit sees that the file is there, but it’s not being tracked.\n\n2\n\nLet’s add all files to the git tracking!\n\n3\n\nYes, now git has ‘staged’ the data file.\n\n4\n\nNow we ‘commit’ the file\n\n5\n\nThe final step is pushing the changes to github.",
     "crumbs": [
       "Part 1: Data visualization in R",
       "Episodes",
-      "Episode 1: Reproducible science using Github"
+      "Reproducible science using Github"
     ]
   },
   {
     "objectID": "part1-dataviz/index.html",
     "href": "part1-dataviz/index.html",
-    "title": "Reproducible data visualisation using R and Github",
+    "title": "Welcome",
     "section": "",
-    "text": "Learning goals:\n\n\n\nAfter this lesson, you should be able to:\nWith regard to data visualization:\n\nSelect the appropriate chart type given the structure of the data\nDesign data visualizations that follow principles of visual clarity (e.g. data-to-ink ratio)\nJustify the choice of color palette for a particular visualization, including accessibility considerations regarding color blindness\nCritically evaluate data visualizations and propose improvements\n\nWith regard to reproducibility:\n\nExplain the FAIR principles and their relevance to data management in the biological sciences\nApply version control to a small data analysis project using git\nCommunicate analysis results to collaborations via Github\nEpisodes to make:",
+    "text": "Welcome to the data visualisation and reproducible science tutorial!\nEpisodes to make:",
     "crumbs": [
       "Setup and introduction to command line",
-      "Reproducible data visualisation using R and Github"
+      "Welcome"
     ]
   },
   {
     "objectID": "part1-dataviz/index.html#reproducible-science-using-github",
     "href": "part1-dataviz/index.html#reproducible-science-using-github",
-    "title": "Reproducible data visualisation using R and Github",
+    "title": "Welcome",
     "section": "Reproducible science using Github:",
     "text": "Reproducible science using Github:\n\nIntroduce github website\nIntroduce concept of version control / FAIR data management\nMake people create a github account, make a repository, and push some changes to the repository\nTODO: look at Johannes data management workshop",
     "crumbs": [
       "Setup and introduction to command line",
-      "Reproducible data visualisation using R and Github"
+      "Welcome"
     ]
   },
   {
     "objectID": "part1-dataviz/index.html#data-visualization-in-r",
     "href": "part1-dataviz/index.html#data-visualization-in-r",
-    "title": "Reproducible data visualisation using R and Github",
+    "title": "Welcome",
     "section": "Data visualization in R:",
     "text": "Data visualization in R:\n\nSome data viz theory\nContinue working with ggplot2, slightly more advanced\nAssignment: take a dataset and create a very BAD plot and a very GOOD plot with this data. Explain why the bad plot is bad and the good plot is good. Present? Hand in in CANVAS? Push to github is maybe better? How to grade this?",
     "crumbs": [
       "Setup and introduction to command line",
-      "Reproducible data visualisation using R and Github"
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "part3-genome-assembly/01_assembly.html",
+    "href": "part3-genome-assembly/01_assembly.html",
+    "title": "Genome assembly",
+    "section": "",
+    "text": "To start this tutorial, make sure you’re connected to Crunchomics as discussed in the computational setup episode. As always, let’s organize ourselves by creating a new directory for this tutorial session, in your MDA directory. Also, let’s create a data/ directory:",
+    "crumbs": [
+      "Setup and introduction to command line",
+      "Episodes",
+      "Genome assembly"
+    ]
+  },
+  {
+    "objectID": "part3-genome-assembly/01_assembly.html#getting-the-data",
+    "href": "part3-genome-assembly/01_assembly.html#getting-the-data",
+    "title": "Genome assembly",
+    "section": "Getting the data",
+    "text": "Getting the data\nTo assemble a genome, we need reads. For this tutorial, the reads are stored on a shared drive on Crunchomics. There are different read datasets, and the teacher will assign to you which dataset you should copy to your working directory. Some datasets contain long Nanopore reads, while other datasets contain short Illumina reads. In addition, different subsets of the data were made by the teaching team: resulting in low and high sequencing depth datasets.If you want to work together you can download the same dataset as your neighbour (maximum group size = 2!). You can discuss the steps, but both of you should process the data.\nCopy your read dataset into to the data directory in your work directory. Replace the XY with the dataset number!\ncp /zfs/omics/projects/education/MDA-materials/genome-assembly/reads/dataset_XY.fastq data/\n\n\n\n\n\n\nExercise\n\n\n\n\n\nInvestigate the read set. Find out the following parameters:\n\nHow many reads do you have?\nHow many total basepairs do you have? Assuming a 5 million basepair bacterial genome, what is the sequencing depth? 2b: which assumption we are making to answer the latter question?\nWhat is the size distribution of your dataset (minimum, average, and maximum read length)? 3b: which sequencing platorm was likely used (Illumina or Nanopore)?\nAdd this information to this to this Google Sheet, at the correct dataset number. Also add your initials to the table.\n\n\n\nClick me to see the answer\n# 1. and 2. and 3. \n# We need to run one command to find out everything that is asked\nseqkit stats data/dataset_XY.fastq\n\n# 2b: we are assuming that all reads actually come from the organism of interest.\n# 2b: if our read set would be contaminated (with e.g. human DNA), the coverage (or depth) of our bacterium of interest would be lower.\n\n# 3b:\n# A shortread dataset has many reads that are short, with a high total sequencing depth.\n# A longread dataset has fewer reads, with a wide distribution of lengths, and a low sequencing depth.\n\n\n\n\n\nDepending on if you have Illumina data or Nanopore data, you will need a different assembly tool. Also, the structure of the output files will look different. Note: in contrast to the RNA-seq tutorial, this tutorial uses real datasets, and the assembly jobs may take a while! Remember from the lecture, assembling a human genome with longread data takes more than 2000 computer-hours! To speed things up, bioinformatics tools can often use more threads at the same time. In this tutorial, we will ask the tools to use a modest amount of threads, since we are sharing the headnode with eachother (and other researchers of IBED and SILS).\nSo, head over to the correct section, and start your genome assembly job.",
+    "crumbs": [
+      "Setup and introduction to command line",
+      "Episodes",
+      "Genome assembly"
+    ]
+  },
+  {
+    "objectID": "part3-genome-assembly/01_assembly.html#megahit-assembly-for-short-reads",
+    "href": "part3-genome-assembly/01_assembly.html#megahit-assembly-for-short-reads",
+    "title": "Genome assembly",
+    "section": "megahit: assembly for short reads",
+    "text": "megahit: assembly for short reads\nIf you have short reads, run a megahit genome assembly like this:\nmegahit -1 data/dataset_XY_R1.fastq -2 data/dataset_XY_R1.fastq -o megahit-assembly -t 4\nIt could take a while, and will print a lot of information to your terminal. You don’t have to read everything but you try to see if you understand some parts.\nLet’s have a look at the output by listing the contents of the output directory:\nls megahit-assembly\nThere’s a subfolder called intermediate_contigs, which contains a lot of intermediate files. We don’t need them today (although you can look at them if you want). The important files are:\n\nfinal.contigs.fasta: the actual genome assembly\nlog: the full log file of the megahit run. There’s a lot of info, but some useful results can be found at the very end of the file.",
+    "crumbs": [
+      "Setup and introduction to command line",
+      "Episodes",
+      "Genome assembly"
+    ]
+  },
+  {
+    "objectID": "part3-genome-assembly/01_assembly.html#flye-assembly-for-long-reads",
+    "href": "part3-genome-assembly/01_assembly.html#flye-assembly-for-long-reads",
+    "title": "Genome assembly",
+    "section": "flye: assembly for long reads",
+    "text": "flye: assembly for long reads\nIf you have long reads, run a flye assembly like this:\nflye --nano-raw data/dataset_XY.fastq --genome-size 5M --out-dir flye-assembly --threads 4\nIt could take a while! You don’t have to read everything but you try to see if you understand some parts.\nLet’s have a look at the output by listing the contents of the output directory:\nls flye-assembly/\nThere are 5 subfolders which contain a lot of intermediate files. We don’t need them today (although you can look at them if you want). Important files are:\n\nassembly.fasta: the actual genome assembly\nassembly_info.txt: small text file with info of each contig\nflye.log: the full log file of the flye run. There’s a lot of info, but some useful results can be found at the very end of the file.\n\nTake a moment to inspect the files with your toolkit of unix commands (cat, head, tail, seqkit, etc).",
+    "crumbs": [
+      "Setup and introduction to command line",
+      "Episodes",
+      "Genome assembly"
+    ]
+  },
+  {
+    "objectID": "part3-genome-assembly/01_assembly.html#gathering-assembly-statistics-in-google-sheets",
+    "href": "part3-genome-assembly/01_assembly.html#gathering-assembly-statistics-in-google-sheets",
+    "title": "Genome assembly",
+    "section": "Gathering assembly statistics in google sheets",
+    "text": "Gathering assembly statistics in google sheets\n\n\n\n\n\n\nExercise\n\n\n\n\n\nGather the following information of your genome assembly:\n\nTotal assembly length\nNumber of contigs\nN50 of contig lengths\nMinimum contig length\nMaximum contig length\nAverage coverage (approximately)\n\nYou can use seqkit stats on your assembly, in combination with looking at log files of your assembly job, to obtain this information.\nAdd the information to your row in the Google Sheet.\n\n\nClick me to see the answer\n# Again, we would get nearly all statistics with seqkit stats:\nseqkit stats data/dataset_XY.fastq\n\n# for both flye and megahit, the N50 can be found in the end of the log file\ntail ....\ntail ....\n\n\n\n\n\nIf you’re fast, you can make another assembly. Look in the google sheet to find out which datasets are still available.",
+    "crumbs": [
+      "Setup and introduction to command line",
+      "Episodes",
+      "Genome assembly"
+    ]
+  },
+  {
+    "objectID": "part3-genome-assembly/01_assembly.html#comparing-assembly-strategies",
+    "href": "part3-genome-assembly/01_assembly.html#comparing-assembly-strategies",
+    "title": "Genome assembly",
+    "section": "Comparing assembly strategies",
+    "text": "Comparing assembly strategies\nTogether with your colleagues, you assembled a number of\ngenerated quite some data to make a sensible comparison about assembly quality between short and long reads, with different sequencing depths. You can import the data stored in the google sheet to an R session with the following code:\nlibrary(readr)\n\nassembly_data &lt;- read_csv(\n  \"https://docs.google.com/spreadsheets/d/XXXXXXXXXXXX/export?format=csv\"\n)\nIf you’re here early, make sure to repeat the data import later when your colleagues entered more data to the google sheet.\n\n\n\n\n\n\nAssignment\n\n\n\n\n\n❗Mini Assignment❗\nMake a figure that compares the most important (according to you) assembly statistic(s) across:\n\nDifferent sequencing technologies\nDifferent sequencing depths\n\nThink carefully about how you organise your figure so that your main message becomes easy to see. You may use multiple panels if this makes your comparisons more clear. Think back to the data visualisation tutorial and try make a figure that uses good data visualisation practices.\nWhen you are done, come to one of the teachers (Misha or Tijs) to discuss your plot. You’ll briefly explain your figure to the teacher. This assignment will not be graded, but you need to pass this assignment. To pass, you need to show that you understand your figure and can clearly explain the main patterns you observe, including the effects of sequencing technology and sequencing depth on assembly quality. If your explanation is unclear or incomplete, we will give you feedback and ask you to continue working on your plot. You can then try the explanation again.",
+    "crumbs": [
+      "Setup and introduction to command line",
+      "Episodes",
+      "Genome assembly"
     ]
   },
   {
     "objectID": "part3-genome-assembly/index.html",
     "href": "part3-genome-assembly/index.html",
-    "title": "Genome assembly",
+    "title": "Welcome",
     "section": "",
-    "text": "Learning goals:\n\n\n\nAfter this lesson, you should be able to:\n\nExplain how read length and sequencing depth affect assembly quality\nExecute a genome assembly, using command-line tools\nSelect appropriate metrics for assessing genome assembly quality\nInterpret assembly quality metrics to identify potential issues with a genome assembly\nJustify the choice of sequencing technology for a genome assembly experiment\n\n\n\nYou’re going to assemble a genome! The genome will be from a bacterium, and you will discover which species it is during the practical.\nThere will be a mini assignment during this tutorial. You will create a figure highlighting the difference between different sequencing technologies for genome assembly. You’ll briefly explain your figure to the teacher. This assignment will not be graded, but you need to pass this assignment. To pass, you need to show that you understand your figure and can clearly explain the main patterns you observe, including the effects of sequencing technology and sequencing depth. If your explanation is unclear or incomplete, we will give you feedback and ask you to continue working on your plot. You can then try the explanation again.\nLet’s start by going to the next episode!",
+    "text": "Welcome to the genome assembly tutorial!\n\n\n\n\n\n\nLearning goals:\n\n\n\nAfter this lesson, you should be able to:\n\nExplain how read length and sequencing depth affect assembly quality\nExecute a genome assembly, using command-line tools\nSelect appropriate metrics for assessing genome assembly quality\nInterpret assembly quality metrics to identify potential issues with a genome assembly\nJustify the choice of sequencing technology for a genome assembly experiment\n\n\n\nYou’re going to assemble a genome! The genome will be from a bacterium, and you will discover which species it in the second part of today’s tutorial, by doing a simple phylogenetic analysis.\nThere will be a mini assignment during this tutorial. You will create a figure highlighting the difference between different sequencing technologies for genome assembly. You’ll briefly explain your figure to the teacher. This assignment will not be graded, but you need to pass this assignment. To pass, you need to show that you understand your figure and can clearly explain the main patterns you observe, including the effects of sequencing technology and sequencing depth. If your explanation is unclear or incomplete, we will give you feedback and ask you to continue working on your plot. You can then try the explanation again.\nLet’s start by going to the next episode!",
     "crumbs": [
       "Setup and introduction to command line",
-      "Genome assembly"
+      "Welcome"
     ]
   },
   {
@@ -382,61 +454,61 @@
   {
     "objectID": "part1-dataviz/02-data-viz.html",
     "href": "part1-dataviz/02-data-viz.html",
-    "title": "Episode 2: Data visualisation",
+    "title": "Data visualisation",
     "section": "",
     "text": "In this episode, you will practice making honest, and beautiful, data visualisations using ggplot2 in RStudio. You will start with the R Project you created in the previous episode. First, we will load the required package for this episode:\nR\n\nlibrary(tidyverse)\nWe will work with the palmerpenguins dataset. This is a dataset describing 344 penguins. There are three different species, occuring on three different islands, and several parameters have been recorded.\nLet’s have a look at the general properties of the dataset:\nR\n\nhead(penguins)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_len\nbill_dep\nflipper_len\nbody_mass\nsex\nyear\n\n\n\n\nAdelie\nTorgersen\n39.1\n18.7\n181\n3750\nmale\n2007\n\n\nAdelie\nTorgersen\n39.5\n17.4\n186\n3800\nfemale\n2007\n\n\nAdelie\nTorgersen\n40.3\n18.0\n195\n3250\nfemale\n2007\n\n\nAdelie\nTorgersen\nNA\nNA\nNA\nNA\nNA\n2007\n\n\nAdelie\nTorgersen\n36.7\n19.3\n193\n3450\nfemale\n2007\n\n\nAdelie\nTorgersen\n39.3\n20.6\n190\n3650\nmale\n2007\n\n\n\n\n\nstr(penguins)\n\n'data.frame':   344 obs. of  8 variables:\n $ species    : Factor w/ 3 levels \"Adelie\",\"Chinstrap\",..: 1 1 1 1 1 1 1 1 1 1 ...\n $ island     : Factor w/ 3 levels \"Biscoe\",\"Dream\",..: 3 3 3 3 3 3 3 3 3 3 ...\n $ bill_len   : num  39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...\n $ bill_dep   : num  18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...\n $ flipper_len: int  181 186 195 NA 193 190 181 195 193 190 ...\n $ body_mass  : int  3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...\n $ sex        : Factor w/ 2 levels \"female\",\"male\": 2 1 1 NA 1 2 1 2 NA NA ...\n $ year       : int  2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...\nIndeed, the are 344 observations. We have some categorical data encoded as factors (species, island, sex) and some measurements of the bodies of the penguins (bill_len, flipper_len).\nTo make a bar plot, we first need to calculate the mean and standard error. In this case, we will group by species, and calculate the mean body_mass:\nR\n\npenguins_summary &lt;- penguins %&gt;% \n  group_by(species) %&gt;% \n  summarize(mean = mean(body_mass, na.rm = TRUE),\n            se = sd(body_mass, na.rm = TRUE) / sqrt(n()))\nLet’s inspect the results:\nR\n\nhead(penguins_summary)\n\n\n\n\n\n\nspecies\nmean\nse\n\n\n\n\nAdelie\n3700.662\n37.19462\n\n\nChinstrap\n3733.088\n46.60747\n\n\nGentoo\n5076.016\n45.27097\nOkay, looks like the Gentoo penguins have a much higher body mass than the other two species.",
     "crumbs": [
       "Part 1: Data visualization in R",
       "Episodes",
-      "Episode 2: Data visualisation"
+      "Data visualisation"
     ]
   },
   {
     "objectID": "part1-dataviz/02-data-viz.html#from-bar-plot-to-sina-plot",
     "href": "part1-dataviz/02-data-viz.html#from-bar-plot-to-sina-plot",
-    "title": "Episode 2: Data visualisation",
+    "title": "Data visualisation",
     "section": "From bar plot to sina plot",
     "text": "From bar plot to sina plot\nLet’s visualise the mean body mass using a ‘traditional’ barplot with error bars.\n\n\n\nR\n\npenguins_summary %&gt;% \n  ggplot(aes(x = species, y = mean)) +\n  geom_col() +\n  geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.2)\n\n\n\n\n\n\n\n\n\nIt does show what we just discovered, but it hides a lot. The standard error bars give some sort of idea of the spread of the data, but what does the spread really look like? A boxplot helps to solve this proble, at least partially:\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = species, y = body_mass)) +\n  geom_boxplot()\n\n\n\n\n\n\n\n\n\nInstead of the mean, boxplots highlight the median value (thick line), the 25% and 75% percentile value (the box), and 15 * IQR (the lines) (where IQR is the inter-quartile range, or distance between the first and third quartiles). It’s better, but it still hides the actual data. Let’s add each individual datapoint. To do this, we use geom_jitter() to add a little bit of noise in the x-axis direction:\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = species, y = body_mass)) +\n  geom_boxplot() +\n  geom_jitter(width = 0.2, alpha = 0.5)\n\n\n\n\n\n\n\n\n\nThis is nice, but we can let the shape that we’re plotting follow the distribution of the underlying datapoints rather than just plot boxes. The boxplots then become violin plots:\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = species, y = body_mass)) +\n  geom_violin() +\n  geom_jitter(width = 0.2, alpha = 0.5)\n\n\n\n\n\n\n\n\n\nThis is an improvement, but the points don’t follow their distribution very well. We can change that by moving from geom_jitter to geom_quasirandom, from the ggbeeswarm package. The combination of violin plot with individual datapoints that follow their distribution is called a sina plot.\n\n\n\nR\n\nlibrary(ggbeeswarm)\n\npenguins %&gt;% \n  ggplot(aes(x = species, y = body_mass)) +\n  geom_violin() +\n  geom_quasirandom(alpha = 0.5, width = 0.2)\n\n\n\n\n\n\n\n\n\nThis is starting to become an honest, information dense plot. However, the default choice of y-axis range exaggerates the difference in body mass between Gentoo penguins and the other species.\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = species, y = body_mass)) +\n  geom_violin() +\n  geom_quasirandom(alpha = 0.5, width = 0.2) +\n  scale_y_continuous(limits = c(0, NA))\n\n\n\n\n\n\n\n\n\nLet’s now work a bit on the visuals. To achieve a higher data-to-ink ratio, we remove the grey background and most grid lines:\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = species, y = body_mass)) +\n  geom_violin() +\n  geom_quasirandom(alpha = 0.5, width = 0.2) +\n  scale_y_continuous(limits = c(0, NA)) +\n   labs(\n    x = \"Species\",\n    y = \"Body mass (g)\"\n  ) +\n  theme_classic() +\n  theme(\n    legend.position = \"none\",  \n    axis.line = element_line(linewidth = 0.4),\n    axis.ticks = element_line(linewidth = 0.4),\n    axis.text = element_text(size = 11),\n    axis.title = element_text(size = 12),\n    panel.grid.major.y = element_line(color = \"grey90\", linewidth = 0.4),  \n    plot.margin = margin(10, 10, 10, 10)\n  )",
     "crumbs": [
       "Part 1: Data visualization in R",
       "Episodes",
-      "Episode 2: Data visualisation"
+      "Data visualisation"
     ]
   },
   {
     "objectID": "part1-dataviz/02-data-viz.html#simpsons-paradox",
     "href": "part1-dataviz/02-data-viz.html#simpsons-paradox",
-    "title": "Episode 2: Data visualisation",
+    "title": "Data visualisation",
     "section": "Simpson’s Paradox",
     "text": "Simpson’s Paradox\nSimpson’s paradox is a phenomenon in data visualisation where a trend appears in aggregated groups of data, but disappears or even reverses when grouping information is taken into account. palmerpenguins contains a beatiful example of Simpson’s paradox:\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = bill_len, y = bill_dep)) +\n  geom_point(alpha = 0.5) + \n  geom_smooth(method = \"lm\", colour = \"black\", se = FALSE) +\n  theme_classic()\n\n\n\n\n\n\n\n\n\nOkay, so, the bill depth is negatively correlated to the bill length! Let’s color the points by species, just to make sure this is correct.\n\n\n\nR\n\npenguins %&gt;% \n  ggplot(aes(x = bill_len, y = bill_dep, colour = species)) +\n  geom_point(alpha = 0.5) + \n  geom_smooth(method = \"lm\", se = FALSE) +\n  theme_classic()\n\n\n\n\n\n\n\n\n\nWoah!\nTODO:\n\nadd color palettes\nadd ggsave\ncreate google slides repository to hold slides",
     "crumbs": [
       "Part 1: Data visualization in R",
       "Episodes",
-      "Episode 2: Data visualisation"
+      "Data visualisation"
     ]
   },
   {
     "objectID": "part1-dataviz/02-data-viz.html#assignment",
     "href": "part1-dataviz/02-data-viz.html#assignment",
-    "title": "Episode 2: Data visualisation",
+    "title": "Data visualisation",
     "section": "Assignment",
     "text": "Assignment\n\n\n\n\n\n\nAssignment\n\n\n\nYou have learned what makes a good visualization. Now do the opposite: make the worst possible figure from the palmerpenguins dataset. Aim to commit as many of these ‘data visualisation sins’ as you can:\n\nHide the truth:\n\nUse a barplot with no indication of spread or sample size\nPool across species or sex to hide real patterns\nTruncate the y-axis to exaggerate tiny differences\n\nUse unclear visuals:\n\nUse clashing, non-colorblind-friendly colors\nLeave axis labels as raw column names, give the plot a misleading title\nMap the same variable to color, shape, and size simultaneously\n\nProduce this plot in 1 code chunk, save it as a .png file.\nknit your .Rmd file, push all changes to Github.\nAdd you plot into the shared Google Presentations sheet, and add three bullet points describing why your plot is the most ugly and misleading plot ever made.",
     "crumbs": [
       "Part 1: Data visualization in R",
       "Episodes",
-      "Episode 2: Data visualisation"
+      "Data visualisation"
     ]
   },
   {
     "objectID": "part1-dataviz/02-data-viz.html#references",
     "href": "part1-dataviz/02-data-viz.html#references",
-    "title": "Episode 2: Data visualisation",
+    "title": "Data visualisation",
     "section": "References",
     "text": "References\n\nFundamentals of Data Visualization, Claus O. Wilke",
     "crumbs": [
       "Part 1: Data visualization in R",
       "Episodes",
-      "Episode 2: Data visualisation"
+      "Data visualisation"
     ]
   },
   {
@@ -610,106 +682,34 @@
   {
     "objectID": "part0-setup/index.html",
     "href": "part0-setup/index.html",
-    "title": "Setup and intro to command line",
+    "title": "Welcome",
     "section": "",
-    "text": "Learning goals:\n\n\n\nAfter this lesson, you should be able to:\n\nUnderstand the difference between working on your own laptop and a compute cluster\nNavigate a filesystem using a command-line environment\nCombine commands into short pipelines to perform more complex data-processing tasks\nRecognize the command-line as a powerful tool for exploring biological data\nThere will be two episodes to cover in the tutorial session:",
+    "text": "Welcome to the setup tutorial! We will setup the computational setup, and learn some command-line basics.\nThere will be two episodes to cover in the tutorial session:",
     "crumbs": [
       "Setup and introduction to command line",
-      "Setup and intro to command line"
+      "Welcome"
     ]
   },
   {
     "objectID": "part0-setup/index.html#computational-setup",
     "href": "part0-setup/index.html#computational-setup",
-    "title": "Setup and intro to command line",
+    "title": "Welcome",
     "section": "Computational setup",
     "text": "Computational setup\nThis episode will describe the computational setup for this module. Briefly, we will connect to the University of Amsterdam compute cluster Crunchomics.",
     "crumbs": [
       "Setup and introduction to command line",
-      "Setup and intro to command line"
+      "Welcome"
     ]
   },
   {
     "objectID": "part0-setup/index.html#introduction-to-the-command-line",
     "href": "part0-setup/index.html#introduction-to-the-command-line",
-    "title": "Setup and intro to command line",
+    "title": "Welcome",
     "section": "Introduction to the command line",
     "text": "Introduction to the command line\nThis episode will cover the basics of working with a command line interface (or Unix shell). This episode prepares you for the RNA-seq and genome assembly tutorials later on. The materials are based on Data Carpentries: Introduction to the Command Line for Genomics and Introduction to the CLI.",
     "crumbs": [
       "Setup and introduction to command line",
-      "Setup and intro to command line"
-    ]
-  },
-  {
-    "objectID": "part3-genome-assembly/01_assembly.html",
-    "href": "part3-genome-assembly/01_assembly.html",
-    "title": "Genome assembly",
-    "section": "",
-    "text": "To start this tutorial, make sure you’re connected to Crunchomics as discussed in the computational setup episode. As always, let’s organize ourselves by creating a new directory for this tutorial session, in your MDA directory. Also, let’s create a data/ directory\nTo assemble a genome, we need reads. For this tutorial, the reads are stored on Crunchomics. There are different read datasets, and the teacher will assign to you which dataset you should copy. Some datasets contain long Nanopore reads, while other datasets contain short Illumina reads. In addition, different subsets of the data were made by the teaching team (resulting in low and high sequencing depth datasets).If you want to work together you can download the same dataset as your neighbour (maximum group size = 2!). You can discuss the steps, but both of you should process the data.\nCopy your read dataset into to the data directory in your workdirectory. Replace the XY with the dataset number!\nDepending on if you have Illumina data or Nanopore data, you will need a different assembly tool. Also, the structure of the output files will look different. Note: in contrast to the RNA-seq tutorial, this tutorial uses real datasets, and the assembly jobs may take a while! Remember from the lecture, assembling a human genome with longread data takes more than 2000 computer-hours! To speed things up, bioinformatics tools can often use more threads at the same time. In this tutorial, we will ask the tools to use a modest amount of threads, since we are sharing the headnode with eachother (and other researchers of IBED and SILS).\nSo, head over to the correct section, and start your genome assembly job.",
-    "crumbs": [
-      "Setup and introduction to command line",
-      "Episodes",
-      "Genome assembly"
-    ]
-  },
-  {
-    "objectID": "part3-genome-assembly/01_assembly.html#spades-assembly-for-short-reads",
-    "href": "part3-genome-assembly/01_assembly.html#spades-assembly-for-short-reads",
-    "title": "Genome assembly",
-    "section": "spades: assembly for short reads",
-    "text": "spades: assembly for short reads\nIf you have short reads, run a spades genome assembly like this:\n(note this takes too long, megahit was faster?)",
-    "crumbs": [
-      "Setup and introduction to command line",
-      "Episodes",
-      "Genome assembly"
-    ]
-  },
-  {
-    "objectID": "part3-genome-assembly/01_assembly.html#flye-assembly-for-long-reads",
-    "href": "part3-genome-assembly/01_assembly.html#flye-assembly-for-long-reads",
-    "title": "Genome assembly",
-    "section": "flye: assembly for long reads",
-    "text": "flye: assembly for long reads\nIf you have long reads, run a flye assembly like this:\nflye --nano-raw data/dataset_XY.fastq --genome-size 5M --out-dir flye-assembly --threads 4\nIt could take a while!\nLet’s have a look at the output:\nls flye-assembly/\nThere are 5 subfolders which contain a lot of intermediate files, we don’t need them today (although you can look at them if you want). Important files are:\n\nassembly.fasta: the actual genome assembly\nassembly_info.txt: small text file with info of each contig\nflye.log: the full log file of the flye run. There’s a lot of info, but some useful results can be found at the very end of the file.\n\nTake a moment to inspect the files with your toolkit of unix commands (cat, head, tail, seqkit, etc).",
-    "crumbs": [
-      "Setup and introduction to command line",
-      "Episodes",
-      "Genome assembly"
-    ]
-  },
-  {
-    "objectID": "part3-genome-assembly/01_assembly.html#gathering-assembly-statistics-in-google-sheets",
-    "href": "part3-genome-assembly/01_assembly.html#gathering-assembly-statistics-in-google-sheets",
-    "title": "Genome assembly",
-    "section": "Gathering assembly statistics in google sheets",
-    "text": "Gathering assembly statistics in google sheets\n\n\n\n\n\n\nExercise\n\n\n\n\n\nUsing seqkit stats, in combination with looking at the output of your assembly job, gather the following information of your genome assembly:\n\nTotal assembly length\nNumber of contigs\nN50 of contig lengths\nMinimum contig length\nMaximum contig length\nAverage coverage\n\nAdd this information to your row in the Google Sheet\n\n\nClick me to see the answer\n# Again, we would get nearly all statistics with seqkit stats:\nseqkit stats data/dataset_XY.fastq\n\n# for both flye and megahit, the N50 can be found in the end of the log file\ntail ....\ntail ....\n\n\n\n\n\nIf you’re fast, you can make another assembly. Look in the google sheet to find out which datasets are still available.",
-    "crumbs": [
-      "Setup and introduction to command line",
-      "Episodes",
-      "Genome assembly"
-    ]
-  },
-  {
-    "objectID": "part3-genome-assembly/01_assembly.html#megahit-assembly-for-short-reads",
-    "href": "part3-genome-assembly/01_assembly.html#megahit-assembly-for-short-reads",
-    "title": "Genome assembly",
-    "section": "megahit: assembly for short reads",
-    "text": "megahit: assembly for short reads\nIf you have short reads, run a megahit genome assembly like this:\n(note this takes too long, megahit was faster?)",
-    "crumbs": [
-      "Setup and introduction to command line",
-      "Episodes",
-      "Genome assembly"
-    ]
-  },
-  {
-    "objectID": "part3-genome-assembly/01_assembly.html#comparing-assembly-strategies",
-    "href": "part3-genome-assembly/01_assembly.html#comparing-assembly-strategies",
-    "title": "Genome assembly",
-    "section": "Comparing assembly strategies",
-    "text": "Comparing assembly strategies\nTogether with your colleagues, you generated quite some data to make a sensible comparison between short- and longreads, with different sequencing depths, for genome assembly of the same organism. You can import the data stored in the google sheet to an R session with the following code:\nlibrary(readr)\n\nassembly_data &lt;- read_csv(\n  \"https://docs.google.com/spreadsheets/d/XXXXXXXXXXXX/export?format=csv\"\n)\nIf you’re here early, make sure to repeat the data import later when your colleagues entered more data to the google sheet.\n\n\n\n\n\n\nAssignment\n\n\n\n\n\n❗Mini Assignment❗\nMake a figure that compares the assembly statistics across:\n\nDifferent sequencing technologies\nDifferent sequencing depths\nDifferent assembly statistics\n\nThink carefully about how you organise your figure so that your main message becomes easy to see. You may use multiple panels if this makes your comparisons more clear.\nWhen you are done, come to one of the teachers (Misha or Tijs) to discuss your plot. You’ll briefly explain your figure to the teacher. This assignment will not be graded, but you need to pass this assignment. To pass, you need to show that you understand your figure and can clearly explain the main patterns you observe, including the effects of sequencing technology and sequencing depth. If your explanation is unclear or incomplete, we will give you feedback and ask you to continue working on your plot. You can then try the explanation again.",
-    "crumbs": [
-      "Setup and introduction to command line",
-      "Episodes",
-      "Genome assembly"
+      "Welcome"
     ]
   }
 ]

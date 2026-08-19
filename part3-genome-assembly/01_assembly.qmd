@@ -4,7 +4,7 @@ sidebar: part3
 engine: knitr
 ---
 
-To start this tutorial, make sure you're connected to Crunchomics as discussed in the [computational setup episode](../part0-setup/01_setup.qmd). As always, let's organize ourselves by creating a new directory for this tutorial session, in your `MDA` directory. Also, let's create a `data/` directory
+To start this tutorial, make sure you're connected to Crunchomics as discussed in the [computational setup episode](../part0-setup/01_setup.qmd). As always, let's organize ourselves by creating a new directory for this tutorial session, in your `MDA` directory. Also, let's create a `data/` directory:
 
 ```bash
 cd personal/MDA/
@@ -13,9 +13,11 @@ cd genome-assembly/
 mdir data
 ```
 
-To assemble a genome, we need reads. For this tutorial, the reads are stored on Crunchomics. There are different read datasets, and the teacher will assign to you which dataset you should copy. Some datasets contain long Nanopore reads, while other datasets contain short Illumina reads. In addition, different subsets of the data were made by the teaching team (resulting in low and high sequencing depth datasets).If you want to work together you can download the same dataset as your neighbour (maximum group size = 2!). You can discuss the steps, but both of you should process the data.
+## Getting the data
 
-Copy your read dataset into to the `data` directory in your workdirectory. Replace the `XY` with the dataset number!
+To assemble a genome, we need reads. For this tutorial, the reads are stored on a shared drive on Crunchomics. There are different read datasets, and the teacher will assign to you which dataset you should copy to your working directory. Some datasets contain long Nanopore reads, while other datasets contain short Illumina reads. In addition, different subsets of the data were made by the teaching team: resulting in low and high sequencing depth datasets.If you want to work together you can download the same dataset as your neighbour (maximum group size = 2!). You can discuss the steps, but both of you should process the data.
+
+Copy your read dataset into to the `data` directory in your work directory. Replace the `XY` with the dataset number!
 
 ```bash
 cp /zfs/omics/projects/education/MDA-materials/genome-assembly/reads/dataset_XY.fastq data/
@@ -23,19 +25,24 @@ cp /zfs/omics/projects/education/MDA-materials/genome-assembly/reads/dataset_XY.
 ::: {.callout-caution collapse="false" title="Exercise"}
 Investigate the read set. Find out the following parameters:
 
-- How many reads do you have?
-- How many total basepairs do you have? Assuming a 5 million basepair bacterial genome, what is the sequencing depth?
-- What is the size distribution of your dataset (minimum, average, and maximum read length)? Which sequencing platorm was likely used (`Illumina` or `Nanopore`)?
-- Add this information to this to this [Google sheet](TOMAKE), at the correct dataset number.
+1. How many reads do you have?
+2. How many total basepairs do you have? Assuming a 5 million basepair bacterial genome, what is the sequencing depth? 2b: which assumption we are making to answer the latter question?
+3. What is the size distribution of your dataset (minimum, average, and maximum read length)? 3b: which sequencing platorm was likely used (`Illumina` or `Nanopore`)?
+4. Add this information to this to this [Google Sheet](https://docs.google.com/spreadsheets/d/1ARB0ZgmnG-mSbV5gqsJOfApGxxUxZHZ4i7HYs34aAPU/edit?usp=sharing){target="_blank"}, at the correct dataset number. Also add your initials to the table.
 
 ```{bash}
 #| eval: false
 #| code-fold: true
 #| code-summary: "Click me to see the answer"
 
+# 1. and 2. and 3. 
 # We need to run one command to find out everything that is asked
 seqkit stats data/dataset_XY.fastq
 
+# 2b: we are assuming that all reads actually come from the organism of interest.
+# 2b: if our read set would be contaminated (with e.g. human DNA), the coverage (or depth) of our bacterium of interest would be lower.
+
+# 3b:
 # A shortread dataset has many reads that are short, with a high total sequencing depth.
 # A longread dataset has fewer reads, with a wide distribution of lengths, and a low sequencing depth.
 ```
@@ -49,11 +56,22 @@ So, head over to the correct section, and start your genome assembly job.
 
 If you have short reads, run a `megahit` genome assembly like this:
 
-(note this takes too long, megahit was faster?)
+```bash
+megahit -1 data/dataset_XY_R1.fastq -2 data/dataset_XY_R1.fastq -o megahit-assembly -t 4
+```
+
+It could take a while, and will print a lot of information to your terminal. You don't have to read everything but you try to see if you understand some parts.
+
+Let's have a look at the output by listing the contents of the output directory:
 
 ```bash
-
+ls megahit-assembly
 ```
+
+There's a subfolder called `intermediate_contigs`, which contains a lot of intermediate files. We don't need them today (although you can look at them if you want). The important files are:
+
+- `final.contigs.fasta`: the actual genome assembly
+- `log`: the full log file of the `megahit` run. There's a lot of info, but some useful results can be found at the very end of the file.
 
 ## `flye`: assembly for long reads
 
@@ -63,15 +81,15 @@ If you have long reads, run a `flye` assembly like this:
 flye --nano-raw data/dataset_XY.fastq --genome-size 5M --out-dir flye-assembly --threads 4
 ```
 
-It could take a while!
+It could take a while! You don't have to read everything but you try to see if you understand some parts.
 
-Let's have a look at the output:
+Let's have a look at the output by listing the contents of the output directory:
 
 ```bash
 ls flye-assembly/
 ```
 
-There are 5 subfolders which contain a lot of intermediate files, we don't need them today (although you can look at them if you want). Important files are:
+There are 5 subfolders which contain a lot of intermediate files. We don't need them today (although you can look at them if you want). Important files are:
 
 - `assembly.fasta`: the actual genome assembly
 - `assembly_info.txt`: small text file with info of each contig
@@ -82,16 +100,18 @@ Take a moment to inspect the files with your toolkit of unix commands (`cat`, `h
 ## Gathering assembly statistics in `google sheets`
 
 ::: {.callout-caution collapse="false" title="Exercise"}
-Using `seqkit stats`, in combination with looking at the output of your assembly job, gather the following information of your genome assembly:
+Gather the following information of your genome assembly:
 
 - Total assembly length
 - Number of contigs
 - N50 of contig lengths
 - Minimum contig length
 - Maximum contig length
-- Average coverage
+- Average coverage (approximately)
 
-Add this information to your row in the [Google Sheet](TODO.)
+You can use `seqkit stats` on your assembly, in combination with looking at log files of your assembly job, to obtain this information.
+
+Add the information to your row in the [Google Sheet](https://docs.google.com/spreadsheets/d/1ARB0ZgmnG-mSbV5gqsJOfApGxxUxZHZ4i7HYs34aAPU/edit?usp=sharing){target="_blank"}.
 
 ```{bash}
 #| eval: false
@@ -111,7 +131,9 @@ If you're fast, you can make another assembly. Look in the google sheet to find 
 
 ## Comparing assembly strategies
 
-Together with your colleagues, you generated quite some data to make a sensible comparison between short- and longreads, with different sequencing depths, for genome assembly of the same organism. You can import the data stored in the google sheet to an R session with the following code:
+Together with your colleagues, you assembled a number of 
+
+generated quite some data to make a sensible comparison about assembly quality between short and long reads, with different sequencing depths. You can import the data stored in the google sheet to an R session with the following code:
 
 ```R
 library(readr)
@@ -126,15 +148,14 @@ If you're here early, make sure to repeat the data import later when your collea
 ::: {.callout-caution collapse="false" title="Assignment"}
 :exclamation:*Mini Assignment*:exclamation:
 
-Make a figure that compares the assembly statistics across:
+Make a figure that compares the most important (according to you) assembly statistic(s) across:
 
 - Different sequencing technologies
 - Different sequencing depths
-- Different assembly statistics
 
-Think carefully about how you organise your figure so that your main message becomes easy to see. You may use multiple panels if this makes your comparisons more clear.
+Think carefully about how you organise your figure so that your main message becomes easy to see. You may use multiple panels if this makes your comparisons more clear. Think back to the data visualisation tutorial and try make a figure that uses good data visualisation practices.
 
-When you are done, come to one of the teachers (Misha or Tijs) to discuss your plot. You'll briefly explain your figure to the teacher. This assignment will not be graded, but you need to `pass` this assignment. To pass, you need to show that you understand your figure and can clearly explain the main patterns you observe, including the effects of sequencing technology and sequencing depth. If your explanation is unclear or incomplete, we will give you feedback and ask you to continue working on your plot. You can then try the explanation again.
+When you are done, come to one of the teachers (Misha or Tijs) to discuss your plot. You'll briefly explain your figure to the teacher. This assignment will not be graded, but you need to `pass` this assignment. To pass, you need to show that you understand your figure and can clearly explain the main patterns you observe, including the effects of sequencing technology and sequencing depth on assembly quality. If your explanation is unclear or incomplete, we will give you feedback and ask you to continue working on your plot. You can then try the explanation again.
 
 :::
 

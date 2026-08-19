@@ -1,7 +1,9 @@
 ---
-title: "RNA-seq and differential gene expression analysis"
+title: "Welcome"
 sidebar: part2
 ---
+
+Welcome to the RNA-seq tutorial!
 
 ::: {.callout-note}
 ## Learning goals:

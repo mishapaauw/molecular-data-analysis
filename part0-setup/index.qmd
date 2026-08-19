@@ -1,7 +1,9 @@
 ---
-title: "Setup and intro to command line"
+title: "Welcome"
 sidebar: part0
 ---
+
+Welcome to the setup tutorial! We will setup the computational setup, and learn some command-line basics.
 
 ::: {.callout-note}
 ## Learning goals:

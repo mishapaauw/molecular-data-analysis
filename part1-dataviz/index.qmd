@@ -1,7 +1,9 @@
 ---
-title: "Reproducible data visualisation using R and Github"
+title: "Welcome"
 sidebar: part1
 ---
+
+Welcome to the data visualisation and reproducible science tutorial!
 
 ::: {.callout-note}
 ## Learning goals:

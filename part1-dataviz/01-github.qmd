@@ -1,5 +1,5 @@
 ---
-title: "Episode 1: Reproducible science using Github"
+title: "Reproducible science using Github"
 ---
 
 You may have heard of the **FAIR principle** for research data: Findable, Accessible, Interoperable, Reusable. These principles focus on how you manage your data, scripts, and results. Adhering to these principles makes tracking and sharing your work easier. You can imagine that a script sitting somewhere on your computer fails FAIR on nearly all aspects: nobody else can find it, access it, or reuse it: and a year from now, neither can you. `git` and `Github` address this directly. Putting the data and scripts of your analysis under 'version control' gives you a timestamped history of every change that you made. Pushing that history to `Github` makes it accessible for others.

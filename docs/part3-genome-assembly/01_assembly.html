@@ -233,8 +233,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="getting-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="getting-the-data">Getting the data</h2>
 <p>To assemble a genome, we need reads. For this tutorial, the reads are stored on a shared drive on Crunchomics. There are different read datasets, and the teacher will assign to you which dataset you should copy to your working directory. Some datasets contain long Nanopore reads, while other datasets contain short Illumina reads. In addition, different subsets of the data were made by the teaching team: resulting in low and high sequencing depth datasets.If you want to work together you can download the same dataset as your neighbour (maximum group size = 2!). You can discuss the steps, but both of you should process the data.</p>
-<p>Copy your read dataset into to the <code>data</code> directory in your work directory. Replace the <code>XY</code> with the dataset number!</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /zfs/omics/projects/education/MDA-materials/genome-assembly/reads/dataset_XY.fastq data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Copy your read dataset into to the <code>data</code> directory in your work directory. Replace the <code>AXY</code> with the dataset number! The format of the datasets is <code>A01</code> to <code>B10</code>. The <code>B</code> datasets are paired-end, they have <code>_1</code> or <code>_2</code> in their filenames. Use the wildcard symbol <code>*</code> to catch them both when copying.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /zfs/omics/projects/education/MDA/MDA-materials/genome-assembly/datasets/dataset_AXY<span class="pp">*</span>.fastq data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that we will be working with real datasets in this tutorial. Some commands (including just copying the data) may take a while.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -259,7 +260,7 @@ Exercise
 <summary>Click me to see the answer</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. and 2. and 3. </span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We need to run one command to find out everything that is asked</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats data/dataset_XY.fastq</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats data/dataset_AXY.fastq</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2b: we are assuming that all reads actually come from the organism of interest.</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2b: if our read set would be contaminated (with e.g. human DNA), the coverage (or depth) of our bacterium of interest would be lower.</span></span>
@@ -278,8 +279,8 @@ Exercise
 <section id="megahit-assembly-for-short-reads" class="level2">
 <h2 class="anchored" data-anchor-id="megahit-assembly-for-short-reads"><code>megahit</code>: assembly for short reads</h2>
 <p>If you have short reads, run a <code>megahit</code> genome assembly like this:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">megahit</span> <span class="at">-1</span> data/dataset_XY_R1.fastq <span class="at">-2</span> data/dataset_XY_R1.fastq <span class="at">-o</span> megahit-assembly <span class="at">-t</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It could take a while, and will print a lot of information to your terminal. You don’t have to read everything but you try to see if you understand some parts.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">megahit</span> <span class="at">-1</span> data/dataset_BXY_1.fastq <span class="at">-2</span> data/dataset_BXY_2.fastq <span class="at">-o</span> megahit-assembly <span class="at">-t</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It could take a while, and will print a lot of information to your terminal. You don’t have to read everything but you can try to see if you understand some parts.</p>
 <p>Let’s have a look at the output by listing the contents of the output directory:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> megahit-assembly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There’s a subfolder called <code>intermediate_contigs</code>, which contains a lot of intermediate files. We don’t need them today (although you can look at them if you want). The important files are:</p>
@@ -287,11 +288,12 @@ Exercise
 <li><code>final.contigs.fasta</code>: the actual genome assembly</li>
 <li><code>log</code>: the full log file of the <code>megahit</code> run. There’s a lot of info, but some useful results can be found at the very end of the file.</li>
 </ul>
+<p>Take a moment to inspect the files with your toolkit of unix commands (<code>cat</code>, <code>head</code>, <code>tail</code>, <code>seqkit</code>, etc).</p>
 </section>
 <section id="flye-assembly-for-long-reads" class="level2">
 <h2 class="anchored" data-anchor-id="flye-assembly-for-long-reads"><code>flye</code>: assembly for long reads</h2>
 <p>If you have long reads, run a <code>flye</code> assembly like this:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flye</span> <span class="at">--nano-raw</span> data/dataset_XY.fastq <span class="at">--genome-size</span> 5M <span class="at">--out-dir</span> flye-assembly <span class="at">--threads</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flye</span> <span class="at">--nano-raw</span> data/dataset_AXY.fastq <span class="at">--genome-size</span> 5M <span class="at">--out-dir</span> flye-assembly <span class="at">--threads</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It could take a while! You don’t have to read everything but you try to see if you understand some parts.</p>
 <p>Let’s have a look at the output by listing the contents of the output directory:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> flye-assembly/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -335,23 +337,22 @@ Exercise
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats data/dataset_XY.fastq</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># for both flye and megahit, the N50 can be found in the end of the log file</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> ....</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> ....</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> megahit-assembly/log </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> flye-assembly/flye.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
 </div>
 </div>
-<p>If you’re fast, you can make another assembly. Look in the google sheet to find out which datasets are still available.</p>
+<p>If you’re fast, you can make another assembly. Look in the google sheet to find out which datasets are still available. Make sure to organise your results well by giving each output folder a sensible name.</p>
 </section>
 <section id="comparing-assembly-strategies" class="level2">
 <h2 class="anchored" data-anchor-id="comparing-assembly-strategies">Comparing assembly strategies</h2>
-<p>Together with your colleagues, you assembled a number of</p>
-<p>generated quite some data to make a sensible comparison about assembly quality between short and long reads, with different sequencing depths. You can import the data stored in the google sheet to an R session with the following code:</p>
+<p>Together with your colleagues, you created a number of assemblies of the same bacterial isolate. We can now make a a sensible comparison about assembly quality between short and long reads, with different sequencing depths. You can import the data stored in the google sheet to an R session with the following code:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>assembly_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://docs.google.com/spreadsheets/d/XXXXXXXXXXXX/export?format=csv"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://docs.google.com/spreadsheets/d/1ARB0ZgmnG-mSbV5gqsJOfApGxxUxZHZ4i7HYs34aAPU/export?format=csv"</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If you’re here early, make sure to repeat the data import later when your colleagues entered more data to the google sheet.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Assignment">

@@ -17,11 +17,14 @@ mdir data
 
 To assemble a genome, we need reads. For this tutorial, the reads are stored on a shared drive on Crunchomics. There are different read datasets, and the teacher will assign to you which dataset you should copy to your working directory. Some datasets contain long Nanopore reads, while other datasets contain short Illumina reads. In addition, different subsets of the data were made by the teaching team: resulting in low and high sequencing depth datasets.If you want to work together you can download the same dataset as your neighbour (maximum group size = 2!). You can discuss the steps, but both of you should process the data.
 
-Copy your read dataset into to the `data` directory in your work directory. Replace the `XY` with the dataset number!
+Copy your read dataset into to the `data` directory in your work directory. Replace the `AXY` with the dataset number! The format of the datasets is `A01` to `B10`. The `B` datasets are paired-end, they have `_1` or `_2` in their filenames. Use the wildcard symbol `*` to catch them both when copying.
 
 ```bash
-cp /zfs/omics/projects/education/MDA-materials/genome-assembly/reads/dataset_XY.fastq data/
+cp /zfs/omics/projects/education/MDA/MDA-materials/genome-assembly/datasets/dataset_AXY*.fastq data/
 ```
+
+Note that we will be working with real datasets in this tutorial. Some commands (including just copying the data) may take a while.
+
 ::: {.callout-caution collapse="false" title="Exercise"}
 Investigate the read set. Find out the following parameters:
 
@@ -37,7 +40,7 @@ Investigate the read set. Find out the following parameters:
 
 # 1. and 2. and 3. 
 # We need to run one command to find out everything that is asked
-seqkit stats data/dataset_XY.fastq
+seqkit stats data/dataset_AXY.fastq
 
 # 2b: we are assuming that all reads actually come from the organism of interest.
 # 2b: if our read set would be contaminated (with e.g. human DNA), the coverage (or depth) of our bacterium of interest would be lower.
@@ -57,10 +60,10 @@ So, head over to the correct section, and start your genome assembly job.
 If you have short reads, run a `megahit` genome assembly like this:
 
 ```bash
-megahit -1 data/dataset_XY_R1.fastq -2 data/dataset_XY_R1.fastq -o megahit-assembly -t 4
+megahit -1 data/dataset_BXY_1.fastq -2 data/dataset_BXY_2.fastq -o megahit-assembly -t 4
 ```
 
-It could take a while, and will print a lot of information to your terminal. You don't have to read everything but you try to see if you understand some parts.
+It could take a while, and will print a lot of information to your terminal. You don't have to read everything but you can try to see if you understand some parts.
 
 Let's have a look at the output by listing the contents of the output directory:
 
@@ -73,12 +76,14 @@ There's a subfolder called `intermediate_contigs`, which contains a lot of inter
 - `final.contigs.fasta`: the actual genome assembly
 - `log`: the full log file of the `megahit` run. There's a lot of info, but some useful results can be found at the very end of the file.
 
+Take a moment to inspect the files with your toolkit of unix commands (`cat`, `head`, `tail`, `seqkit`, etc).
+
 ## `flye`: assembly for long reads
 
 If you have long reads, run a `flye` assembly like this:
 
 ```bash
-flye --nano-raw data/dataset_XY.fastq --genome-size 5M --out-dir flye-assembly --threads 4
+flye --nano-raw data/dataset_AXY.fastq --genome-size 5M --out-dir flye-assembly --threads 4
 ```
 
 It could take a while! You don't have to read everything but you try to see if you understand some parts.
@@ -122,24 +127,22 @@ Add the information to your row in the [Google Sheet](https://docs.google.com/sp
 seqkit stats data/dataset_XY.fastq
 
 # for both flye and megahit, the N50 can be found in the end of the log file
-tail ....
-tail ....
+tail megahit-assembly/log 
+tail flye-assembly/flye.log
 ```
 :::
 
-If you're fast, you can make another assembly. Look in the google sheet to find out which datasets are still available.
+If you're fast, you can make another assembly. Look in the google sheet to find out which datasets are still available. Make sure to organise your results well by giving each output folder a sensible name.
 
 ## Comparing assembly strategies
 
-Together with your colleagues, you assembled a number of 
-
-generated quite some data to make a sensible comparison about assembly quality between short and long reads, with different sequencing depths. You can import the data stored in the google sheet to an R session with the following code:
+Together with your colleagues, you created a number of assemblies of the same bacterial isolate. We can now make a a sensible comparison about assembly quality between short and long reads, with different sequencing depths. You can import the data stored in the google sheet to an R session with the following code:
 
 ```R
 library(readr)
 
 assembly_data <- read_csv(
-  "https://docs.google.com/spreadsheets/d/XXXXXXXXXXXX/export?format=csv"
+    "https://docs.google.com/spreadsheets/d/1ARB0ZgmnG-mSbV5gqsJOfApGxxUxZHZ4i7HYs34aAPU/export?format=csv"
 )
 ```
 

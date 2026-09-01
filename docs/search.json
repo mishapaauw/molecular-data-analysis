@@ -72,6 +72,18 @@
     ]
   },
   {
+    "objectID": "part0-setup/02_CLI_basics.html#clear-cleaning-up-your-terminal",
+    "href": "part0-setup/02_CLI_basics.html#clear-cleaning-up-your-terminal",
+    "title": "Introduction to the command line",
+    "section": "clear: cleaning up your terminal",
+    "text": "clear: cleaning up your terminal\nAll the commands we used so far are piling up on your screen. If you want to start fresh, you can run the clear command:\nclear\nThis cleans up your terminal and gives you a clean space to continue your work. If you still want to look up what you did, use the up and down arrow to cycle through commands you ran before. You can also view a list of all commands you previously ran using history (we will look into this command a little bit later today.).",
+    "crumbs": [
+      "Setup and introduction to command line",
+      "Episodes",
+      "Introduction to the command line"
+    ]
+  },
+  {
     "objectID": "part0-setup/02_CLI_basics.html#wget-download-data",
     "href": "part0-setup/02_CLI_basics.html#wget-download-data",
     "title": "Introduction to the command line",
@@ -112,7 +124,7 @@
     "href": "part0-setup/02_CLI_basics.html#history-keeping-track-of-what-you-did",
     "title": "Introduction to the command line",
     "section": "history: keeping track of what you did",
-    "text": "history: keeping track of what you did\nThe history command is quite useful: it keeps a list of all the commands that you used today. You can view this as a simple automated labjournal, although it does not contain any output, or information whether a command worked at all. It can be useful for example in a scenario where you would delete your data by accident (see following exercise).\n\n\n\n\n\n\nExercise\n\n\n\n\n\n\nRemove the sequencing data from the data folder as well.\nUse history to find back the command to download the data.\nRedownload the data, and this time, move (mv) the data to the data folder.\nUse ls commands to inspect what happened by using mv rather than cp.\n\n\n\nClick me to see the answer\n# 1. Oh no, I removed my raw data!\nrm data/sample1.fastq.gz\n\n# 2. Ah, I remember, it was the wget command.\nhistory\n\n# 3. Let's download again, and this time move it instead of copy\nwget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part0-setup/data/sample1.fastq.gz\nmv sample1.fastq.gz data/\n\n# 4. Now we only have one copy of the data, in the data folder.\nls -l\nls -l data/\n\n\n\n\n\nInstead of retyping commands, you can also press the arrow ‘up’ key to cycle through commands you already ran before.",
+    "text": "history: keeping track of what you did\nThe history command is quite useful: it keeps a list of all the commands that you used today. You can view this as a simple automated labjournal, although it does not contain any output, or information whether a command worked at all. It can be useful for example in a scenario where you would delete your data by accident (see following exercise).\n\n\n\n\n\n\nExercise\n\n\n\n\n\n\nRemove the sequencing data from the data folder as well.\nUse history to find back the command to download the data.\nRedownload the data, and this time, move (mv) the data to the data folder.\nUse ls commands to inspect what happened by using mv rather than cp.\n\n\n\nClick me to see the answer\n# 1. Oh no, I removed my raw data!\nrm data/sample1.fastq.gz\n\n# 2. Ah, I remember, it was the wget command.\nhistory\n\n# 3. Let's download again, and this time move it instead of copy\nwget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part0-setup/data/sample1.fastq.gz\nmv sample1.fastq.gz data/\n\n# 4. Now we only have one copy of the data, in the data folder.\nls -l\nls -l data/\n\n\n\n\n\nInstead of retyping commands, you can also press the arrow up key to cycle through commands you already ran before.",
     "crumbs": [
       "Setup and introduction to command line",
       "Episodes",

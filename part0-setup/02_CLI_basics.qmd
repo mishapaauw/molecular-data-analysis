@@ -103,6 +103,16 @@ pwd
 ```
 :::
 
+## `clear`: cleaning up your terminal
+
+All the commands we used so far are piling up on your screen. If you want to start fresh, you can run the `clear` command:
+
+```bash
+clear
+```
+
+This cleans up your terminal and gives you a clean space to continue your work. If you still want to look up what you did, use the `up` and `down` arrow to cycle through commands you ran before. You can also view a list of all commands you previously ran using `history` (we will look into this command a little bit later today.).
+
 ## `wget`: download data
 
 Next, let's download some sequencing data. We will use the `wget` command to download some sequencing data from a repository, into the currect working directory. 
@@ -181,7 +191,7 @@ ls -l data/
 ```
 :::
 
-Instead of retyping commands, you can also press the arrow 'up' key to cycle through commands you already ran before.
+Instead of retyping commands, you can also press the arrow `up` key to cycle through commands you already ran before.
 
 ## `gunzip`: uncompress files
 
@@ -360,7 +370,6 @@ grep AGATCGGAAGAGC data/sample1.fastq -B 1 | grep ERR | cut -f 1 -d ' '
 grep AGATCGGAAGAGC data/sample1.fastq -B 1 | grep ERR | cut -f 1 -d ' ' > contaminated_reads.txt
 ```
 :::
-
 
 ## Wrap-up
 

@@ -19,7 +19,11 @@ By the end of this module, you will be able to:
 
 Generative AI can be a useful tool to help you build bioinformatics pipelines. We think genAI is most useful when you already have a level of knowledge of a specific topic. Therefore, we strongly advice you to not use genAI to write all your code if you want to become a proficient bioinformatician. Use your time during this module to get to this level by writing code yourself or with help of the teachers. This gives you a solid basis and you will be able to assess whether AI-generated code makes sense, or is bloated with unnecessary parts, or is just plain wrong – the latter two are a common occurence! Later during your career, genAI can help you write better code faster.
 
-**todo: should we formulate hard rules here?**
+In addition, we as teachers care about you learning bioinformatics, and not about receiving flawless and smooth assignments. We do not want to spend time reading and providing feedback on something that a machine wrote. These notes bring us to the following rules for this module:
+
+- You **are** allowed to use genAI tools to support your learning and understanding of the course materials. For example, ask AI to re-explain a concept in a different way, or ask AI to ask you probing questions to increase your understandig
+
+- You **are not** allowed to use genAI tools to replace your learning and critical thinking. Especially, you are not allowed to generate full solutions to assignments. 
 
 ## Module structure
 
@@ -38,26 +42,37 @@ The following timetable is preliminary and still subject to change:
 
 ### Week 1:
 | Date | Time | Location | Type | Topic |
-|--|---|--|--|---------|
-| 28 sept | 13:00 - 14:00 | xx | Lecture | Module introduction |
-| 28 sept | 14:00 - 17:00 | xx | Tutorial | Introduction: Shell, R, tidyverse |
-| 29 sept | 13:00 - 14:00 | xx | Lecture | Principles of data visualization |
-| 29 sept | 14:00 - 17:00 | xx | Tutorial | Part 1: Data visualization in R (including mini presentation)|
-| 30 sept | 13:00 - 14:00 | xx | Lecture | RNA-seq lecture |
-| 30 sept | 14:00 - 17:00 | xx | Tutorial | Part 2: RNA-seq analysis (mapping reads) |
+|--|---|---|---|---------|
+| 28 sept | 13:00 - 14:00 | SP A1.18 | Lecture | Module introduction |
+| 28 sept | 14:00 - 17:00 | SP A1.18 | Tutorial | Introduction: Shell, R, tidyverse |
+| 29 sept | 13:00 - 14:00 | SP A1.12 | Lecture | Principles of data visualization |
+| 29 sept | 14:00 - 17:00 | SP A1.12 | Tutorial | Part 1: Data visualization in R (including mini presentation)|
+| 30 sept | 13:00 - 14:00 | SP B0.201 | Lecture | RNA-seq lecture |
+| 30 sept | 14:00 - 17:00 | SP B0.201 | Tutorial | Part 2: RNA-seq analysis (mapping reads) |
 
 ### Week 2:
 | Date | Time | Location | Type | Topic |
-|--|---|--|--|---------|
-| 5 oct | 13:00 - 15:00 | xx | Tutorial | Part 2: RNA-seq analysis (differential expression analysis)|
-| 5 oct | 15:00 - 17:00 | xx | :exclamation:*Assignment*:exclamation: | Part 2: Assignment RNA-seq |
-| 6 oct | 13:00 - 17:00 | xx | :exclamation:*Assignment*:exclamation: | Part 2: Assignment RNA-seq |
-| 8 oct | 13:00 - 15:00 | xx | Lecture | Genome assembly & comparative genomics lecture |
+|--|---|---|---|---------|
+| 5 oct | 13:00 - 17:00 | SP A1.18 | Tutorial | Part 2: RNA-seq analysis (differential expression analysis)|
+| 6 oct | 13:00 - 17:00 | SP A1.12 | :exclamation:*Assignment*:exclamation: | Part 2: Assignment RNA-seq |
+| 8 oct | 13:00 - 15:00 | SP B0.208 | Lecture | Genome assembly & comparative genomics lecture |
 
 ### Week 3:
 | Date | Time | Location | Type | Topic |
-|--|---|--|--|---------|
-| 12 oct | 13:00 - 17:00 | xx | Tutorials | Part 3: Genome assembly & comparative genomics |
+|--|---|---|---|---------|
+| 12 oct | 13:00 - 17:00 | SP A1.24 | Tutorial | Part 3: Genome assembly & comparative genomics |
+| 13 oct | 13:00 - 15:00 | SP A1.12 | Lecture | Single-cell omics lecture (Aalt-Jan) |
+| 13 oct | 13:00 - 17:00 | SP A1.12 | Tutorial | Single-cell omics tutorial |
+| 15 oct | 13:00 - 15:00 | SP G0.10 | Lecture | Lecture (Aalt-Jan) |
+| 15 oct | 13:00 - 17:00 | SP G0.10 | Tutorial | Single-cell omics tutorial |
+
+### Week 4:
+| Date | Time | Location | Type | Topic |
+|--|---|---|---|---------|
+| 19 oct | 13:00 - 15:00 | SP A1.24 | Lecture | Gene regulatory networks lecture (Aalt-Jan) |
+| 19 oct | 15:00 - 17:00 | SP A1.24 | Tutorial | Gene regulatory networks tutorial |
+| 20 oct | 13:00 - 17:00 | SP A1.12 | :exclamation:*Assignment*:exclamation: | Gene regulatory networks assignment |
+
 
 ## Prerequisites
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Reproducible science using Github – Molecular Data Analysis</title>
+<title>Reproducible science using GitHub – Molecular Data Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title">Reproducible science using Github</h1>
+          <h1 class="quarto-secondary-nav-title">Reproducible science using GitHub</h1>
         </a>     
     </div>
   </nav>
@@ -181,7 +181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../part1-dataviz/01-github.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Reproducible science using Github</span></a>
+ <span class="menu-text">Reproducible science using GitHub</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -202,9 +202,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setting-up-a-repository" id="toc-setting-up-a-repository" class="nav-link active" data-scroll-target="#setting-up-a-repository">Setting up a repository</a></li>
+  <li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation">Preparation</a></li>
+  <li><a href="#setting-up-a-repository" id="toc-setting-up-a-repository" class="nav-link" data-scroll-target="#setting-up-a-repository">Setting up a repository</a></li>
+  <li><a href="#making-your-first-commit" id="toc-making-your-first-commit" class="nav-link" data-scroll-target="#making-your-first-commit">Making your first <code>commit</code></a></li>
+  <li><a href="#getting-a-personal-access-token" id="toc-getting-a-personal-access-token" class="nav-link" data-scroll-target="#getting-a-personal-access-token">Getting a personal access token</a></li>
   <li><a href="#cloning-the-repository-to-the-cluster" id="toc-cloning-the-repository-to-the-cluster" class="nav-link" data-scroll-target="#cloning-the-repository-to-the-cluster">Cloning the repository to the cluster</a></li>
-  <li><a href="#adding-a-new-file-and-committing-it." id="toc-adding-a-new-file-and-committing-it." class="nav-link" data-scroll-target="#adding-a-new-file-and-committing-it.">Adding a new file and committing it.</a></li>
+  <li><a href="#adding-a-new-file-and-committing-it" id="toc-adding-a-new-file-and-committing-it" class="nav-link" data-scroll-target="#adding-a-new-file-and-committing-it">Adding a new file and committing it</a></li>
+  <li><a href="#wrapping-up" id="toc-wrapping-up" class="nav-link" data-scroll-target="#wrapping-up">Wrapping up</a></li>
   </ul>
 </nav>
     </div>
@@ -213,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Reproducible science using Github</h1>
+<h1 class="title d-none d-lg-block">Reproducible science using GitHub</h1>
 </div>
 
 
@@ -230,23 +234,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>You may have heard of the <strong>FAIR principle</strong> for research data: Findable, Accessible, Interoperable, Reusable. These principles focus on how you manage your data, scripts, and results. Adhering to these principles makes tracking and sharing your work easier. You can imagine that a script sitting somewhere on your computer fails FAIR on nearly all aspects: nobody else can find it, access it, or reuse it: and a year from now, neither can you. <code>git</code> and <code>Github</code> address this directly. Putting the data and scripts of your analysis under ‘version control’ gives you a timestamped history of every change that you made. Pushing that history to <code>Github</code> makes it accessible for others.</p>
-<p>Today we will setup a <code>Github</code> repository and push an analysis to it, from the cluster.</p>
+<p>You may have heard of the <strong>FAIR principle</strong> for research data: Findable, Accessible, Interoperable, Reusable. These principles focus on how you manage your data, scripts, and results. Adhering to these principles makes tracking and sharing your work easier. You can imagine that a script sitting somewhere on your computer fails FAIR on nearly all aspects: nobody else can find it, access it, or reuse it: and a year from now, neither can you. <code>git</code> and <code>Github</code> address this directly. Putting the data and scripts of your analysis under ‘version control’ gives you a timestamped history of every change that you made. Pushing that history to <code>GitHub</code> makes it accessible for others.</p>
+<p>Today we will setup a <code>GitHub</code> repository and push an analysis to it, from the cluster.</p>
+<section id="preparation" class="level2">
+<h2 class="anchored" data-anchor-id="preparation">Preparation</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Do this before the tutorial starts!</strong></p>
+<p>You will need a GitHub account with 2 factor authentication setup.</p>
+<ol type="1">
+<li>Go to github.com → Sign up → follow the prompts</li>
+<li>Make sure to set up 2 factor authentication using <code>Microsoft Authenticator</code>, <code>Google Authenticator</code>, SMS, or other options.</li>
+</ol>
+</div>
+</div>
+</section>
 <section id="setting-up-a-repository" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up-a-repository">Setting up a repository</h2>
+<p>We’ll start by making a repository on GitHub:</p>
 <ol type="1">
-<li><p>Make a GitHub account Go to github.com → Sign up → follow the prompts</p></li>
-<li><p>Make a repository on GitHub</p>
-<ol type="1">
-<li>Click the + (top right) → New repository</li>
-<li>Name it (e.g.&nbsp;`data_visualization_episode)</li>
-<li>Leave it Public, tick Add a README</li>
+<li>Click the <code>+</code> (top right) → <code>New repository</code></li>
+<li>Name it (e.g.&nbsp;<code>data_visualization_episode</code>)</li>
+<li>Leave it <code>Public</code>, tick <code>Add a README</code></li>
 <li>Create repository</li>
-</ol></li>
 </ol>
-<p>Github is very serious about safety. This is good, but it forces us to use a bit more complicate authentication methods than just a password.</p>
-<ol start="3" type="1">
-<li>Generate a <strong>Personal Access Token</strong> (your “password” when committing changes).
+<p>GitHub will automatically redirect you to the repository page. It should look something like this:</p>
+<p><img src="../images/empty-repository.png" class="img-fluid"></p>
+<p>Indeed, it’s quite empty for now.</p>
+</section>
+<section id="making-your-first-commit" class="level2">
+<h2 class="anchored" data-anchor-id="making-your-first-commit">Making your first <code>commit</code></h2>
+<p>Let’s make our first change in this repository, and <code>commit</code> that change. To commit a change means that that change is now part of the track changes record of this repository. We are going to edit the <code>README.md</code> file. A <code>README</code> file acts as the ‘landing page’ of this repository and should contain a clear description of what the repository is about. The file extension <code>.md</code> means <code>markdown</code>: this is a plain text format with simple but very effective styling options. For example <code>#</code> signs create nice headers, and putting double asterisks <code>**</code> around a word makes it <strong>bold</strong> when the markdown file is rendered. In fact; this course website is written in <code>markdown</code>!</p>
+<ol type="1">
+<li>Click the little pen icon that says <code>Edit file</code> when you hover over it.</li>
+<li>Add a short informative sentence to the README file.</li>
+<li>Click the green <code>Commit changes</code> button, verify that you agree with the automatic ‘commit message’ and hit <code>Commit changes</code> again.</li>
+</ol>
+<p>This will again redirect you to the repository page, and you will see your change being applied in the README file. In addition, you will see the commit message, and an identifier like <code>9e4d6b7</code>. Each commit will get such an identifier.</p>
+</section>
+<section id="getting-a-personal-access-token" class="level2">
+<h2 class="anchored" data-anchor-id="getting-a-personal-access-token">Getting a personal access token</h2>
+<p>GitHub is very serious about safety. This is good, but it forces us to use a bit more complicated authentication methods than just a password. Let’s generate a <strong>Personal Access Token</strong> (your “password” when committing changes).</p>
 <ol type="1">
 <li>Log in → click your profile picture (top right) → Settings</li>
 <li>Left sidebar, scroll down → Developer settings</li>
@@ -254,52 +290,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Generate new token (classic)</li>
 <li>Name: <code>bioinformatics</code> · Expiration: <code>14 days</code> · Check the box: <code>repo</code></li>
 <li>Generate token → copy it now (you won’t see it again) → paste it somewhere safe (e.g.&nbsp;a text file) for later</li>
-</ol></li>
 </ol>
+<p>We will need this token in the next section, where we will use <code>git</code> on the command line rather than via the webbrowser.</p>
 </section>
 <section id="cloning-the-repository-to-the-cluster" class="level2">
 <h2 class="anchored" data-anchor-id="cloning-the-repository-to-the-cluster">Cloning the repository to the cluster</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/<span class="op">&lt;</span>your-username<span class="op">&gt;</span>/<span class="op">&lt;</span>repo-name<span class="op">&gt;</span>.git</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>repo-name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This may prompt you for your password, use the token here:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Username:</span> <span class="op">&lt;</span>your-github-username<span class="op">&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> <span class="op">&lt;</span>paste your token here — NOT your GitHub password<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Most likely, you will work on a local laptop or cluster rather than on the GitHub website. To get the repository down to the cluster, we will <code>clone</code> the repository. First, connect to the headnode of Crunchomics as <a href="../part0-setup/01_setup.html">like we did yesterday</a>. Let’s prepare first by navigating to the <code>MDA</code> folder. Then, create a new folder called <code>data-vis-tutorial</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> personal/</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> MDA/</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data-vis-tutorial</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> data-vis-tutorial</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Okay, we are now in an empty folder. Let’s clone the repository you just created.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/<span class="op">&lt;</span>your-username<span class="op">&gt;</span>/<span class="op">&lt;</span>repo-name<span class="op">&gt;</span>.git</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="co"># Yes, it's really there!</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="op">&lt;</span>repo-name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This may prompt you for your password, use your username and the access token here:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Username:</span> <span class="op">&lt;</span>your-github-username<span class="op">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> <span class="op">&lt;</span>paste your token here<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="adding-a-new-file-and-committing-it." class="level2">
-<h2 class="anchored" data-anchor-id="adding-a-new-file-and-committing-it.">Adding a new file and committing it.</h2>
-<p>Let’s make a <code>data</code> directory, and add a data file to it:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> data/penguins.csv https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="adding-a-new-file-and-committing-it" class="level2">
+<h2 class="anchored" data-anchor-id="adding-a-new-file-and-committing-it">Adding a new file and committing it</h2>
+<p>Let’s make a <code>data</code> directory, and add a data file to it. We will use the data file later today in the data visualisation tutorial.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> data/penguins.csv https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>First we verify that we actually have the dataset:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It’s really there! Now, we can run <code>git status</code> to verify that <code>git</code> is actually also aware that the file now exists in our repository. But, <code>git</code> is not yet keeping track of this file.</p>
-<div class="sourceCode" id="annotated-cell-5"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-5-1" class="code-annotation-target"><a href="#annotated-cell-5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-5-2" class="code-annotation-target"><a href="#annotated-cell-5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-5-3" class="code-annotation-target"><a href="#annotated-cell-5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-5-4" class="code-annotation-target"><a href="#annotated-cell-5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"added pinguins dataset"</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-5" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-5-5" class="code-annotation-target"><a href="#annotated-cell-5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It’s really there! Now, we’re going to commit this to <code>git</code> and push it to <code>GitHub</code>. Yes, that’s right: commits aren’t limited to editing existing files. Adding new files or folders (like our <code>data/</code> directory) is a commit too. We will run a number of <code>git</code> commands now: run <code>git status</code> to verify that <code>git</code> is actually also aware that the file now exists in our repository. Then, we <code>add</code> the files that we want to commit. Then, we actually <code>commit</code> the changes in these files. Finally, we will <code>push</code> that to GitHub. This sounds like a lot of steps, and you’re right. However, you will get used to this sequence of commands if you use it often enough. Let’s go through the commands one more time:</p>
+<div class="sourceCode" id="annotated-cell-6"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-1" class="code-annotation-target"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-6-4" class="code-annotation-target"><a href="#annotated-cell-6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"added pinguins dataset"</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="5" onclick="event.preventDefault();">5</a><span id="annotated-cell-6-5" class="code-annotation-target"><a href="#annotated-cell-6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-5" data-target-annotation="1">1</dt>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="1" data-code-annotation="1"><code>git</code> sees that the file is there, but it’s not being tracked.</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="1" data-code-annotation="1"><code>git</code> sees that the file is there, but it’s not being tracked.</span>
 </dd>
-<dt data-target-cell="annotated-cell-5" data-target-annotation="2">2</dt>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="2" data-code-annotation="2">Let’s add all files to the git tracking!</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="2" data-code-annotation="2">Let’s add all files to the git tracking!</span>
 </dd>
-<dt data-target-cell="annotated-cell-5" data-target-annotation="3">3</dt>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="3" data-code-annotation="3">Yes, now <code>git</code> has ‘staged’ the data file.</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="3" data-code-annotation="3">Yes, now <code>git</code> has ‘staged’ the data file.</span>
 </dd>
-<dt data-target-cell="annotated-cell-5" data-target-annotation="4">4</dt>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="4" data-code-annotation="4">Now we ‘commit’ the file</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="4" data-code-annotation="4">Now we <code>commit</code> the file</span>
 </dd>
-<dt data-target-cell="annotated-cell-5" data-target-annotation="5">5</dt>
+<dt data-target-cell="annotated-cell-6" data-target-annotation="5">5</dt>
 <dd>
-<span data-code-cell="annotated-cell-5" data-code-lines="5" data-code-annotation="5">The final step is pushing the changes to github.</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="5" data-code-annotation="5">The final step is pushing the changes to GitHub.</span>
 </dd>
 </dl>
+<p>This step might ask for your password, again, use your token:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Username:</span> <span class="op">&lt;</span>your-github-username<span class="op">&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> <span class="op">&lt;</span>paste your token here<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Go to your GitHub repository online to see that the changes are live.</p>
+</section>
+<section id="wrapping-up" class="level2">
+<h2 class="anchored" data-anchor-id="wrapping-up">Wrapping up</h2>
+<p>Today was not really about biology. Instead, we learned a new system for tracking changes in our coding projects. In the next section of the tutorial, we will write data visualisation code in R, commit these changes, and push them to GitHub. Over time, this process is what turns a repository into a living, evolving record of your project.</p>
 
 
 </section>

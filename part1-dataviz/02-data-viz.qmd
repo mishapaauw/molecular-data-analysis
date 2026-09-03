@@ -273,6 +273,7 @@ ggsave('results/small_multiples.png', p2, width = 13, height = 14, units = "cm")
 Now, save your R script. Then, turn to your terminal in RStudio. We're going to commit these changes to GitHub!
 
 ```{bash filename="bash"}
+#| eval: false
 git status # <1>
 git add . 
 git status 
@@ -282,11 +283,13 @@ git push
 
 1. `git` sees that you have changed and added files, but it not yet keeping track of them.
 
+Alright, we're ready for the assignment now.
+
 ## Assignment
 
 ::: {.callout-note}
 ### Assignment
-You have learned what makes a good visualization. Now do the opposite: make the worst possible figure from the `palmerpenguins` dataset. Aim to commit as many of these 'data visualisation sins' as you can:
+You have learned what makes a good visualization. Now do the opposite: make the worst possible figure from the `palmerpenguins` dataset. Aim to commit as many 'data visualisation sins' as you can:
 
 - Hide the truth:
     - Use a barplot with no indication of spread or sample size
@@ -298,10 +301,12 @@ You have learned what makes a good visualization. Now do the opposite: make the 
     - Leave axis labels as raw column names, give the plot a misleading title
     - Map the same variable to color, shape, and size simultaneously
 
-- Produce this plot in 1 code chunk, save it as a `.png` file.
-- knit your `.Rmd` file, push all changes to Github.
+- Produce this plot in your R script, save the plot as a `.png` file.
+- Push all changes to GitHub.
 - Add you plot into the shared Google Presentations sheet, and add three bullet points describing _why_ your plot is the most ugly and misleading plot ever made.
+- Also add a link to your GitHub repository in the Google Presentation sheet [here](https://docs.google.com/presentation/d/1kXmQ_B9e1IF0sSDDtEaR4HYqSqy3RLsXL4BHHgTODlI/edit?usp=sharing){target="_blank"}
 :::
+
 
 ## References
 

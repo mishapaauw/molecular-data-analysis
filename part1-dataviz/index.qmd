@@ -10,35 +10,35 @@ Welcome to the data visualisation and reproducible science tutorial!
 
 After this lesson, you should be able to:
 
-With regard to data visualization:
-
-- Select the appropriate chart type given the structure of the data
-- Design data visualizations that follow principles of visual clarity (e.g. data-to-ink ratio)
-- Justify the choice of color palette for a particular visualization, including accessibility considerations regarding color blindness
-- Critically evaluate data visualizations and propose improvements
-
 With regard to reproducibility:
 
 - Explain the FAIR principles and their relevance to data management in the biological sciences
 - Apply version control to a small data analysis project using `git`
 - Communicate analysis results to collaborations via `Github`
+
+With regard to data visualization:
+
+- Design data visualizations that follow principles of visual clarity (e.g. data-to-ink ratio)
+- Justify the choice of color palette for a particular visualization, including accessibility considerations regarding color blindness
+- Critically evaluate data visualizations and propose improvements
+
 :::
 
+There will be two lessons in this tutorial
 
+## Reproducible science using GitHub:
 
-Episodes to make:
+Here, we will introduce the FAIR principle and the GitHub website. There's some preparation for you to do before this tutorial:
 
-## Reproducible science using Github:
+::: {.callout-note}
+**Do this before the tutorial starts!**
 
-- Introduce github website
-- Introduce concept of version control / FAIR data management
-- Make people create a github account, make a repository, and push some changes to the repository
-- TODO: look at Johannes data management workshop
+You will need a GitHub account with 2 factor authentication setup.
 
+1. Go to github.com → Sign up → follow the prompts
+2. Make sure to set up 2 factor authentication using `Microsoft Authenticator`, `Google Authenticator`, SMS, or other options.
+:::
 
-## Data visualization in R:
+## Data visualization in R
 
-- Some data viz theory
-- Continue working with ggplot2, slightly more advanced
-- Assignment: take a dataset and create a very BAD plot and a very GOOD plot with this data. Explain why the bad plot is bad and the good plot is good. Present? Hand in in CANVAS? Push to github is maybe better? How to grade this?
-
+In this part of the tutorial you'll some core data visualisation principles, and apply them directly to a dataset in `R`.

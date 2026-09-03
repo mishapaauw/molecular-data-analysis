@@ -1,0 +1,15 @@
+{
+  "hash": "f16d423893bc4e26e494449f95048617",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Assignment\"\nengine: knitr\nformat:\n    html:\n        fig-width: 5\n        fig-height: 4\n        code-annotations: hover\n        link-external-icon: true\n        link-external-newwindow: true\n---\n\n\n\n\n\nExplain assignment logistics here.",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

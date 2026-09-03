@@ -1,0 +1,14 @@
+---
+title: "Assignment"
+engine: knitr
+format:
+    html:
+        fig-width: 5
+        fig-height: 4
+        code-annotations: hover
+        link-external-icon: true
+        link-external-newwindow: true
+---
+
+
+Explain assignment logistics here.

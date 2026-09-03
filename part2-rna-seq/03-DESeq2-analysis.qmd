@@ -1,0 +1,13 @@
+---
+title: "Differential gene expression analysis"
+engine: knitr
+format:
+    html:
+        fig-width: 5
+        fig-height: 4
+        code-annotations: hover
+        link-external-icon: true
+        link-external-newwindow: true
+---
+
+add code for DESeq2 analysis here (from bioDSC workshop)

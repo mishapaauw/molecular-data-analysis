@@ -21,9 +21,16 @@ After this lesson, you should be able to:
 
 :::
 
-TODO:
+For RNA-seq, there will be a 1-hour lecture and two tutorial sessions. In addition, there will be a 4-hour assignment session which will be graded.
 
-- Take contents from RNA-seq workshop bioDSC. 
-- Adapt to fit MDA program. 
-- Find good Arabidopsis RNA-seq dataset for assignment. Create clear expectations for the assignment.
+## Mapping reads tutorial
 
+In this tutorial, you will learn the command-line steps of an RNA-seq workflow. Briefly, you'll take the raw reads, perform quality control, trim low-quality sequences, map them to a genome, and then count how many reads 'landed' in each gene.
+
+## Differential gene expression tutorial
+
+In this tutorial, you will work with the 'count table' to discover genes that are up- or down-regulated in certain conditions. This tutorial will be performed in RStudio.
+
+## Assignment
+
+In the assignment, you will get a new count table, along with an R Markdown file containing code blocks to fill in and questions to answer. You hand in the file on Canvas, this will be graded.

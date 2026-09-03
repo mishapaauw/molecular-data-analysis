@@ -1,0 +1,15 @@
+{
+  "hash": "ab7cb3ea9653119003c0a129aceef632",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Differential gene expression analysis\"\nengine: knitr\nformat:\n    html:\n        fig-width: 5\n        fig-height: 4\n        code-annotations: hover\n        link-external-icon: true\n        link-external-newwindow: true\n---\n\n\n\n\nadd code for DESeq2 analysis here (from bioDSC workshop)\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

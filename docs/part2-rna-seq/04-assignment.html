@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome – Molecular Data Analysis</title>
+<title>Assignment – Molecular Data Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../part2-rna-seq/01-experimental-considerations.html" rel="next">
+<link href="../part2-rna-seq/03-DESeq2-analysis.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -117,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title">Welcome</h1>
+          <h1 class="quarto-secondary-nav-title">Assignment</h1>
         </a>     
     </div>
   </nav>
@@ -130,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part2-rna-seq/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../part2-rna-seq/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome</span></a>
   </div>
 </li>
@@ -163,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../part2-rna-seq/04-assignment.html" class="sidebar-item-text sidebar-link">
+  <a href="../part2-rna-seq/04-assignment.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Assignment</span></a>
   </div>
 </li>
@@ -174,23 +174,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#mapping-reads-tutorial" id="toc-mapping-reads-tutorial" class="nav-link active" data-scroll-target="#mapping-reads-tutorial">Mapping reads tutorial</a></li>
-  <li><a href="#differential-gene-expression-tutorial" id="toc-differential-gene-expression-tutorial" class="nav-link" data-scroll-target="#differential-gene-expression-tutorial">Differential gene expression tutorial</a></li>
-  <li><a href="#assignment" id="toc-assignment" class="nav-link" data-scroll-target="#assignment">Assignment</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Welcome</h1>
+<h1 class="title d-none d-lg-block">Assignment</h1>
 </div>
 
 
@@ -207,45 +199,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to the RNA-seq tutorial!</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Learning goals:
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>After this lesson, you should be able to:</p>
-<ul>
-<li>Design a RNA-seq experiment with enough statistical power</li>
-<li>Recognize common bioinformatics filetypes (<code>.fastq</code>, <code>.fasta</code>, <code>.bam</code>)</li>
-<li>Process RNA-seq data using appropriate tools, from raw reads to count table</li>
-<li>Interpret PCA and clustering results to asess whether sample groupingds alsign with the experimental design</li>
-<li>Apply DESeq2 to obtain lists of differentially expressed genes between two conditions</li>
-<li>Apply gene enrichment tests to defined gene lists</li>
-<li>Be able to create key plots such as volcano plots and heat maps</li>
-<li>Integrate RNA-seq results into a hypothesis about a biological problem</li>
-</ul>
-</div>
-</div>
-<p>For RNA-seq, there will be a 1-hour lecture and two tutorial sessions. In addition, there will be a 4-hour assignment session which will be graded.</p>
-<section id="mapping-reads-tutorial" class="level2">
-<h2 class="anchored" data-anchor-id="mapping-reads-tutorial">Mapping reads tutorial</h2>
-<p>In this tutorial, you will learn the command-line steps of an RNA-seq workflow. Briefly, you’ll take the raw reads, perform quality control, trim low-quality sequences, map them to a genome, and then count how many reads ‘landed’ in each gene.</p>
-</section>
-<section id="differential-gene-expression-tutorial" class="level2">
-<h2 class="anchored" data-anchor-id="differential-gene-expression-tutorial">Differential gene expression tutorial</h2>
-<p>In this tutorial, you will work with the ‘count table’ to discover genes that are up- or down-regulated in certain conditions. This tutorial will be performed in RStudio.</p>
-</section>
-<section id="assignment" class="level2">
-<h2 class="anchored" data-anchor-id="assignment">Assignment</h2>
-<p>In the assignment, you will get a new count table, along with an R Markdown file containing code blocks to fill in and questions to answer. You hand in the file on Canvas, this will be graded.</p>
+<p>Explain assignment logistics here.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -354,6 +310,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         if (link.dataset.originalHref !== undefined) {
           link.href = link.dataset.originalHref;
         }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
       }
     }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -609,25 +572,64 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         }
       };
     }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
           }
-        });
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
       }
   const findCites = (el) => {
     const parentEl = el.parentElement;
@@ -670,11 +672,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../part2-rna-seq/03-DESeq2-analysis.html" class="pagination-link" aria-label="Differential gene expression analysis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Differential gene expression analysis</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../part2-rna-seq/01-experimental-considerations.html" class="pagination-link" aria-label="Before the experiment">
-        <span class="nav-page-text">Before the experiment</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -82,5 +82,5 @@ The following timetable is preliminary and still subject to change:
 
 ## Getting started
 
-Ready to begin? Head to the [Setup](setup/index.qmd) section to prepare your computational environment.
+Ready to begin? Head to the [Setup](part0-setup/index.qmd) section to prepare your computational environment.
 

@@ -12,19 +12,18 @@ After this lesson, you should be able to:
 
 With regard to reproducibility:
 
-- Explain the FAIR principles and their relevance to data management in the biological sciences
-- Apply version control to a small data analysis project using `git`
-- Communicate analysis results to collaborations via `Github`
+- Explain the FAIR principles and their relevance to data management in the biological sciences.
+- Apply version control to a small data analysis project using `git`.
+- Communicate analysis results to collaborations via `Github`.
 
 With regard to data visualization:
 
-- Design data visualizations that follow principles of visual clarity (e.g. data-to-ink ratio)
-- Justify the choice of color palette for a particular visualization, including accessibility considerations regarding color blindness
-- Critically evaluate data visualizations and propose improvements
+- Design data visualizations that follow principles of visual clarity (e.g. data-to-ink ratio).
+- Critically evaluate data visualizations and propose improvements.
 
 :::
 
-There will be two lessons in this tutorial
+There will be two lessons in this tutorial:
 
 ## Reproducible science using GitHub:
 
@@ -41,4 +40,4 @@ You will need a GitHub account with 2 factor authentication setup.
 
 ## Data visualization in R
 
-In this part of the tutorial you'll some core data visualisation principles, and apply them directly to a dataset in `R`.
+In this part of the tutorial you'll some important data visualisation principles, and apply them directly to a dataset in `R`. As a small (not graded) assignment, you'll make a data visualisation that's is terrible, and you'll present this visualisation to the rest of the group.

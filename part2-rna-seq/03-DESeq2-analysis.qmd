@@ -73,25 +73,35 @@ library(tidyverse)
 library(ggrepel)
 ```
 
-Then, load the count table and metadata file:
+Then, load the count table first:
 
 ```{R filename = "R"}
 raw_counts <- read.csv("data/Deforges_2019-raw-counts.csv", header = T, stringsAsFactors = F) # <1>
 
 raw_counts <- raw_counts %>% column_to_rownames("Geneid") # <2>
 
-metadata <- read.csv("data/Deforges_2019-experiment-design.csv", header = T)
-
 raw_counts[1:4,1:4]
 ```
 1. Make sure you use the correct path to where your data is stored. Depending on your folder structure, you may need to adapt the filepath. Here, we use: `data/Deforges_2019-raw-counts.csv`.
 2. Here, we store the column `Geneid` as row names instead of a dedicated column.
 
-That looks good! Now, it's important to note that `DESeq2` expects the sample names (columns in count table) to *exactly match* the sample names in the metadata file, and be in the *same order*! For this small dataset, we can inspect that by eye. In addition, and probably useful for larger datasets, we can use the `all()` function to check this.
+That looks good! One quick check we can do is to find how many reads were assigned to genes in each sample. This gives an indication of the library size. Since each column represents a sample, we can do this with the `colSums()` function:
 
 ```{R filename = "R"}
+colSums(raw_counts)
+```
+
+That seems fairly equal across samples. Still, it ranges from 53M reads to about 87M reads, so we will need to normalize for that later on.
+
+New, let's look at the metadata of the experiment:
+
+```{R filename = "R"}
+metadata <- read.csv("data/Deforges_2019-experiment-design.csv", header = T)
+
 head(metadata)
 ```
+
+Now, it's important to note that `DESeq2` expects the sample names (columns in count table) to *exactly match* the sample names in the metadata file, and be in the *same order*! For this small dataset, we can inspect that by eye. In addition, and probably useful for larger datasets, we can use the `all()` function to check this.
 
 ```{R filename = "R"}
 all(colnames(raw_counts) == metadata$sample) # <1>
@@ -114,7 +124,7 @@ As essential step in RNA-seq analysis is to inspect similarity between samples. 
 
 ### Performing variance stabilization
 
-Before performing the PCA itself, we need to take an import feature of RNA-seq data into account: the variance of a gene is strongly correlated to the expression level of the gene. In statistics language, our data is **not homoscedastic**, while PCA assumes homoscedastic data. We can solve this by performing a variance stabilizing transformation `vst()`:
+Before performing the PCA itself, we need to take an important feature of RNA-seq data into account: the variance of a gene is strongly correlated to the expression level of the gene. In statistics language, our data is **not homoscedastic**, while PCA assumes homoscedastic data. We can solve this by performing a variance stabilizing transformation `vst()`:
 
 ```{R filename = "R"}
 variance_stabilized_dataset <- vst(dds, blind = TRUE)

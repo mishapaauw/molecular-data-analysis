@@ -9,12 +9,22 @@ knitr:
     fig.height: 4.2
 ---
 
-In this episode, you will practice making honest, and beautiful, data visualisations using `ggplot2` in `RStudio`. You will start with the R Project you created in the previous episode. First, we will load the required package for this episode:
+In this episode, you will practice making honest, and beautiful, data visualisations using `ggplot2` in `RStudio`. You will start with the R script you created in the previous episode.
+
+## Welcome to the `tidyverse`
+
+ First, we will load the required package for this episode:
 
 ```{R filename="R"}
 #| warning: false
 library(tidyverse)
 ```
+
+Loading `tidyverse` imports a collection of packages that work together very nicely. The most important ones are `dplyr` for data manipulation, and `ggplot2` for data visualisation. The `dplyr` package makes common data-analysis tasks more consistent and readable. Central to the `dplyr` idea is that common operations are performed with descriptive functions (e.g. `filter()`), and that operations can be chained together with a pipe symbol: `%>%` (shortcut: `control/command` + `shift` + `m`). In a way, it's similar to the command-line tricks we've seen before. 
+
+In the first four weeks of this course, you learned to manipulate data using the base `R` functions. In the Bioinformatics module, we will use `dplyr` to show you a different way of working with data. In the end, it's up to you which route you like best.
+
+## Today we'll study penguins
 
 We will work with the `palmerpenguins` dataset. This is a dataset describing 344 penguins. There are three different species, occuring on three different islands, and several parameters have been recorded.
 
@@ -32,9 +42,72 @@ head(penguins)
 str(penguins)
 ```
 
-Indeed, the are 344 observations. We have some categorical data encoded as factors (`species`, `island`, `sex`) and some measurements of the bodies of the penguins (`bill_len`, `flipper_len`).
+Okay, the are 344 observations: each observation is one penguin. Of each penguin,  categorical data is recorded as factors (`species`, `island`, `sex`) and some measurements of the bodies of the penguins (`bill_len`, `bill_depth`, `flipper_len` and `body_mass`) is recorded. Finally, we have the `year` in which the measurement was taken.
 
-To make a bar plot, we first need to calculate the mean and standard error. In this case, we will group by `species`, and calculate the mean `body_mass`:
+Let's dive into some `dplyr` basics:
+
+Filter all penguins that were recorded in the `year` 2007, or anything *but* the `year` 2007. Note that we're using the `dplyr` pipe here: `%>%` (shortcut: `control/command` + `shift` + `m`). You can interpret `%>%` as *and then*: 'we take dataset penguins *and then* filter for all observations in 2007'.
+
+```{R filename="R"}
+#| eval: false
+penguins %>% filter(year == 2007)
+
+penguins %>% filter(year != 2007)
+```
+
+If you want to store the results in a new data frame, you do it just like always in `R`:
+
+```{R filename="R"}
+#| eval: false
+penguins_2007 <- penguins %>% filter(year == 2007)
+```
+
+If we want to filter for all Chinstrap and Gentoo penguins (but not Adelie penguins), we can use the following trick:
+
+```{R filename="R"}
+#| eval: false
+penguins %>% filter(species %in% c('Gentoo', "Chinstrap"))
+```
+
+Now we learned how to filter observations (rows), but maybe we would want to select variables (columns). For example, we might want to work with a simpler dataset which just contains species, island, and flipper length:
+
+```{R filename="R"}
+#| eval: false
+penguins %>% select(species, island, flipper_length_mm)
+```
+
+As you might have guessed, we can *combine* `dplyr` verbs together. Usually, we do this line by line to make the code more readable:
+
+```{R filename="R"}
+#| eval: false
+penguins %>% 
+  filter(year == 2007) %>% 
+  select(species, island)
+```
+
+We can also create new variables using `mutate()`:
+
+```{R filename="R"}
+#| eval: false
+penguins %>% 
+  mutate(body_mass_kg = body_mass_g / 1000)
+```
+
+Or similarly, combine two text variables together into one, separated by a `-`: 
+
+```{R filename="R"}
+#| eval: false
+penguins %>% 
+  mutate(species_island = paste(species, island, sep = "-"))
+```
+
+This example may seem useless, but a similar step will be useful in the RNA-seq tutorial and assignment.
+
+There's much more you can do with `dplyr`, check out the [dplyr cheatsheet (.pdf)](../images/data-transformation.pdf){target="_blank"}
+
+## Bar plot
+
+Which penguin species would be have the heighest body weight? Let's visualise that. To make a bar plot, we first need to calculate the mean and standard error. In this case, we will use a very powerful part of `dplyr`: `group_by()` combined with `summarize()`. Here, we will group by `species`, and calculate the mean and standard deviation of the `body_mass`:
 
 ```{R filename="R"}
 penguins_summary <- penguins %>% 
@@ -62,7 +135,7 @@ penguins_summary %>%
   geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.2)
 ```
 
-It does show what we just discovered, but it hides a lot. The standard error bars give some sort of idea of the spread of the data, but it looks suspicously small. That's because the standard error decreases with increasing sample size `n`, and in this case we have quite some penguins! What does the spread _really_ look like? A boxplot helps to solve this proble, at least partially:
+It does show what we just discovered, but it hides a lot. The standard error bars give some sort of idea of the spread of the data, but it looks suspicously small. That's because the standard error decreases with increasing sample size `n`, and in this case we have quite some penguins! What does the spread _really_ look like? A boxplot helps to solve this problem, at least partially:
 
 ```{R filename="R"}
 penguins %>% 
@@ -294,6 +367,7 @@ You have learned what makes a good visualization. Now do the opposite: make the 
 - Hide the truth:
     - Use a barplot with no indication of spread or sample size
     - Pool across species or sex to hide real patterns
+    - Use a weird filter to include or exclude observations
     - Truncate the y-axis to exaggerate tiny differences
 
 - Use unclear visuals:

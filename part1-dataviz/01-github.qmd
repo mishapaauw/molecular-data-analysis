@@ -17,6 +17,13 @@ You will need a GitHub account with 2 factor authentication setup.
 2. Make sure to set up 2 factor authentication using `Microsoft Authenticator`, `Google Authenticator`, SMS, or other options.
 :::
 
+## Examples of project repositories
+
+Before making a small repository for today's tutorial, we will take a look at two scientific project repositories. Hopefully, these examples will give you an idea of *why* it's useful to maintain a (bioinformatics) repository. These two repositories were already introduced in the lecture corresponding to this tutorial, but are listed here again:
+
+- [mishapaauw/PPPlasmids](https://github.com/mishapaauw/PPPlasmids){target="_blank"}: this repository is a work-in-progress bioinformatics project. All `scripts` and `results` are included in the repository. In addition, there is a `README` file that acts as a labjournal. It contains a mini project description, and descriptions of several bioinformatics steps. There are also several notes about experimental design decisions, and other remarkable things. Finally, there's a list of `TODOs` to remember what I can pick up when returning to this project, and some important references.
+- [BleekerLab/Riboflavin](https://github.com/BleekerLab/Riboflavin): this repository is associated to a published paper. It contains subfolders for each figure of the paper, each subfolder holds the raw data and the script to make that figure. This allows readers of the paper to reproduce all the figures, and judge each data-decision that was made along the way. Here, the `README` acts as a landing page describing the overal goal of the project and the research findings. 
+
 ## Setting up a repository
 
 We'll start by making a repository on GitHub:
@@ -96,7 +103,7 @@ First we verify that we actually have the dataset:
 ls data/
 ```
 
-It's really there! Now, we're going to commit this to `git` and push it to `GitHub`. Yes, that's right: commits aren't limited to editing existing files. Adding new files or folders (like our `data/` directory) is a commit too. We will run a number of `git` commands now:  run `git status` to verify that `git` is actually also aware that the file now exists in our repository. Then, we `add` the files that we want to commit. Then, we actually `commit` the changes in these files. Finally, we will `push` that to GitHub. This sounds like a lot of steps, and you're right. However, you will get used to this sequence of commands if you use it often enough. Let's go through the commands one more time:
+It's really there! Now, we're going to commit this to `git` and push it to `GitHub`. Yes, that's right: commits aren't limited to editing existing files. Adding new files or folders (like our `data/` directory) is a commit too. We will run a number of `git` commands now:  run `git status` to verify that `git` is actually also aware that the file now exists in our repository. Then, we `add` the files that we want to commit. In `git` jargon, these files are now `staged`. Then, we actually `commit` the changes in these files. Finally, we will `push` that to GitHub. This sounds like a lot of steps, and you're right. However, you will get used to this sequence of commands if you use it often enough. Let's go through the commands one more time:
 
 ```bash
 git status # <1>
@@ -106,10 +113,10 @@ git commit -m "added pinguins dataset" # <4>
 git push # <5>
 ```
 
-1. `git` sees that the file is there, but it's not being tracked.
+1. `git` sees that the file is there, but it's not being tracked yet.
 2. Let's add all files to the git tracking!
 3. Yes, now `git` has 'staged' the data file. 
-4. Now we `commit` the file
+4. Now we `commit` the file.
 5. The final step is pushing the changes to GitHub.
 
 This step might ask for your password, again, use your token:
@@ -120,6 +127,14 @@ Password: <paste your token here>
 ```
 
 Go to your GitHub repository online to see that the changes are live. 
+
+::: {.callout-caution title="Exercise"}
+In the next section of today's tutorial, we will be making working on data visualisation scripts in `R`. For now, we can already prepare for that:
+
+- In this repository, create an R script (i.e., a file called `data_visualisation.R`). It can be empty for now.
+- Push this file to github using the `add`, `commit`, `push` procedure.
+
+:::
 
 ## Wrapping up
 

@@ -203,6 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#preparation" id="toc-preparation" class="nav-link active" data-scroll-target="#preparation">Preparation</a></li>
+  <li><a href="#examples-of-project-repositories" id="toc-examples-of-project-repositories" class="nav-link" data-scroll-target="#examples-of-project-repositories">Examples of project repositories</a></li>
   <li><a href="#setting-up-a-repository" id="toc-setting-up-a-repository" class="nav-link" data-scroll-target="#setting-up-a-repository">Setting up a repository</a></li>
   <li><a href="#making-your-first-commit" id="toc-making-your-first-commit" class="nav-link" data-scroll-target="#making-your-first-commit">Making your first <code>commit</code></a></li>
   <li><a href="#getting-a-personal-access-token" id="toc-getting-a-personal-access-token" class="nav-link" data-scroll-target="#getting-a-personal-access-token">Getting a personal access token</a></li>
@@ -256,6 +257,14 @@ Note
 </ol>
 </div>
 </div>
+</section>
+<section id="examples-of-project-repositories" class="level2">
+<h2 class="anchored" data-anchor-id="examples-of-project-repositories">Examples of project repositories</h2>
+<p>Before making a small repository for today’s tutorial, we will take a look at two scientific project repositories. Hopefully, these examples will give you an idea of <em>why</em> it’s useful to maintain a (bioinformatics) repository. These two repositories were already introduced in the lecture corresponding to this tutorial, but are listed here again:</p>
+<ul>
+<li><a href="https://github.com/mishapaauw/PPPlasmids" target="_blank">mishapaauw/PPPlasmids</a>: this repository is a work-in-progress bioinformatics project. All <code>scripts</code> and <code>results</code> are included in the repository. In addition, there is a <code>README</code> file that acts as a labjournal. It contains a mini project description, and descriptions of several bioinformatics steps. There are also several notes about experimental design decisions, and other remarkable things. Finally, there’s a list of <code>TODOs</code> to remember what I can pick up when returning to this project, and some important references.</li>
+<li><a href="https://github.com/BleekerLab/Riboflavin">BleekerLab/Riboflavin</a>: this repository is associated to a published paper. It contains subfolders for each figure of the paper, each subfolder holds the raw data and the script to make that figure. This allows readers of the paper to reproduce all the figures, and judge each data-decision that was made along the way. Here, the <code>README</code> acts as a landing page describing the overal goal of the project and the research findings.</li>
+</ul>
 </section>
 <section id="setting-up-a-repository" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up-a-repository">Setting up a repository</h2>
@@ -315,7 +324,7 @@ Note
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> <span class="at">-O</span> data/penguins.csv https://raw.githubusercontent.com/allisonhorst/palmerpenguins/main/inst/extdata/penguins.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>First we verify that we actually have the dataset:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It’s really there! Now, we’re going to commit this to <code>git</code> and push it to <code>GitHub</code>. Yes, that’s right: commits aren’t limited to editing existing files. Adding new files or folders (like our <code>data/</code> directory) is a commit too. We will run a number of <code>git</code> commands now: run <code>git status</code> to verify that <code>git</code> is actually also aware that the file now exists in our repository. Then, we <code>add</code> the files that we want to commit. Then, we actually <code>commit</code> the changes in these files. Finally, we will <code>push</code> that to GitHub. This sounds like a lot of steps, and you’re right. However, you will get used to this sequence of commands if you use it often enough. Let’s go through the commands one more time:</p>
+<p>It’s really there! Now, we’re going to commit this to <code>git</code> and push it to <code>GitHub</code>. Yes, that’s right: commits aren’t limited to editing existing files. Adding new files or folders (like our <code>data/</code> directory) is a commit too. We will run a number of <code>git</code> commands now: run <code>git status</code> to verify that <code>git</code> is actually also aware that the file now exists in our repository. Then, we <code>add</code> the files that we want to commit. In <code>git</code> jargon, these files are now <code>staged</code>. Then, we actually <code>commit</code> the changes in these files. Finally, we will <code>push</code> that to GitHub. This sounds like a lot of steps, and you’re right. However, you will get used to this sequence of commands if you use it often enough. Let’s go through the commands one more time:</p>
 <div class="sourceCode" id="annotated-cell-6"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-6-1" class="code-annotation-target"><a href="#annotated-cell-6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-6-2" class="code-annotation-target"><a href="#annotated-cell-6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
 <a class="code-annotation-anchor" data-target-cell="annotated-cell-6" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-6-3" class="code-annotation-target"><a href="#annotated-cell-6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
@@ -324,7 +333,7 @@ Note
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-6" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="1" data-code-annotation="1"><code>git</code> sees that the file is there, but it’s not being tracked.</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="1" data-code-annotation="1"><code>git</code> sees that the file is there, but it’s not being tracked yet.</span>
 </dd>
 <dt data-target-cell="annotated-cell-6" data-target-annotation="2">2</dt>
 <dd>
@@ -336,7 +345,7 @@ Note
 </dd>
 <dt data-target-cell="annotated-cell-6" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-cell="annotated-cell-6" data-code-lines="4" data-code-annotation="4">Now we <code>commit</code> the file</span>
+<span data-code-cell="annotated-cell-6" data-code-lines="4" data-code-annotation="4">Now we <code>commit</code> the file.</span>
 </dd>
 <dt data-target-cell="annotated-cell-6" data-target-annotation="5">5</dt>
 <dd>
@@ -347,6 +356,23 @@ Note
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Username:</span> <span class="op">&lt;</span>your-github-username<span class="op">&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Password:</span> <span class="op">&lt;</span>paste your token here<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Go to your GitHub repository online to see that the changes are live.</p>
+<div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the next section of today’s tutorial, we will be making working on data visualisation scripts in <code>R</code>. For now, we can already prepare for that:</p>
+<ul>
+<li>In this repository, create an R script (i.e., a file called <code>data_visualisation.R</code>). It can be empty for now.</li>
+<li>Push this file to github using the <code>add</code>, <code>commit</code>, <code>push</code> procedure.</li>
+</ul>
+</div>
+</div>
 </section>
 <section id="wrapping-up" class="level2">
 <h2 class="anchored" data-anchor-id="wrapping-up">Wrapping up</h2>

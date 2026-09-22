@@ -45,8 +45,8 @@ The following timetable is preliminary and still subject to change:
 |--|---|---|---|---------|
 | 28 sept | 13:00 - 14:00 | SP A1.18 | Lecture | Module introduction |
 | 28 sept | 14:00 - 17:00 | SP A1.18 | Tutorial | Introduction: Shell, R, tidyverse |
-| 29 sept | 13:00 - 14:00 | SP A1.12 | Lecture | Principles of data visualization |
-| 29 sept | 14:00 - 17:00 | SP A1.12 | Tutorial | Part 1: Data visualization in R (including mini presentation)|
+| 29 sept | 13:00 - 14:00 | SP B0.204 | Lecture | Principles of data visualization |
+| 29 sept | 14:00 - 17:00 | SP B0.204 | Tutorial | Part 1: Data visualization in R (including mini presentation)|
 | 30 sept | 13:00 - 14:00 | SP B0.201 | Lecture | RNA-seq lecture |
 | 30 sept | 14:00 - 17:00 | SP B0.201 | Tutorial | Part 2: RNA-seq analysis (mapping reads) |
 
@@ -54,7 +54,7 @@ The following timetable is preliminary and still subject to change:
 | Date | Time | Location | Type | Topic |
 |--|---|---|---|---------|
 | 5 oct | 13:00 - 17:00 | SP A1.18 | Tutorial | Part 2: RNA-seq analysis (differential expression analysis)|
-| 6 oct | 13:00 - 17:00 | SP A1.12 | :exclamation:*Assignment*:exclamation: | Part 2: Assignment RNA-seq |
+| 6 oct | 13:00 - 17:00 | SP B0.204 | :exclamation:*Assignment*:exclamation: | Part 2: Assignment RNA-seq |
 | 8 oct | 13:00 - 15:00 | SP B0.208 | Lecture | Genome assembly & comparative genomics lecture |
 
 ### Week 3:

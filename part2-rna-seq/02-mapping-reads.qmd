@@ -106,7 +106,7 @@ fastqc -o fastqc_reports data/reads/sample1.fastq.gz # <2>
 You'll see that `fastqc` created a `.html` page in the `fastqc_reports` directory. We'll inspect it later.
 
 ::: {.callout-tip title="Exercise" icon="false"}
-Run `fastqc` on another sample.
+Run `fastqc` on all four samples.
 :::
 
 ::: {.callout-caution title="Solution" collapse="true" icon="false"}
@@ -114,11 +114,13 @@ To do this, we need to replace the input filename.
 
 ```{bash filename="bash"}
 #| eval: false
-fastqc -o fastqc_reports reads/sample2.fastq.gz
+fastqc -o fastqc_reports data/reads/sample2.fastq.gz
+fastqc -o fastqc_reports data/reads/sample3.fastq.gz
+fastqc -o fastqc_reports data/reads/sample4.fastq.gz
 ```
 :::
 
-Doing this manually for every sample would be quite tiring, especially when we would have many samples. We will use a for loop, a fundamental programming concept, to automate this process for us:
+Here, we did this manually for the four different samples. In reality, you might want to automate this. This saves time, especially if you have many samples, and is less prone to typing mistakes. We won't cover it in this tutorial, but you could do this with a for loop. To actually use a for loop, save the following script into a small text file that you give the `.sh` extension (e.g. `run_fastq.sh`). Then you can execute the script by typing: `bash run_fastq.sh`.
 
 ```{bash filename="bash"}
 #| eval: false
@@ -132,7 +134,7 @@ done
 2. `do` (and later `done`) define the start and the end of the for loop, respectively.
 2. Here we add the actual command that will be repeated for each sample, where `$sample` will subsequently be filled in with all of our four filenames.
 
-`fastq` generates reports of each sample in `.html` and `.zip` format:
+`fastq` generated reports of each sample in `.html` and `.zip` format:
 
 ```{bash filename="bash"}
 #| eval: false
@@ -165,10 +167,18 @@ Inspect all four QC reports, and discuss with your neighbour what you think abou
 
 A common anomaly detected by `fastqc` is sequencing adapters still being present some of the the reads (shown in **Overrepresented sequences** table). This is known as 'adapter contamination', and the presence of these adapter sequences in the reads might affect how the reads map to the genome of interest. So, we need to get rid of them. We will use `fastp` to do this. In addition, `fastp` will trim low quality bases from the reads. Finally, it will remove reads that are overall of low quality, or are too short after the trimming steps.
 
+First, prepare the output folders:
+
 ```{bash filename="bash"}
 #| eval: false
 mkdir fastp_reports
 mkdir data/trimmed_reads
+```
+
+Then, run `fastp` on one sample:
+
+```{bash filename="bash"}
+#| eval: false
 fastp \ 
   -i data/reads/sample1.fastq.gz \
   -o data/trimmed_reads/sample1.trimmed.fastq.gz \
@@ -334,7 +344,7 @@ Use the two following commands on a `.bam` file, and interpret the output.
 :::
 
 ::: {.callout-tip title="Exercise" icon="false"}
-So far, we only trimmed and mapped one sample. Trim and map the other three samples. Easy mode: repeat the commands performed earlier, update the sample numbers. For a challenge: write two `bash` for loops to process all four samples.
+So far, we only trimmed and mapped one sample. Trim and map the other three samples. Easy mode: repeat the commands performed earlier, just update the sample numbers. For a challenge: write two `bash` for loops to process all four samples. See the text around `fastqc` for an explanation of for loops.
 :::
 
 ::: {.callout-caution title="Solution" collapse="true" icon="false"}
@@ -435,7 +445,7 @@ The first row records the specific `featureCounts` command that we used to make 
 ::: {.callout-note}
 To use the `featureCounts` table with `DESeq2`, you will need to clean it. First, we don't need the header that starts with `#`. Second, we only need the `geneid` and count columns, nothing else. Third, the sample names should be cleaned from `mapped_reads/sample1_Aligned.sortedByCoord.out.bam` to just `sample1`.
 
-You can do this in many ways. It's possible in `R`, after loading the data, but before starting `DESeq`. It's possible to do this by hand in `Excel`. Finally, you can do it with a number of `unix` commands on the command line:
+You can do this in many ways. It's possible in `R`, after loading the data, but before starting `DESeq`. It's possible to do this by hand in `Excel`. Finally, you can do it with a elegant pipeline with a number of `unix` commands on the command line:
 
 ```bash
 grep -v '#' counts.tsv | cut -f1,7- | sed 's/_Aligned.sortedByCoord.out.bam//g'| sed 's|mapped_reads/||g' | column -t > counts_cleaned.tsv

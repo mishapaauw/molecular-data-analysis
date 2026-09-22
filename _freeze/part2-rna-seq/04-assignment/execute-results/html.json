@@ -1,9 +1,11 @@
 {
-  "hash": "f16d423893bc4e26e494449f95048617",
+  "hash": "287f4d28ba1fb805108264c2c3d2d78c",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Assignment\"\nengine: knitr\nformat:\n    html:\n        fig-width: 5\n        fig-height: 4\n        code-annotations: hover\n        link-external-icon: true\n        link-external-newwindow: true\n---\n\n\n\n\n\nExplain assignment logistics here.",
-    "supporting": [],
+    "markdown": "---\ntitle: \"Assignment\"\nengine: knitr\nformat:\n    html:\n        fig-width: 5\n        fig-height: 4\n        code-annotations: hover\n        link-external-icon: true\n        link-external-newwindow: true\n---\n\n\n\n\nFor the assignment, login to Crunchomics via [https://omics-app01.science.uva.nl/](https://omics-app01.science.uva.nl/).\n\nThen, prepare a directory:\n\n```bash\n# this should be your /home/UVANETID:\npwd \n\n# move into the MDA directory \ncd MDA\n\n# create new directory\nmkdir rna-seq-assignment \ncd rna-seq-assignment\n```\n\nThen, you copy the required materials from the shared location to your current working directory:\n\n```bash\ncp /zfs/omics/projects/education/MDA/rna-seq-assignment/* .\n```\n\nThen open the `.qmd` file and follow the instructions. Have fun!\n\n",
+    "supporting": [
+      "04-assignment_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

@@ -101,6 +101,17 @@ metadata <- read.csv("data/Deforges_2019-experiment-design.csv", header = T)
 head(metadata)
 ```
 
+In some cases, you might want to exclude some samples. For example, you might want to remove the `meja` treated samples. We could do that like this:
+
+```{R filename = "R"}
+metadata_filter <- metadata %>% filter(condition != "meja") 
+
+raw_counts_filter <- raw_counts %>%  
+  select(metadata_filter$sample)
+```
+
+Today, we will continue with the full dataset, but you might need the code block above in the assignment!
+
 Now, it's important to note that `DESeq2` expects the sample names (columns in count table) to *exactly match* the sample names in the metadata file, and be in the *same order*! For this small dataset, we can inspect that by eye. In addition, and probably useful for larger datasets, we can use the `all()` function to check this.
 
 ```{R filename = "R"}

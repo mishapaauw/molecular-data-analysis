@@ -10,5 +10,27 @@ format:
         link-external-newwindow: true
 ---
 
+For the assignment, login to Crunchomics via [https://omics-app01.science.uva.nl/](https://omics-app01.science.uva.nl/).
 
-Explain assignment logistics here.
+Then, prepare a directory:
+
+```bash
+# this should be your /home/UVANETID:
+pwd 
+
+# move into the MDA directory 
+cd MDA
+
+# create new directory
+mkdir rna-seq-assignment 
+cd rna-seq-assignment
+```
+
+Then, you copy the required materials from the shared location to your current working directory:
+
+```bash
+cp /zfs/omics/projects/education/MDA/rna-seq-assignment/* .
+```
+
+Then open the `.qmd` file and follow the instructions. Have fun!
+

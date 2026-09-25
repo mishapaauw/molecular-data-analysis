@@ -8,13 +8,19 @@ Welcome to the genome assembly tutorial!
 ::: {.callout-note}
 ## Learning goals:
 
-After this lesson, you should be able to:
+After this lecture lecture, you should be able to:
 
+- Explain the principle of genome assembly using sequencing reads
+- Explain the main challenges of genome assembly and annotation
+- Explain the basics of the genome assembly algorithms adress these challenges
+
+After this tutorial, you should be able to:
+
+- Perform a genome assembly, using command-line tools and evaluate the resulting assembly
+- Select and interpret appropriate metrics for assessing genome assembly quality
 - Explain how read length and sequencing depth affect assembly quality
-- Execute a genome assembly, using command-line tools
-- Select appropriate metrics for assessing genome assembly quality
-- Interpret assembly quality metrics to identify potential issues with a genome assembly
 - Justify the choice of sequencing technology for a genome assembly experiment
+
 :::
 
 You're going to assemble a genome! The genome will be from a bacterium, and you will discover which species it in the second part of today's tutorial, by doing a  phylogenetic analysis.

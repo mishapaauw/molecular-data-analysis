@@ -13,11 +13,10 @@ After this lesson, you should be able to:
 - Design a RNA-seq experiment with enough statistical power
 - Recognize common bioinformatics filetypes (`.fastq`, `.fasta`, `.bam`)
 - Process RNA-seq data using appropriate tools, from raw reads to count table
-- Interpret PCA and clustering results to asess whether sample groupingds alsign with the experimental design
+- Interpret PCA and clustering results to asess whether sample groupings align with the experimental design
 - Apply DESeq2 to obtain lists of differentially expressed genes between two conditions
-- Apply gene enrichment tests to defined gene lists
 - Be able to create key plots such as volcano plots and heat maps
-- Integrate RNA-seq results into a hypothesis about a biological problem
+- Integrate RNA-seq results into a hypothesis about a qubiological problem
 
 :::
 

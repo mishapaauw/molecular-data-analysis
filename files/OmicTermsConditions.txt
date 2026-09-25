@@ -1,0 +1,33 @@
+
+As requested an account has been created on the crunchomics cluster. You can now access the cluster via ssh to the head-node omics-h0.science.uva.nl using your uvanetID.
+
+The conditions under which access to Crunchomics High Performance Compute environment (HPCe)  is granted are as follows:
+ - You will get access to the HPCe for a restricted time period.
+ - You are granted a storage of 500 GB. After the duration of this grant, or when your UvAnetID expires, your data will be removed from the HPCe.
+ - The UvA ICT code of conduct is also applicable to the use of the HPCe: https://extranet.uva.nl/en/content/a-z/ict-code-of-conduct/ict-code-of-conduct.html
+ - You will use the HPCe with consideration to other users, i.e. you will avoid the unnecessary use of resources (e.g. by closing applications not in use).
+ - We do not backup your data on the HPCe.
+ - Currently the use of the HPCe is free of charge. It might be that in the future a contribution will be asked. If so, we will let you know in time.
+ - HPCe is intended to be used ‘during Research’, it is not an archiving system. For archiving options, use SILS tape archive or ask your RDM data steward.
+
+For large compute jobs a job queueing system (SLURM) is available. Interactive usage is possible but is discouraged for larger jobs. The sinfo command on the head node will give you information on the available nodes on the cluster. If you want to do calculations which take more than a few hours: run them using Slurm. 
+
+You have a 10G quotum on your home directory which is on a fast NVMe ssd-drive.  You can store up to 500GB data in /zfs/omics/personal/$USER. 
+
+A install script to do some configuration can be found in 
+/zfs/omics/software/script/omics_install_script  
+Run this once to set up some basic stuff: create a link to personal data and adds /zfs/omics/software/bin to your path
+
+We try to avoid setting hard limits on resource usage, instead we expect you to keep in mind you are sharing the system with other users. Some rules of thumb: 
+  - Don't run multicore programs on the head-node (omics-h0), use the compute nodes. 
+  - Don't allocate more than 20% (cpu or mem) of the cluster for more than a day.  
+  - Do not leave allocations unused and set reasonable time limits on you jobs.  
+
+Further information and documentation about the cluster can be found at  https://crunchomics-documentation.readthedocs.io/en/latest
+
+For more information and help on data analysis check out the SILS biological Data Science Center: https://www.biodsc.nl 
+
+If you miss programs or data on which you think might be of interest to more users let me know and I'll see if it can be installed. If you have any further  questions or remarks: we are very interested in hearing them, as they help us improving the provided services.  So don't hesitate to contact me if you encounter problems, have questions or want some more explanation.
+
+Regards
+Wim de Leeuw

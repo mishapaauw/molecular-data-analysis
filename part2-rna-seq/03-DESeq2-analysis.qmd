@@ -40,7 +40,7 @@ cd RNA-seq-deseq2
 mkdir data
 mkdir data_processed
 mkdir results
-touch RNA-seq-analysis.R #<1>
+touch RNA-seq-analysis.qmd #<1>
 ```
 
 1. This is a new shell command! `touch` simply creates an empty file, directly from the command line.
@@ -54,9 +54,22 @@ wget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/p
 wget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/Deforges_2019-experiment-design.csv
 ```
 
-Then, in open the new `.R` script in Rstudio.
+Then, in open the new `.qmd` script in Rstudio.
 
 :::
+
+## What's a `.qmd` file?
+
+It's a `Quarto` document that combines plain text, code, and the output of that code in one file. That's super useful, because:
+
+- You can use it to write explanations and describe your analysis alongside your R code.
+- R code is placed in code chunks that you can run by clicking on the green little arrow.
+- The results of the code, such as tables, figures, and statistical output, can be included automatically in the document.
+- A `.qmd` file can be rendered into a finished document, such as an HTML webpage or PDF. In fact, this website is built with `.qmd` files.
+
+Taken together: 
+
+> Because the analysis and its explanation live together, a `.qmd` file makes your work easier to reproduce, understand, and share
 
 ## Reading the count table into DESeq2
 

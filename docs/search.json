@@ -781,7 +781,7 @@
     "href": "part2-rna-seq/04-assignment.html",
     "title": "Assignment",
     "section": "",
-    "text": "For the assignment, login to Crunchomics via https://omics-app01.science.uva.nl/.\nThen, prepare a directory:\n# this should be your /home/UVANETID:\npwd \n\n# move into the MDA directory \ncd MDA\n\n# create new directory\nmkdir rna-seq-assignment \ncd rna-seq-assignment\nThen, you copy the required materials from the shared location to your current working directory:\ncp /zfs/omics/projects/education/MDA/rna-seq-assignment/* .\nThen open the .qmd file and follow the instructions. Have fun!",
+    "text": "For the assignment, login to Crunchomics via https://omics-app01.science.uva.nl/ as usual.\nThen, prepare a directory:\n# this should be your /home/UVANETID:\npwd \n\n# move into the MDA directory we used before\ncd MDA\n\n# create new directory\nmkdir rna-seq-assignment \ncd rna-seq-assignment\nThen, you copy the required materials from the shared location to your current working directory:\ncp /zfs/omics/projects/education/MDA/rna-seq-assignment/* .\nThen open the .qmd file and follow the instructions. The .qmd file is a filetype that contains both (markdown-formatted) plain text and code blocks. This way, we can combine explanations and thoughts (in plain text) with code in one document. Go through the explanation starting at the top and work your way through the assignment. You’ll find ‘Question’ blocks and ‘Answer’ blocks. In the ‘Answer’ blocks, you write plain text answers or code answers. Code answers should be written in the provided, empty, code-blocks. If every code block works, the qmd file can be rendered as a nice .html page (just like this website!).\nYou can use the tutorial materials. If you get stuck, there are ‘checkpoints’, where you can load the results that you should have generated at that point. If you really really get stuck, you can ask the teachers for technical help to a limited extend. Finally, we will answer no questions regarding the biological interpretation.\nHave fun!",
     "crumbs": [
       "Part 2: RNA-seq analysis",
       "Episodes",
@@ -849,7 +849,19 @@
     "href": "part2-rna-seq/03-DESeq2-analysis.html#setup",
     "title": "Differential gene expression analysis",
     "section": "Setup",
-    "text": "Setup\n\n\n\n\n\n\nNote\n\n\n\nLet’s first create a project folder for this tutorial. It should be located in your MDA folder. In the end; it should look like this:\n\nRNA-seq-deseq2\n├── data/\n│   ├── Deforges_2019-raw-counts.csv\n│   └── Deforges_2019-experiment-design.csv\n├── data_processed/\n│   └── Normalized counts will go here\n├── results/\n│   └── Graphs will go here\n└── RNA-seq.R\n\nFirst create all the folders:\n\ncd MDA\nmkdir RNA-seq-deseq2\ncd RNA-seq-deseq2\nmkdir data\nmkdir data_processed\nmkdir results\n1touch RNA-seq-analysis.R\n\n\n1\n\nThis is a new shell command! touch simply creates an empty file, directly from the command line.\n\n\n\n\nThen download the count table and experimental design data:\n\ncd data\nwget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/Deforges_2019-raw-counts.csv\nwget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/Deforges_2019-experiment-design.csv\n\nThen, in open the new .R script in Rstudio.",
+    "text": "Setup\n\n\n\n\n\n\nNote\n\n\n\nLet’s first create a project folder for this tutorial. It should be located in your MDA folder. In the end; it should look like this:\n\nRNA-seq-deseq2\n├── data/\n│   ├── Deforges_2019-raw-counts.csv\n│   └── Deforges_2019-experiment-design.csv\n├── data_processed/\n│   └── Normalized counts will go here\n├── results/\n│   └── Graphs will go here\n└── RNA-seq.R\n\nFirst create all the folders:\n\ncd MDA\nmkdir RNA-seq-deseq2\ncd RNA-seq-deseq2\nmkdir data\nmkdir data_processed\nmkdir results\n1touch RNA-seq-analysis.qmd\n\n\n1\n\nThis is a new shell command! touch simply creates an empty file, directly from the command line.\n\n\n\n\nThen download the count table and experimental design data:\n\ncd data\nwget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/Deforges_2019-raw-counts.csv\nwget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/Deforges_2019-experiment-design.csv\n\nThen, in open the new .qmd script in Rstudio.",
+    "crumbs": [
+      "Part 2: RNA-seq analysis",
+      "Episodes",
+      "Differential gene expression analysis"
+    ]
+  },
+  {
+    "objectID": "part2-rna-seq/03-DESeq2-analysis.html#whats-a-.qmd-file",
+    "href": "part2-rna-seq/03-DESeq2-analysis.html#whats-a-.qmd-file",
+    "title": "Differential gene expression analysis",
+    "section": "What’s a .qmd file?",
+    "text": "What’s a .qmd file?\nIt’s a Quarto document that combines plain text, code, and the output of that code in one file. That’s super useful, because:\n\nYou can use it to write explanations and describe your analysis alongside your R code.\nR code is placed in code chunks that you can run by clicking on the green little arrow.\nThe results of the code, such as tables, figures, and statistical output, can be included automatically in the document.\nA .qmd file can be rendered into a finished document, such as an HTML webpage or PDF. In fact, this website is built with .qmd files.\n\nTaken together:\n\nBecause the analysis and its explanation live together, a .qmd file makes your work easier to reproduce, understand, and share",
     "crumbs": [
       "Part 2: RNA-seq analysis",
       "Episodes",

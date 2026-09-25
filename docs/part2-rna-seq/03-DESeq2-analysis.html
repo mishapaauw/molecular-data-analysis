@@ -244,6 +244,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#whats-a-.qmd-file" id="toc-whats-a-.qmd-file" class="nav-link" data-scroll-target="#whats-a-.qmd-file">What’s a <code>.qmd</code> file?</a></li>
   <li><a href="#reading-the-count-table-into-deseq2" id="toc-reading-the-count-table-into-deseq2" class="nav-link" data-scroll-target="#reading-the-count-table-into-deseq2">Reading the count table into DESeq2</a>
   <ul class="collapse">
   <li><a href="#creating-the-dds-object" id="toc-creating-the-dds-object" class="nav-link" data-scroll-target="#creating-the-dds-object">Creating the <code>dds</code> object</a></li>
@@ -319,7 +320,7 @@ Note
 <span id="annotated-cell-25-4"><a href="#annotated-cell-25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span>
 <span id="annotated-cell-25-5"><a href="#annotated-cell-25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data_processed</span>
 <span id="annotated-cell-25-6"><a href="#annotated-cell-25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> results</span>
-<button class="code-annotation-anchor" data-target-cell="annotated-cell-25" data-target-annotation="1">1</button><span id="annotated-cell-25-7" class="code-annotation-target"><a href="#annotated-cell-25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> RNA-seq-analysis.R</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-25" data-target-annotation="1">1</button><span id="annotated-cell-25-7" class="code-annotation-target"><a href="#annotated-cell-25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> RNA-seq-analysis.qmd</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-annotation">
 <dl class="code-annotation-container-hidden code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-25" data-target-annotation="1">1</dt>
@@ -335,9 +336,23 @@ Note
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/Deforges_2019-raw-counts.csv</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/Deforges_2019-experiment-design.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Then, in open the new <code>.R</code> script in Rstudio.</p>
+<p>Then, in open the new <code>.qmd</code> script in Rstudio.</p>
 </div>
 </div>
+</section>
+<section id="whats-a-.qmd-file" class="level2">
+<h2 class="anchored" data-anchor-id="whats-a-.qmd-file">What’s a <code>.qmd</code> file?</h2>
+<p>It’s a <code>Quarto</code> document that combines plain text, code, and the output of that code in one file. That’s super useful, because:</p>
+<ul>
+<li>You can use it to write explanations and describe your analysis alongside your R code.</li>
+<li>R code is placed in code chunks that you can run by clicking on the green little arrow.</li>
+<li>The results of the code, such as tables, figures, and statistical output, can be included automatically in the document.</li>
+<li>A <code>.qmd</code> file can be rendered into a finished document, such as an HTML webpage or PDF. In fact, this website is built with <code>.qmd</code> files.</li>
+</ul>
+<p>Taken together:</p>
+<blockquote class="blockquote">
+<p>Because the analysis and its explanation live together, a <code>.qmd</code> file makes your work easier to reproduce, understand, and share</p>
+</blockquote>
 </section>
 <section id="reading-the-count-table-into-deseq2" class="level2">
 <h2 class="anchored" data-anchor-id="reading-the-count-table-into-deseq2">Reading the count table into DESeq2</h2>

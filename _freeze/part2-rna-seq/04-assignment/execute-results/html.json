@@ -1,11 +1,9 @@
 {
-  "hash": "287f4d28ba1fb805108264c2c3d2d78c",
+  "hash": "e2839d6a8d34d851eb83fc874afeea48",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Assignment\"\nengine: knitr\nformat:\n    html:\n        fig-width: 5\n        fig-height: 4\n        code-annotations: hover\n        link-external-icon: true\n        link-external-newwindow: true\n---\n\n\n\n\nFor the assignment, login to Crunchomics via [https://omics-app01.science.uva.nl/](https://omics-app01.science.uva.nl/).\n\nThen, prepare a directory:\n\n```bash\n# this should be your /home/UVANETID:\npwd \n\n# move into the MDA directory \ncd MDA\n\n# create new directory\nmkdir rna-seq-assignment \ncd rna-seq-assignment\n```\n\nThen, you copy the required materials from the shared location to your current working directory:\n\n```bash\ncp /zfs/omics/projects/education/MDA/rna-seq-assignment/* .\n```\n\nThen open the `.qmd` file and follow the instructions. Have fun!\n\n",
-    "supporting": [
-      "04-assignment_files"
-    ],
+    "markdown": "---\ntitle: \"Assignment\"\nengine: knitr\nformat:\n    html:\n        fig-width: 5\n        fig-height: 4\n        code-annotations: hover\n        link-external-icon: true\n        link-external-newwindow: true\n---\n\n\n\nFor the assignment, login to Crunchomics via [https://omics-app01.science.uva.nl/](https://omics-app01.science.uva.nl/) as usual.\n\nThen, prepare a directory:\n\n```bash\n# this should be your /home/UVANETID:\npwd \n\n# move into the MDA directory we used before\ncd MDA\n\n# create new directory\nmkdir rna-seq-assignment \ncd rna-seq-assignment\n```\n\nThen, you copy the required materials from the shared location to your current working directory:\n\n```bash\ncp /zfs/omics/projects/education/MDA/rna-seq-assignment/* .\n```\n\nThen open the `.qmd` file and follow the instructions. The `.qmd` file is a filetype that contains both (markdown-formatted) plain text and code blocks. This way, we can combine explanations and thoughts (in plain text) with code in one document. Go through the explanation starting at the top and work your way through the assignment. You'll find 'Question' blocks and 'Answer' blocks. In the 'Answer' blocks, you write plain text answers or code answers. Code answers should be written in the provided, empty, code-blocks. If every code block works, the `qmd` file can be rendered as a nice `.html` page (just like this website!).\n\nYou can use the tutorial materials. If you get stuck, there are 'checkpoints', where you can load the results that you should have generated at that point. If you really really get stuck, you can ask the teachers for technical help to a limited extend. Finally, we will answer no questions regarding the biological interpretation.\n\nHave fun!\n\n",
+    "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

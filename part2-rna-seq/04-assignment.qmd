@@ -10,7 +10,7 @@ format:
         link-external-newwindow: true
 ---
 
-For the assignment, login to Crunchomics via [https://omics-app01.science.uva.nl/](https://omics-app01.science.uva.nl/).
+For the assignment, login to Crunchomics via [https://omics-app01.science.uva.nl/](https://omics-app01.science.uva.nl/) as usual.
 
 Then, prepare a directory:
 
@@ -18,7 +18,7 @@ Then, prepare a directory:
 # this should be your /home/UVANETID:
 pwd 
 
-# move into the MDA directory 
+# move into the MDA directory we used before
 cd MDA
 
 # create new directory
@@ -32,5 +32,9 @@ Then, you copy the required materials from the shared location to your current w
 cp /zfs/omics/projects/education/MDA/rna-seq-assignment/* .
 ```
 
-Then open the `.qmd` file and follow the instructions. Have fun!
+Then open the `.qmd` file and follow the instructions. The `.qmd` file is a filetype that contains both (markdown-formatted) plain text and code blocks. This way, we can combine explanations and thoughts (in plain text) with code in one document. Go through the explanation starting at the top and work your way through the assignment. You'll find 'Question' blocks and 'Answer' blocks. In the 'Answer' blocks, you write plain text answers or code answers. Code answers should be written in the provided, empty, code-blocks. If every code block works, the `qmd` file can be rendered as a nice `.html` page (just like this website!).
+
+You can use the tutorial materials. If you get stuck, there are 'checkpoints', where you can load the results that you should have generated at that point. If you really really get stuck, you can ask the teachers for technical help to a limited extend. Finally, we will answer no questions regarding the biological interpretation.
+
+Have fun!
 

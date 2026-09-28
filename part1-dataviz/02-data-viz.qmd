@@ -361,8 +361,8 @@ Alright, we're ready for the assignment now.
 ## Assignment
 
 ::: {.callout-note}
-### Assignment
-You have learned what makes a good visualization. Now do the opposite: make the worst possible figure from the `palmerpenguins` dataset. Aim to commit as many 'data visualisation sins' as you can:
+### Exercise
+You have learned what makes a good visualization. Now do the opposite: make the worst possible figure from the `palmerpenguins` dataset. Aim to make as many 'data visualisation sins' as you can:
 
 - Hide the truth:
     - Use a barplot with no indication of spread or sample size
@@ -377,8 +377,9 @@ You have learned what makes a good visualization. Now do the opposite: make the 
 
 - Produce this plot in your R script, save the plot as a `.png` file.
 - Push all changes to GitHub.
-- Add you plot into the shared Google Presentations sheet, and add three bullet points describing _why_ your plot is the most ugly and misleading plot ever made.
-- Also add a link to your GitHub repository in the Google Presentation sheet [here](https://docs.google.com/presentation/d/1kXmQ_B9e1IF0sSDDtEaR4HYqSqy3RLsXL4BHHgTODlI/edit?usp=sharing){target="_blank"}
+- Add you plot into the shared Google Presentations sheet, and add answer the four bullet points
+- Also add a link to your GitHub repository in the Google Presentation sheet ([here](https://docs.google.com/presentation/d/1kXmQ_B9e1IF0sSDDtEaR4HYqSqy3RLsXL4BHHgTODlI/edit?usp=sharing){target="_blank"})
+- If there's still time, we will do a round of short presentations to share each plot with the group.
 :::
 
 

@@ -88,7 +88,7 @@
     "href": "part0-setup/02_CLI_basics.html#wget-download-data",
     "title": "Introduction to the command line",
     "section": "wget: download data",
-    "text": "wget: download data\nNext, let’s download some sequencing data. We will use the wget command to download some sequencing data from a repository, into the currect working directory.\nwget https://github.com/mishapaauw/molecular-data-analysis/blob/main/part0-setup/data/sample1.fastq.gz\nAs always, verify that your file arrived by running ls.",
+    "text": "wget: download data\nNext, let’s download some sequencing data. We will use the wget command to download some sequencing data from a repository, into the currect working directory.\nwget https://raw.githubusercontent.com/mishapaauw/molecular-data-analysis/main/part0-setup/data/sample1.fastq.gz\nAs always, verify that your file arrived by running ls.",
     "crumbs": [
       "Setup and introduction to command line",
       "Episodes",

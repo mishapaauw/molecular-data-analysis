@@ -118,7 +118,7 @@ This cleans up your terminal and gives you a clean space to continue your work. 
 Next, let's download some sequencing data. We will use the `wget` command to download some sequencing data from a repository, into the currect working directory. 
 
 ```bash
-wget https://github.com/mishapaauw/molecular-data-analysis/blob/main/part0-setup/data/sample1.fastq.gz
+wget https://raw.githubusercontent.com/mishapaauw/molecular-data-analysis/main/part0-setup/data/sample1.fastq.gz
 ```
 
 As always, verify that your file arrived by running `ls`.

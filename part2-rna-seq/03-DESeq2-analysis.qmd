@@ -15,7 +15,7 @@ The main goal of most RNA-seq experiments is to discover which genes are differe
 
 ::: {.callout-note}
 
-Let's first create a project folder for this tutorial. It should be located in your `MDA` folder. In the end; it should look like this:
+Let's first create a project folder for this tutorial, let's call it `RNA-seq-deseq2`. It should be located in your `MDA` folder. In the end; it should look like this:
 
 ```{bash}
 #| eval: FALSE
@@ -27,7 +27,7 @@ RNA-seq-deseq2
 │   └── Normalized counts will go here
 ├── results/
 │   └── Graphs will go here
-└── RNA-seq.R
+└── RNA-seq-analysis.qmd
 ```
 
 First create all the folders:
@@ -40,10 +40,7 @@ cd RNA-seq-deseq2
 mkdir data
 mkdir data_processed
 mkdir results
-touch RNA-seq-analysis.qmd #<1>
 ```
-
-1. This is a new shell command! `touch` simply creates an empty file, directly from the command line.
 
 Then download the count table and experimental design data:
 
@@ -54,7 +51,7 @@ wget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/p
 wget https://github.com/mishapaauw/molecular-data-analysis/raw/refs/heads/main/part2-rna-seq/data/Deforges_2019-experiment-design.csv
 ```
 
-Then, in open the new `.qmd` script in Rstudio.
+Then, in Rstudio, open a new  `Quarto Document`: click File > New File > Quarto Document... Add a name that makes sense, and your name as author,
 
 :::
 
@@ -69,7 +66,7 @@ It's a `Quarto` document that combines plain text, code, and the output of that 
 
 Taken together: 
 
-> Because the analysis and its explanation live together, a `.qmd` file makes your work easier to reproduce, understand, and share
+> Because the analysis and its explanation live together, a `.qmd` file makes it easier to reproduce, understand, and share your work.
 
 ## Reading the count table into DESeq2
 
@@ -522,9 +519,45 @@ gene_2 %>% ggplot(aes(x = condition, y = count, colour = condition)) +
 ```
 Yep, that seems about right.
 
-### Heatmap
+## Excercises 
 
-Alternatively, we could also display the expression levels of the DEGs in a heatmap. With the following code, we make a 'tidy' dataframe from the variance stabilised counts, and select only the genes that we consider DEGs. Remember, these are the genes that passed both a `padj` threshold and `log2FoldChange` threshold in the `aba` vs `control` contrast.
+::: {.callout-tip title="Exercise 1: another contrast" icon="false"}
+We made one volcano plot of the ABA vs control contrast. Make another contrast: pick another plant hormone that you find interesting, repeat the `results()` step, and create a volcano plot for that contrast.
+:::
+
+::: {.callout-caution title="Solution 1" collapse="true" icon="false"}
+There is no solution for this exercise, it's copying and pasting the steps we did before while replacing the `contrast_to_test`.
+:::
+
+::: {.callout-tip title="Exercise 2: functional interpretation" icon="false"}
+- Find a way to extract all the gene names of differentially expressed genes from one of your contrasts. Along the way, think about the following questions:
+  - Where do I put my threshold levels for a 'differentially expressed gene'? Both the for (adjusted) p-value, and the log2foldchange.
+  - Am I interested in upregulated genes, downregulated genes, or both? 
+- Perform a GO term analysis. Go to [gost](https://biit.cs.ut.ee/gprofiler/gost), pick organism: `Arabidopsis thaliana`, paste your list of genes in the box, and hit `Run query`. Inspect the results and discuss this with your neighbour or a teacher. In case you don't know, read online about GO terms.
+
+:::
+
+
+::: {.callout-caution title="Solution 2" collapse="true" icon="false"}
+1. There are many ways, one is the following:
+
+```{r}
+results_aba_vs_control %>% 
+  filter(significance == "Significantly upregulated") %>% 
+  pull(gene) %>% 
+  write_lines('results/upregulated_ABA.txt')
+```
+
+2. ...
+
+:::
+
+::: {.callout-tip title="Exercise 3: heatmap" icon="false"}
+Another popular RNA-seq data visualisation is a *heatmap* of the expression levels of the differentially expressed genes across all the samples. 
+
+1. Use the following instructions to make a heatmap of the ABA differentially regulated gene expression levels:
+
+With the following code, we make a 'tidy' dataframe from the variance stabilised counts, and select only the genes that we consider DEGs. Remember, these are the genes that passed both a `padj` threshold and `log2FoldChange` threshold in the `aba` vs `control` contrast.
 
 ```{R filename="R"}
 variance_stabilised_df <- variance_stabilised_counts %>%
@@ -545,7 +578,7 @@ vsd_selection <- variance_stabilised_df %>%
 Then, we draw a heatmap using the `tidyheatmaps` package. Essentially, this is a `tidyverse`-style wrapper of the more famous heatmap package `pheatmap`.
 
 ```{R filename="R"}
-library(tidyheatmaps)
+library(tidyheatmaps) # note, you might need to install this package: install.packages("tidyheatmaps")
 
 heatmap <- tidyheatmap(df = vsd_selection,
             rows = gene,
@@ -572,10 +605,10 @@ heatmap <- tidyheatmap(df = vsd_selection,
             rows = gene,
             columns = sample,
             values = count,
-            scale = "row", # <1>
+            scale = "row",
             annotation_col = c(condition),
             gaps_col = condition,
-            cluster_rows = TRUE, # <2>
+            cluster_rows = TRUE, 
             color_legend_n = 7,
             show_rownames = FALSE,
             show_colnames = TRUE,
@@ -586,16 +619,11 @@ ggsave("results/heatmap_aba_DEGs.png", heatmap, width = 14, height = 8, units = 
 heatmap
 ```
 
-1. This argument is added to perform k-means clustering and gather different genes into `n` clusters, in this case, 2 clusters.
-2. Since we will be plotting just two clusters, we can set `show_rownames` to `TRUE`.
-
-::: {.callout-tip title="Challenging exercise" icon="false"}
-This heatmap shows just the DEGs of `aba` vs `control`. Update the code to make a heatmap including _all_ DEGs of hormone-treated samples vs `control` conditions.
+2. This heatmap shows just the DEGs of `aba` vs `control`. Update the code to make a heatmap including _all_ DEGs of hormone-treated samples vs `control` conditions.
 :::
 
-::: {.callout-tip title="Hints" collapse="true"icon="false"}
-
-Do make such a heatmap, you need to take the following steps:
+::: {.callout-tip title="Hint for 3.2" collapse="true"icon="false"}
+To make such the heatmap for question 3.2, you need to take the following steps:
 
 1. Create result tables of all different hormone treatments vs `control` samples.
 2. Extract the gene name lists of DEGs in each condition
@@ -604,7 +632,7 @@ Do make such a heatmap, you need to take the following steps:
 5. Create the heatmap.
 :::
 
-::: {.callout-caution title="Solution" collapse="true" icon="false"}
+::: {.callout-caution title="Solution 3.2" collapse="true" icon="false"}
 
 First we make result tables for the missing contrasts:
 

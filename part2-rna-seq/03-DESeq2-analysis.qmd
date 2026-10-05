@@ -106,7 +106,7 @@ That seems fairly equal across samples. Still, it ranges from 53M reads to about
 New, let's look at the metadata of the experiment:
 
 ```{R filename = "R"}
-metadata <- read.csv("data/Deforges_2019-experiment-design.csv", header = T)
+metadata <- read.csv("data/Deforges_2019-experiment-design.csv")
 
 head(metadata)
 ```

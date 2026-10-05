@@ -86,7 +86,7 @@ library(ggrepel)
 Then, load the count table first:
 
 ```{R filename = "R"}
-raw_counts <- read.csv("data/Deforges_2019-raw-counts.csv", header = T, stringsAsFactors = F) # <1>
+raw_counts <- read.csv("data/Deforges_2019-raw-counts.csv") # <1>
 
 raw_counts <- raw_counts %>% column_to_rownames("Geneid") # <2>
 

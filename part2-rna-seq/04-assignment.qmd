@@ -31,7 +31,7 @@ cd rna-seq-assignment
 Then, you copy the required materials from the shared location to your current working directory:
 
 ```bash
-cp /zfs/omics/projects/education/MDA/rna-seq-assignment/* .
+cp -r /zfs/omics/projects/education/MDA/rna-seq-assignment/* .
 ```
 
 Then open the `.qmd` file. Important! Change the working directory of R (`Session` > `Set Working Directory`) to the new `MDA/rna-seq-assignment` directory.

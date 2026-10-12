@@ -195,11 +195,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#getting-the-data" id="toc-getting-the-data" class="nav-link active" data-scroll-target="#getting-the-data">Getting the data</a></li>
+  <li><a href="#using-the-compute-nodes" id="toc-using-the-compute-nodes" class="nav-link active" data-scroll-target="#using-the-compute-nodes">Using the compute nodes</a>
+  <ul class="collapse">
+  <li><a href="#submitting-your-first-slurm-job" id="toc-submitting-your-first-slurm-job" class="nav-link" data-scroll-target="#submitting-your-first-slurm-job">Submitting your first slurm job</a></li>
+  </ul></li>
+  <li><a href="#getting-the-data" id="toc-getting-the-data" class="nav-link" data-scroll-target="#getting-the-data">Getting the data</a></li>
   <li><a href="#megahit-assembly-for-short-reads" id="toc-megahit-assembly-for-short-reads" class="nav-link" data-scroll-target="#megahit-assembly-for-short-reads"><code>megahit</code>: assembly for short reads</a></li>
   <li><a href="#flye-assembly-for-long-reads" id="toc-flye-assembly-for-long-reads" class="nav-link" data-scroll-target="#flye-assembly-for-long-reads"><code>flye</code>: assembly for long reads</a></li>
   <li><a href="#gathering-assembly-statistics-in-google-sheets" id="toc-gathering-assembly-statistics-in-google-sheets" class="nav-link" data-scroll-target="#gathering-assembly-statistics-in-google-sheets">Gathering assembly statistics in <code>google sheets</code></a></li>
   <li><a href="#comparing-assembly-strategies" id="toc-comparing-assembly-strategies" class="nav-link" data-scroll-target="#comparing-assembly-strategies">Comparing assembly strategies</a></li>
+  <li><a href="#genome-annotation" id="toc-genome-annotation" class="nav-link" data-scroll-target="#genome-annotation">Genome annotation</a></li>
   </ul>
 </nav>
     </div>
@@ -225,16 +230,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>To start this tutorial, make sure you’re connected to Crunchomics as discussed in the <a href="../part0-setup/01_setup.html">computational setup episode</a>. As always, let’s organize ourselves by creating a new directory for this tutorial session, in your <code>MDA</code> directory. Also, let’s create a <code>data/</code> directory:</p>
+<p>To start this tutorial, make sure you’re connected to the Crunchomics headnode <code>h0</code> as discussed in the <a href="../part0-setup/01_setup.html">computational setup episode</a>. As always, let’s organize ourselves. Navigate to your <code>personal/MDA</code> directory, then create a new directory for todays tutorial: <code>mkdir genome-assembly</code>. Navigate into it and create a <code>data/</code> directory:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> personal/MDA/</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> genome-assembly</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> genome-assembly/</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">mdir</span> data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="using-the-compute-nodes" class="level2">
+<h2 class="anchored" data-anchor-id="using-the-compute-nodes">Using the compute nodes</h2>
+<p>Remember the Crunchomics diagram?</p>
+<p><img src="../images/Crunchomics_architecture.jpg" class="img-fluid"></p>
+<p>So far, we only worked on the <code>Head Node h0</code>. Today, you will learn how to use the compute nodes of Crunchomics by submitting <code>JOBS</code>. Crunchomics uses <code>slurm</code>, a program to manage all the jobs submitted to the cluster by all the users.</p>
+<section id="submitting-your-first-slurm-job" class="level3">
+<h3 class="anchored" data-anchor-id="submitting-your-first-slurm-job">Submitting your first slurm job</h3>
+<p>To submit a job, we must write a little script. In the RStudio editor, click File, New File, Shell script. Add the following contents. Use the little numbers to get an explanation per line.</p>
+<div class="sourceCode" id="annotated-cell-2"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1">1</button><span id="annotated-cell-2-2" class="code-annotation-target"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=sleep_demo</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2">2</button><span id="annotated-cell-2-3" class="code-annotation-target"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=00:02:00</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="3">3</button><span id="annotated-cell-2-4" class="code-annotation-target"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=100M</span></span>
+<span id="annotated-cell-2-6"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># The actual job commands start here</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="4">4</button><span id="annotated-cell-2-8" class="code-annotation-target"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Job </span><span class="va">$SLURM_JOB_ID</span><span class="st"> started on </span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span><span class="st"> at </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">"</span></span>
+<button class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="5">5</button><span id="annotated-cell-2-9" class="code-annotation-target"><a href="#annotated-cell-2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sleep</span> 75</span>
+<span id="annotated-cell-2-10"><a href="#annotated-cell-2-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Job finished at </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">"</span></span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<dl class="code-annotation-container-hidden code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="2" data-code-annotation="1">The name of the job</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="3" data-code-annotation="2">Time limit; <code>slurm</code> kills the job if it runs longer.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="4,5" data-code-annotation="3">Resource requests: one CPU and 100 MB of memory.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="8" data-code-annotation="4"><code>$SLURM_JOB_ID</code> is set by Slurm inside the job.</span>
+</dd>
+<dt data-target-cell="annotated-cell-2" data-target-annotation="5">5</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="9" data-code-annotation="5">The actual “work”: just wait 75 seconds.</span>
+</dd>
+</dl>
+<p>Save this file as <code>run_sleep.sh</code> in your <code>genome-assembly</code> folder. In your terminal, verify that it exists:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">[mpaauw@omics-h0</span> genome-assembly]$ ls</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">data</span>  sleep_test.sh <span class="co"># it exists!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, you submit the job like this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> sleep_test.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will see that the job is submitted, and is assigned a job ID. For the rest nothing seems to happen, but your job is no longer running at the headnode <code>h0</code>, instead it’s running on one of the compute nodes. We can look at all the jobs that are currently running or waiting on the compute nodes by looking at the Slurm queue like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Depending on if the cluster is very busy, this can give a long list of queued or running jobs. Can you find yours, by the job name or your student number? On which of the compute nodes is it running?</p>
+<p>Remember, you can use command line tricks to filter this output if it’s confusing. For example, we can filter the jobs that are actually running (<code>R</code>) from jobs that are waiting to start (pending; <code>PD</code>):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="kw">|</span> <span class="fu">grep</span> R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>(Alternatively, you could <code>grep</code> for your student number to see only your jobs.)</p>
+<p>While (or after) your jobs is running, a log file is created.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">[mpaauw@omics-h0</span> genome-assembly]$ ls</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">data</span>  sleep_test.sh  slurm-387072.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In my case it’s called <code>slurm-387072.out</code>. Inspect it using <code>cat</code> to see the contents. Discuss with your neighbour or teacher what you see. Do the same after your job has finished running (which should take about…. 75 seconds!).</p>
+</section>
+</section>
 <section id="getting-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="getting-the-data">Getting the data</h2>
-<p>To assemble a genome, we need reads. For this tutorial, the reads are stored on a shared drive on Crunchomics. There are different read datasets, and the teacher will assign to you which dataset you should copy to your working directory. Some datasets contain long Nanopore reads, while other datasets contain short Illumina reads. In addition, different subsets of the data were made by the teaching team: resulting in low and high sequencing depth datasets.If you want to work together you can download the same dataset as your neighbour (maximum group size = 2!). You can discuss the steps, but both of you should process the data.</p>
-<p>Copy your read dataset into to the <code>data</code> directory in your work directory. Replace the <code>AXY</code> with the dataset number! The format of the datasets is <code>A01</code> to <code>B10</code>. The <code>B</code> datasets are paired-end, they have <code>_1</code> or <code>_2</code> in their filenames. Use the wildcard symbol <code>*</code> to catch them both when copying.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /zfs/omics/projects/education/MDA/MDA-materials/genome-assembly/datasets/dataset_AXY<span class="pp">*</span>.fastq data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We are now ready to assemble a genome! To assemble a genome, we need reads. For this tutorial, the reads are stored on a shared drive on Crunchomics. There are different read datasets, and the teacher will assign to you which dataset you should copy to your working directory. Some datasets contain long Nanopore reads, while other datasets contain short Illumina reads. In addition, different subsets of the data were made by the teaching team: resulting in low and high sequencing depth datasets.</p>
+<p>Copy your read dataset into to the <code>data</code> directory in your work directory. Important! replace the <code>AXY</code> with the dataset number! The format of the datasets is <code>A01</code> to <code>B10</code>. The <code>B</code> datasets are paired-end, they have <code>_1</code> or <code>_2</code> in their filenames. Use the wildcard symbol <code>*</code> to catch them both when copying.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> /zfs/omics/projects/education/MDA/MDA-materials/genome-assembly/datasets/dataset_AXY<span class="pp">*</span>.fastq data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Note that we will be working with real datasets in this tutorial. Some commands (including just copying the data) may take a while.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Exercise">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
@@ -258,16 +320,16 @@ Exercise
 <div class="cell">
 <details class="code-fold">
 <summary>Click me to see the answer</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. and 2. and 3. </span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We need to run one command to find out everything that is asked</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats data/dataset_AXY.fastq</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2b: we are assuming that all reads actually come from the organism of interest.</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2b: if our read set would be contaminated (with e.g. human DNA), the coverage (or depth) of our bacterium of interest would be lower.</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3b:</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># A shortread dataset has many reads that are short, with a high total sequencing depth.</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># A longread dataset has fewer reads, with a wide distribution of lengths, and a low sequencing depth.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. and 2. and 3. </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We need to run one command to find out everything that is asked</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats data/dataset_AXY.fastq</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2b: we are assuming that all reads actually come from the organism of interest.</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2b: if our read set would be contaminated (with e.g. human DNA), the coverage (or depth) of our bacterium of interest would be lower.</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3b:</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># A shortread dataset has many reads that are short, with a high total sequencing depth.</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># A longread dataset has fewer reads, with a wide distribution of lengths, and a low sequencing depth.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -278,11 +340,21 @@ Exercise
 </section>
 <section id="megahit-assembly-for-short-reads" class="level2">
 <h2 class="anchored" data-anchor-id="megahit-assembly-for-short-reads"><code>megahit</code>: assembly for short reads</h2>
-<p>If you have short reads, run a <code>megahit</code> genome assembly like this:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">megahit</span> <span class="at">-1</span> data/dataset_BXY_1.fastq <span class="at">-2</span> data/dataset_BXY_2.fastq <span class="at">-o</span> megahit-assembly <span class="at">-t</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It could take a while, and will print a lot of information to your terminal. You don’t have to read everything but you can try to see if you understand some parts.</p>
-<p>Let’s have a look at the output by listing the contents of the output directory:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> megahit-assembly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you have short reads, make a <code>assemble-megahit.sh</code> script like this. This is for dataset <code>B05</code>, replace with your number!</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=megahit-assembly</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00 </span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=6 </span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=16G #</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ex">megahit</span> <span class="at">-1</span> data/dataset_B05_1.fastq <span class="at">-2</span> data/dataset_B05_2.fastq <span class="dt">\</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">-o</span> megahit-assembly <span class="at">-t</span> 6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that we tell <code>slurm</code> that we need more power: 1 hour (it will be done faster!), 6 CPUs, and 16G of RAM memory. In the <code>megahit</code> command, we specificy that we have ‘paired end reads’ (<code>-1</code> and <code>-2</code>), that we want to store the results in a new folder (<code>-o megahit-assembly</code>) and that <code>megahit</code> can use 6 threads (<code>-t 6</code>).</p>
+<p>Save your script, in the <code>genome-assembly</code> folder. Then, submit the job:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> assemble-megahit.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will take a while. Monitor your job by inspecting the slurm queue (<code>squeue</code>) every now and then: is your job still running? Also, inspect the log file (<code>slurm-xxxx.out</code>) every now and then. This will be filled with a lot of information from the megahit run. You don’t have to read and understand everything but you can try to see if you understand some parts.</p>
+<p>Finished? Even though the job was run on the compute nodes, the results will be in your own directory. Let’s have a look at the output by listing the contents of the output directory:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> megahit-assembly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There’s a subfolder called <code>intermediate_contigs</code>, which contains a lot of intermediate files. We don’t need them today (although you can look at them if you want). The important files are:</p>
 <ul>
 <li><code>final.contigs.fasta</code>: the actual genome assembly</li>
@@ -292,11 +364,21 @@ Exercise
 </section>
 <section id="flye-assembly-for-long-reads" class="level2">
 <h2 class="anchored" data-anchor-id="flye-assembly-for-long-reads"><code>flye</code>: assembly for long reads</h2>
-<p>If you have long reads, run a <code>flye</code> assembly like this:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flye</span> <span class="at">--nano-raw</span> data/dataset_AXY.fastq <span class="at">--genome-size</span> 5M <span class="at">--out-dir</span> flye-assembly <span class="at">--threads</span> 4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>It could take a while! You don’t have to read everything but you try to see if you understand some parts.</p>
-<p>Let’s have a look at the output by listing the contents of the output directory:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> flye-assembly/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you have long reads, make a <code>assemble-flye.sh</code> script like this. This is for datset <code>A06</code>, replace with your number!</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=flye-assembly</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00 </span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=6 </span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=16G #</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="ex">flye</span> <span class="at">--nano-raw</span> data/dataset_A06.fastq <span class="at">--genome-size</span> 5M <span class="dt">\</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--out-dir</span> flye-assembly <span class="at">--threads</span> 6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that we tell <code>slurm</code> that we need more power: 1 hour (it will be done faster!), 6 CPUs, and 16G of RAM memory. In the <code>flye</code> command, we point to the raw nanopore reads (<code>--nano-raw</code>), that we want to store the results in a new folder (<code>--out-dir flye-assembly</code>) and that <code>flye</code> can use 6 threads (<code>--threads 6</code>).</p>
+<p>Save your script, in the <code>genome-assembly</code> folder. Then, submit the job:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> assemble-flye.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will take a while. Monitor your job by inspecting the slurm queue (<code>squeue</code>) every now and then: is your job still running? Also, inspect the log file (<code>slurm-xxxx.out</code>) every now and then. This will be filled with a lot of information from the megahit run. You don’t have to read and understand everything but you can try to see if you understand some parts.</p>
+<p>Finished? Even though the job was run on the compute nodes, the results will be in your own directory. Let’s have a look at the output by listing the contents of the output directory:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> flye-assembly/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There are 5 subfolders which contain a lot of intermediate files. We don’t need them today (although you can look at them if you want). Important files are:</p>
 <ul>
 <li><code>assembly.fasta</code>: the actual genome assembly</li>
@@ -333,12 +415,12 @@ Exercise
 <div class="cell">
 <details class="code-fold">
 <summary>Click me to see the answer</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Again, we would get nearly all statistics with seqkit stats:</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats data/dataset_XY.fastq</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># for both flye and megahit, the N50 can be found in the end of the log file</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> megahit-assembly/log </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> flye-assembly/flye.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Again, we would get nearly all statistics with seqkit stats:</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats flye-assembly/assembly.fasta</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># for both flye and megahit, the N50 can be found in the end of the log file</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> megahit-assembly/log </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> flye-assembly/flye.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
@@ -349,11 +431,13 @@ Exercise
 <section id="comparing-assembly-strategies" class="level2">
 <h2 class="anchored" data-anchor-id="comparing-assembly-strategies">Comparing assembly strategies</h2>
 <p>Together with your colleagues, you created a number of assemblies of the same bacterial isolate. We can now make a a sensible comparison about assembly quality between short and long reads, with different sequencing depths. You can import the data stored in the google sheet to an R session with the following code:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>assembly_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://docs.google.com/spreadsheets/d/1ARB0ZgmnG-mSbV5gqsJOfApGxxUxZHZ4i7HYs34aAPU/export?format=csv"</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>assembly_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://docs.google.com/spreadsheets/d/1ARB0ZgmnG-mSbV5gqsJOfApGxxUxZHZ4i7HYs34aAPU/export?format=csv"</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ... add code to make your plot :)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If you’re here early, make sure to repeat the data import later when your colleagues entered more data to the google sheet.</p>
 <div class="callout callout-style-default callout-caution callout-titled" title="Assignment">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="true" aria-label="Toggle callout">
@@ -373,11 +457,22 @@ Assignment
 <li>Different sequencing technologies</li>
 <li>Different sequencing depths</li>
 </ul>
-<p>Think carefully about how you organise your figure so that your main message becomes easy to see. You may use multiple panels if this makes your comparisons more clear. Think back to the data visualisation tutorial and try make a figure that uses good data visualisation practices.</p>
+<p>Think carefully about how you organise your figure so that your main message becomes easy to see. Perhaps, first sketch what you want to visualize. You may use multiple panels if this makes your comparisons more clear (but it’s not required). Think back to the data visualisation tutorial and try make a figure that uses good data visualisation practices.</p>
 <p>When you are done, come to one of the teachers (Misha or Tijs) to discuss your plot. You’ll briefly explain your figure to the teacher. This assignment will not be graded, but you need to <code>pass</code> this assignment. To pass, you need to show that you understand your figure and can clearly explain the main patterns you observe, including the effects of sequencing technology and sequencing depth on assembly quality. If your explanation is unclear or incomplete, we will give you feedback and ask you to continue working on your plot. You can then try the explanation again.</p>
 </div>
 </div>
 </div>
+</section>
+<section id="genome-annotation" class="level2">
+<h2 class="anchored" data-anchor-id="genome-annotation">Genome annotation</h2>
+<p>If there’s time left, you can annotate your genome. There are numerous command-line programs available to annotate all sorts of interesting features on bacterial genomes. However, these are not pre-installed on Crunchomics and in this tutorial, we will not learn how to install new softwares. Luckily, some annotation tools also have webservers available. To use these, download the assembly to your local computer.</p>
+<p>Then, follow your favorite of the following options:</p>
+<ul>
+<li><a href="https://bakta.computational.bio">Bakta</a>: general genome annotation, the successor of <code>prokka</code></li>
+<li><a href="https://antismash.secondarymetabolites.org/#!/start">antiSMASH</a>: annotation of biosynthetic gene clusters</li>
+<li><a href="https://proksee.ca">proksee</a>: a genome browser service with many embedded annotation options (e.g.&nbsp;<code>bakta</code> and <code>prokka</code>, but also specialized annotation tools for mobile genetic elements like <code>PHASTEST</code> (bacteriophages) and <code>mobileOG-db</code> (different types of mobile genetic elements))</li>
+</ul>
+<p>Inspect the results, discuss them with your neighbour and/or teacher!</p>
 
 
 </section>
@@ -744,25 +839,64 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         }
       };
     }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
+      const annoteTargets = window.document.querySelectorAll('.code-annotation-anchor');
+      for (let i=0; i<annoteTargets.length; i++) {
+        const annoteTarget = annoteTargets[i];
+        const targetCell = annoteTarget.getAttribute("data-target-cell");
+        const targetAnnotation = annoteTarget.getAttribute("data-target-annotation");
+        const contentFn = () => {
+          const content = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          if (content) {
+            const tipContent = content.cloneNode(true);
+            tipContent.classList.add("code-annotation-tip-content");
+            return tipContent.outerHTML;
           }
-        });
+        }
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          onShow: (instance) => {
+            selectCodeLines(instance.reference);
+            instance.reference.classList.add('code-annotation-active');
+            window.tippy.hideAll();
+          },
+          onHide: (instance) => {
+            unselectCodeLines();
+            instance.reference.classList.remove('code-annotation-active');
+          },
+          maxWidth: 300,
+          delay: [50, 0],
+          duration: [200, 0],
+          offset: [5, 10],
+          arrow: true,
+          appendTo: function(el) {
+            return el.parentElement.parentElement.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto',
+          placement: 'right',
+          popperOptions: {
+            modifiers: [
+            {
+              name: 'flip',
+              options: {
+                flipVariations: false, // true by default
+                allowedAutoPlacements: ['right'],
+                fallbackPlacements: ['right', 'top', 'top-start', 'top-end', 'bottom', 'bottom-start', 'bottom-end', 'left'],
+              },
+            },
+            {
+              name: 'preventOverflow',
+              options: {
+                mainAxis: false,
+                altAxis: false
+              }
+            }
+            ]        
+          }      
+        };
+        window.tippy(annoteTarget, config); 
       }
   const findCites = (el) => {
     const parentEl = el.parentElement;
